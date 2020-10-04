@@ -75,4 +75,7 @@ const providers = [
   {id:'whalevault',logo: whalevault_logo,style: whalevault_style}
 ]
 
+/** comma seperated list of all providers */
+export const providerList = providers.map(p => p.id).join(', ')
+
 export default providers

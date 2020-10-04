@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "allowJs": true,
+    "outDir": "./dist",
+    "declaration": true,
+    "declarationDir": "./dist",
+    "resolveJsonModule": true,
+    "typeRoots": [
+      "custom_typings"
+    ]
+  },
+  "files": ["src/index.js", "src/custom.d.ts"]
+}
