@@ -1,6 +1,6 @@
 {
     "lerna": "3.13.0",
-    "npmClient": "npm",
+    "npmClient": "yarn",
     "version": "independent",
     "packages": ["packages/**/*"],
     "registry": "https://registry.npmjs.org/",

@@ -1,103 +1,85 @@
-const pkg = require('./package.json');
-const rules = require('./configs/rules.config');
-const { aliases } = require('./configs/aliases.config');
+// const pkg = require('./package.json');
+// const rules = require('./configs/rules.config');
+// const { aliases } = require('./configs/aliases.config');
 
-module.exports = {
-    module: {
-        rules: rules,
-    },
-    entry: './src/index.js',
-    output: {
-        filename: pkg.main,
-        library: '',
-        libraryTarget: 'commonjs'
-    },
-    resolve: {
-        alias: aliases,
-        extensions: ['.js', '.jsx', '.json', '.ttf', '.png', '.jpg', '.json' ],
-        modules: ['node_modules']
-    },
-};
-
-// const webpack = require('webpack');
-// const ExtractTextPlugin = require('extract-text-webpack-plugin');
-// const path = require('path');
-// const libraryName= pkg.name;
 // module.exports = {
-//     mode: 'production',
-//     entry: "./src/index.js",
+//     module: {
+//         rules: rules,
+//     },
+//     entry: './src/index.js',
 //     output: {
 //         filename: pkg.main,
 //         library: '',
 //         libraryTarget: 'commonjs'
 //     },
-//     plugins: [
-//         new ExtractTextPlugin({
-//             filename: 'oreidLoginButton.css',
-//         }),
-//     ],
-//     node: {
-//       net: 'empty',
-//       tls: 'empty',
-//       dns: 'empty'
+//     resolve: {
+//         alias: aliases,
+//         extensions: ['.tsx', '.ts', '.js', '.jsx', '.json', '.ttf', '.png', '.jpg', '.json' ],
+//         modules: ['node_modules']
 //     },
-//     module: {
-//         rules : [
-//             ...rules,
-//             {
-//             test: /\.(png|svg|jpg|gif|ttf)$/,
-//             use: [
-//                 {
-//                     loader: 'url-loader',
-//                     options:{
-//                         fallback: "file-loader",
-//                         name: "[name][md5:hash].[ext]",
-//                         outputPath: 'assets/',
-//                         publicPath: '/assets/'
-//                     }
-//                 }    
-//             ]
-//         },
-//         {
-//             test: /\.*css$/,
-//             use : ExtractTextPlugin.extract({
-//                 fallback : 'style-loader',
-//                 use : [
-//                     'css-loader',
-//                     'sass-loader'
-//                 ]
-//             })
-//         },
-//         {
-//             test: /\.(eot|ttf|woff|woff2)$/,
-//             use: ["file-loader"],
-//         },
-//         {
-//             test: /\.(pdf|doc|zip)$/,
-//             use: ["file-loader"],
-//         }]
-//     },
-//     resolve: { 
-//         alias: { 
-//             // 'react': path.resolve(__dirname, './node_modules/react') ,
-//             // 'react-dom': path.resolve(__dirname, './node_modules/react-dom'),
-//             // 'assets': path.resolve(__dirname, './src/assets'),
-//             ...aliases
-//         } 
-//     },
-//     externals: {
-//         // Don't bundle react or react-dom
-//         react: {
-//             commonjs: "react",
-//             commonjs2: "react",
-//             amd: "React",
-//             root: "React"
-//         },
-//         "react-dom": {
-//             commonjs: "react-dom",
-//             commonjs2: "react-dom",
-//             amd: "ReactDOM",
-//             root: "ReactDOM"
-//         }
-//     }
 // };
+
+const pkg = require('./package.json');
+const rules = require('./configs/rules.config');
+const { aliases } = require('./configs/aliases.config');
+import path from 'path';
+
+const commonConfig = {
+  mode: 'production',
+  // entry: {
+  //   'eos-transit': './src/index.ts',
+  //   'eos-transit-scatter': './src/walletProviders/scatter/index.ts',
+  //   'eos-transit-stub': './src/walletProviders/stub.ts'.
+  // },
+  module: {
+      rules: rules,
+  },
+  entry: {
+    app: ['./src/index.js'],
+    vendor: ['react', 'react-dom']
+},
+  output: {
+      filename: pkg.main,
+      // library: '',
+      path: path.resolve(__dirname, 'umd'),
+      libraryTarget: 'umd',
+      library: ['providers', 'LoginButton'],
+      libraryExport: 'default'
+  },
+  resolve: {
+      alias: aliases,
+      extensions: ['.tsx', '.ts', '.js', '.jsx', '.json', '.ttf', '.png', '.jpg', '.json' ],
+      modules: ['node_modules']
+  },
+  plugins: [
+    // new ProvidePlugin({
+    //   'window.ScatterJS': ['scatterjs-core', 'default'],
+    //   'window.ScatterEOS': ['scatterjs-plugin-eosjs2', 'default']
+    // })
+  ],
+  externals: {
+    // 'scatterjs-core': 'ScatterJS',
+    // 'scatterjs-plugin-eosjs2': 'ScatterEOS'
+  },
+  stats: {
+    colors: true
+  }
+};
+
+const providersConfig = {
+  ...commonConfig,
+  entry: {
+    // scatter: './src/walletProviders/scatter/index.ts',
+    loginButton: './packages/LoginButton/src/index.ts'
+  },
+  output: {
+    filename: '[name].min.js',
+    path: path.resolve(__dirname, 'dist'),
+    libraryTarget: 'umd',
+    library: ['providers', '[name]'],
+    libraryExport: 'default',
+    globalObject: 'window'
+  }
+};
+
+export default [providersConfig];

@@ -20,16 +20,26 @@ const rules = [
             'sass-loader',
         ],
     },
+    // {
+    //     test: /\.(js|jsx)$/,
+    //     exclude: /node_modules/,
+    //     use: {
+    //         loader: "babel-loader",
+    //         options: {
+    //             presets: ['@babel/preset-env', '@babel/react'],
+    //             plugins: [ require.resolve('babel-plugin-transform-react-jsx-filter') ]
+    //         },
+    //     }
+    // },
     {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
+        test: /\.(js|jsx|ts|tsx)?$/,
         use: {
-            loader: "babel-loader",
+            loader: 'ts-loader',
             options: {
-                presets: ['@babel/preset-env', '@babel/react'],
-                plugins: [ require.resolve('babel-plugin-transform-react-jsx-filter') ]
-            },
-        }
+            configFile: 'tsconfig.webpack.json'
+            }
+        },
+        exclude: /node_modules/
     },
     {
         test: /\.(png|svg|jpg|gif|ttf)$/,
