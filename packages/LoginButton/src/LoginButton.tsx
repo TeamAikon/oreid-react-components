@@ -1,16 +1,15 @@
 import React, { Component } from 'react'
 import Roboto from './assets/Roboto-Medium.ttf'
 import providers, { providerList } from './providers'
-import { ProgressPlugin } from 'webpack'
 
 let defaultButtonStyle = {
-  padding: '10px 24px 10px 14px',
+  padding: '10px 10px 10px 10px',
   backgroundColor: '#3E5895',
   color: '#ffffff',
   fontFamily: Roboto + 'sans-serif',
   fontWeight: '500',
   fontSize: '14px',
-  width: 250,
+  width: 200,
   lineHeight: '22px',
   letterSpacing: '1px',
   textAlign: 'left',
