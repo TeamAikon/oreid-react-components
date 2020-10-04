@@ -1,0 +1,43 @@
+{
+    "name": "oreid-react-components",
+    "version": "1.0.0",
+    "description": "React components for use with ORE ID",
+    "main": "index.js",
+    "scripts": {
+        "build:components": "lerna bootstrap && lerna exec npm run \"build\"",
+        "clean:components": "lerna exec npm run \"clean\"",
+        "publish:components": "lerna publish",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "start-storybook -p 9001 -c .storybook"
+    },
+    "author": "Aikon",
+    "devDependencies": {
+        "@babel/core": "7.2.2",
+        "@babel/plugin-transform-react-jsx": "^7.10.4",
+        "@babel/preset-env": "7.3.1",
+        "@babel/preset-react": "7.0.0",
+        "autoprefixer": "9.4.7",
+        "babel-loader": "8.0.5",
+        "babel-plugin-transform-react-jsx-filter": "^6.0.1",
+        "core-js": "^3.6.5",
+        "cross-env": "5.2.0",
+        "css-loader": "2.1.0",
+        "extract-text-webpack-plugin": "^4.0.0-beta.0",
+        "file-loader": "^6.1.0",
+        "lerna": "3.13.0",
+        "node-sass": "4.11.0",
+        "postcss-loader": "3.0.0",
+        "rimraf": "^3.0.2",
+        "sass-loader": "7.1.0",
+        "style-loader": "0.23.1",
+        "url-loader": "^4.1.0",
+        "webpack": "4.29.3",
+        "webpack-cli": "3.2.3"
+    },
+    "dependencies": {
+        "@storybook/cli": "^5.3",
+        "@storybook/react": "^5.3",
+        "react": "16.13.1",
+        "react-dom": "16.13.1"
+    }
+}
