@@ -7,6 +7,7 @@ const rules = [
         use: [
             'style-loader',
             'css-loader',
+            'shebang-loader',
             {
                 loader: 'postcss-loader',
                 options: {
