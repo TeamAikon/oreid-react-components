@@ -1,4 +1,4 @@
-# OER ID React component library
+# ORE ID React component library
 
 ## First time setup
 1. Use only `npm` for running scripts, in order to avoid some unexpected conflicts with different `.lock` files;
