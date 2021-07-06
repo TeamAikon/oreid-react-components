@@ -1,6 +1,6 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
-import OreIdWebWidget from 'oreid-web-widget'
+import OreIdWebWidget from 'oreid-react-web-widget'
 
 storiesOf("OreIdWebWidget", module).add("Default", () => (
   <div>
@@ -42,7 +42,7 @@ storiesOf("OreIdWebWidget", module).add("Default", () => (
           preventAutoSign: false, // prevent auto sign even if transaction is auto signable
       }}
       onSuccess={(result) => {
-        const params = JSON.parse('{"' + decodeURI(result.split('?')[1]).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}')
+        const params = JSON.parse('{"' + decodeURI(result?.split('?')[1]).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}')
         console.log(params)
         this.setState({ oreIdResult: params })
         this.onCloseModal()

@@ -1,6 +1,6 @@
 {
-    "name": "oreid-web-widget",
-    "description": "React.js wrapper for OreId WebWidget crossplatform component",
+    "name": "oreid-react-web-widget",
+    "description": "React wrapper for OreId WebWidget component",
     "version": "1.0.1",
     "license": "MIT",
     "author": "Aikon",
@@ -16,7 +16,7 @@
         "build-production": "yarn build && TS_NODE_PROJECT=\"tsconfig.webpack.json\" webpack",
         "clean": "rm -rf dist && rm -rf dist.browser",
         "copy-assets": "copyfiles -u 1 \"src/assets/*\" dist",
-        "echo": "echo \"================== oreid-web-widget ===================\"",
+        "echo": "echo \"================== oreid-react-web-widget ===================\"",
         "installpkg": "yarn echo && yarn",
         "prepare": "yarn build",
         "prebuild": "yarn clean",
@@ -35,6 +35,6 @@
     "dependencies": {
         "react": "^16.13.1",
         "react-dom": "^16.13.1",
-        "oreid-js": "^2.10.5"
+        "oreid-js": "^2.11.0"
     }
 }
