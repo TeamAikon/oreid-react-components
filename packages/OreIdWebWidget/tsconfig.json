@@ -10,5 +10,6 @@
       "custom_typings"
     ]
   },
-  "files": ["src/index.js", "src/custom.d.ts"]
+  "files": ["src/index.js", "src/custom.d.ts"],
+  "include": ["src/@customTypes/**/*"]
 }
