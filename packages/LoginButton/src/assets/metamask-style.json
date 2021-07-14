@@ -1,0 +1,10 @@
+{
+    "buttonStyle":{
+        "color": "#f89c35",
+        "backgroundColor": "#fff"
+
+    },
+    "logoStyle":{
+    },
+    "text":"Login Web3"
+}

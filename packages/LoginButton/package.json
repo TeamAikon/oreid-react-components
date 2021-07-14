@@ -1,7 +1,7 @@
 {
     "name": "oreid-login-button",
     "description": "Login button for ORE ID which includes provider logos",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "license": "MIT",
     "author": "Aikon",
     "main": "dist/index.js",
