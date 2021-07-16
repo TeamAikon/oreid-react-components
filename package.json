@@ -4,7 +4,7 @@
     "description": "React components for use with ORE ID",
     "main": "index.js",
     "scripts": {
-        "build:components": "lerna bootstrap",
+        "build:components": "lerna bootstrap --ignore-scripts && lerna exec npm run \"build\"",
         "clean:components": "lerna exec npm run \"clean\"",
         "publish:components": "lerna publish",
         "test": "echo \"Error: no test specified\" && exit 1",
@@ -14,7 +14,7 @@
     },
     "author": "Aikon",
     "publishConfig": {
-        "registry": "https://npm.pkg.github.com"
+        "registry":"https://npm.pkg.github.com"
     },
     "repository": "git@github.com:TeamAikon/oreid-react-components.git",
     "devDependencies": {
@@ -35,7 +35,7 @@
         "css-loader": "2.1.0",
         "extract-text-webpack-plugin": "^4.0.0-beta.0",
         "file-loader": "^6.1.0",
-        "lerna": "^3.22.1",
+        "lerna": "3.13.0",
         "node-sass": "4.11.0",
         "postcss-loader": "3.0.0",
         "react-docgen-typescript-plugin": "^0.6.0",
