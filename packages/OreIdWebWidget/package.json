@@ -9,18 +9,18 @@
     "publishConfig": {
         "access": "public"
     },
-    "repository":"https://github.com/TeamAikon/oreid-react-components",
+    "repository": "https://github.com/TeamAikon/oreid-react-components",
     "scripts": {
-        "build-server": "rm -rf dist/* && tsc --build tsconfig.json && yarn copy-assets",
+        "build-server": "rm -rf dist/* && tsc --build tsconfig.json && npm run copy-assets",
         "build-browser": "rm -rf dist.browser/* && ./node_modules/.bin/ncc build src/index.ts -o dist.browser --minify",
-        "build": "yarn build-server",
-        "build-production": "yarn build && TS_NODE_PROJECT=\"tsconfig.webpack.json\" webpack",
+        "build": "npm run build-server",
+        "build-production": "npm run build && TS_NODE_PROJECT=\"tsconfig.webpack.json\" webpack",
         "clean": "rm -rf dist && rm -rf dist.browser",
         "copy-assets": "copyfiles -u 1 \"src/assets/*\" dist",
         "echo": "echo \"================== oreid-react-web-widget ===================\"",
-        "installpkg": "yarn echo && yarn",
-        "prepare": "yarn build",
-        "prebuild": "yarn clean",
+        "installpkg": "npm run echo && npm run",
+        "prepare": "npm run build",
+        "prebuild": "npm run clean",
         "watch": "./tsc -w",
         "test": "",
         "lint": "tslint -c ../../tslint.json -p ./tsconfig.json"
@@ -29,11 +29,11 @@
         "@types/node": "^14.11.1",
         "@types/react": "^17.0.13",
         "@types/react-dom": "^17.0.8",
-        "@zeit/ncc": "^0.22.3",
-        "copyfiles": "^2.4.0",
-        "typescript": "4.0.3"
+        "@zeit/ncc": "^0.22.3"
     },
     "dependencies": {
+        "copyfiles": "^2.4.1",
+        "typescript": "^4.0.3",
         "oreid-js": "git+https://apim-npmbot:LtT3pgcj9YAxMrNN@github.com/API-market/oreid-js#feature/web-widget-3"
     },
     "peerDependencies": {
