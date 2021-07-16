@@ -1,6 +1,6 @@
 import React, { CSSProperties } from 'react';
 import { WebWidget } from 'oreid-js';
-import OreIdWebWidget from 'oreid-react-web-widget';
+import OreIdWebWidget from '@oreid-react-components/oreid-react-web-widget';
 // import CloseIcon from './assets/close.svg';
 
 const modalBackgroundStyle: CSSProperties = {
@@ -40,7 +40,6 @@ interface OreIdModalProps extends WebWidget.WebWidgetProps {
   onClose: Function;
   onOpen: Function;
   oreIdOptions: any;
-  action: SVGStringList;
 }
 
 const CloseIcon = () => (
