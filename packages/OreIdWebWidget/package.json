@@ -1,7 +1,7 @@
 {
     "name": "oreid-react-web-widget",
     "description": "React wrapper for OreId WebWidget component",
-    "version": "1.0.1",
+    "version": "1.1.0-alpha.0",
     "license": "MIT",
     "author": "Aikon",
     "main": "dist/index.js",
@@ -33,8 +33,8 @@
     },
     "dependencies": {
         "copyfiles": "^2.4.1",
-        "typescript": "^4.0.3",
-        "oreid-js": "git+https://apim-npmbot:LtT3pgcj9YAxMrNN@github.com/API-market/oreid-js#feature/web-widget-3"
+        "oreid-js": "git+https://apim-npmbot:LtT3pgcj9YAxMrNN@github.com/API-market/oreid-js#feature/web-widget-3",
+        "typescript": "^4.0.3"
     },
     "peerDependencies": {
         "react": "^16.13.1",
