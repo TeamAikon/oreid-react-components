@@ -53,6 +53,7 @@
         "@storybook/cli": "^5.3",
         "@storybook/react": "^5.3",
         "react": "16.13.1",
-        "react-dom": "16.13.1"
+        "react-dom": "16.13.1",
+        "oreid-js": "git+https://apim-npmbot:LtT3pgcj9YAxMrNN@github.com/API-market/oreid-js.git#2.12.0"
     }
 }
