@@ -4,7 +4,7 @@
     "description": "React components for use with ORE ID",
     "main": "index.js",
     "scripts": {
-        "build:components": "lerna bootstrap && lerna exec npm run \"build\"",
+        "build:components": "lerna bootstrap",
         "clean:components": "lerna exec npm run \"clean\"",
         "publish:components": "lerna publish",
         "test": "echo \"Error: no test specified\" && exit 1",
