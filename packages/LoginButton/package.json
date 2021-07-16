@@ -9,6 +9,7 @@
     "publishConfig": {
         "access": "public"
     },
+    "repository":"https://github.com/TeamAikon/oreid-react-components",
     "scripts": {
         "build-server": "rm -rf dist/* && tsc --build tsconfig.json && yarn copy-assets",
         "build-browser": "rm -rf dist.browser/* && ./node_modules/.bin/ncc build src/index.ts -o dist.browser --minify",
