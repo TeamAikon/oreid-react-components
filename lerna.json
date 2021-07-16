@@ -1,9 +1,9 @@
 {
     "lerna": "3.13.0",
-    "npmClient": "yarn",
+    "npmClient": "npm",
     "version": "independent",
     "packages": ["packages/**/*"],
-    "registry": "https://registry.npmjs.org/",
+    "registry": "https://npm.pkg.github.com",
     "command": {
         "publish": {
             "ignoreChanges": ["*.md", "tests/*", "ignored-files"]
