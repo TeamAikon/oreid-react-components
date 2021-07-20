@@ -27,6 +27,7 @@ storiesOf("LoginButton", module).add("Default", () => (
   <LoginButton provider={'scatter'} onClick={() => { alert('Clicked')}}></LoginButton>
   <LoginButton provider={'simpleos'} onClick={() => { alert('Clicked')}}></LoginButton>
   <LoginButton provider={'tokenpocket'} onClick={() => { alert('Clicked')}}></LoginButton>
+  <LoginButton provider={'walletconnect'} onClick={() => { alert('Clicked')}}></LoginButton>
   <LoginButton provider={'web3'} onClick={() => { alert('Clicked')}}></LoginButton>
   <LoginButton provider={'whalevault'} onClick={() => { alert('Clicked')}}></LoginButton>
 </div>

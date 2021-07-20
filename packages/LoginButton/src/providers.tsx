@@ -46,6 +46,8 @@ import simpleos_logo from './assets/simpleos-logo@2x.png'
 import simpleos_style from './assets/simpleos-style.json'
 import tokenpocket_logo from './assets/tokenpocket-logo@2x.png'
 import tokenpocket_style from './assets/tokenpocket-style.json'
+import walletconnect_logo from './assets/walletconnect-logo.png'
+import walletconnect_style from './assets/walletconnect-style.json'
 import web3_logo from './assets/web3-logo@2x.png'
 import web3_style from './assets/web3-style.json'
 import whalevault_logo from './assets/whalevault-logo@2x.png'
@@ -74,6 +76,7 @@ const providers = [
   {id:'scatter',logo: scatter_logo,style: scatter_style},
   {id:'simpleos',logo: simpleos_logo,style: simpleos_style},
   {id:'tokenpocket',logo: tokenpocket_logo,style: tokenpocket_style},
+  {id:'walletconnect',logo: walletconnect_logo,style: walletconnect_style},
   {id:'web3',logo: web3_logo,style: web3_style},
   {id:'whalevault',logo: whalevault_logo,style: whalevault_style}
 ]
