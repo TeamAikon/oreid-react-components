@@ -6,10 +6,8 @@
     "declaration": true,
     "declarationDir": "./dist",
     "resolveJsonModule": true,
-    "typeRoots": [
-      "custom_typings"
-    ]
+    "skipLibCheck": true
   },
-  "files": ["src/index.js", "src/custom.d.ts"],
+  "files": ["src/index.js"],
   "include": ["src/@customTypes/**/*"]
 }

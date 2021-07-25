@@ -1,17 +1,114 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { WebWidget } from "oreid-js";
+import React, { CSSProperties } from 'react';
+import { WebWidget } from 'oreid-js';
+import OreIdWebWidgetChromeless from './OreIdWebWidgetChromeless/OreIdWebWidgetChromeless';
+import { DappActions } from '../../../../oreid-js/dist/webwidget';
 
-declare const window: any;
-let OreIdWebWidget: any;
-
-if (window) {
-  const widget = WebWidget.createWebWidget();
-  window["WrapperComponent"] = widget;
-  OreIdWebWidget = window.WrapperComponent.driver("react", {
-    React,
-    ReactDOM,
-  });
+const modalBackgroundStyle: CSSProperties = {
+  position: 'fixed',
+  backgroundColor: 'rgba(0,0,0,0.3)',
+  height: '100vh',
+  width: '100vw',
+  top: 0,
+  left: 0
 }
 
-export default OreIdWebWidget;
+const modalContainerStyle: CSSProperties = {
+  backgroundColor: '#fafafa',
+  borderRadius: '8px',
+  maxHeight: '600px',
+  maxWidth: '600px',
+  boxShadow: '0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0)',
+  position: 'relative',
+  top: '15%',
+  left: '35%'
+}
+
+const closeButtonStyle: CSSProperties = {
+  position: 'absolute',
+  top: '5%',
+  right: '5%',
+  zIndex: 1
+}
+
+const closeButtonIconStyle: CSSProperties = {
+  height: '30px',
+  width: '30px',
+  color: 'lightgray',
+}
+
+interface OreIdReactWebWidgetProps extends WebWidget.WebWidgetProps {
+  onClose: Function;
+  onOpen: Function;
+  oreIdOptions: any;
+  action: DappActions;
+}
+
+const CloseIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" style={closeButtonIconStyle} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+)
+
+export default class OreIdWebWidget extends React.Component<OreIdReactWebWidgetProps> {
+  state = {
+    showModal: false
+  }
+
+  constructor(props: OreIdReactWebWidgetProps) {
+    super(props);
+    this.closeModal = this.closeModal.bind(this);
+    this.openModal = this.openModal.bind(this);
+    this.onWebWidgetError = this.onWebWidgetError.bind(this);
+    this.onWebWidgetSuccess = this.onWebWidgetSuccess.bind(this);
+  }
+
+  closeModal() {
+    if (typeof this.props.onClose === 'function') {
+      this.props.onClose();
+    }
+    this.setState({ showModal: false })
+  }
+
+  onWebWidgetError(result: any) {
+    this.props.onError(result)
+    this.closeModal()
+  }
+
+  onWebWidgetSuccess(result: any) {
+    this.props.onSuccess(result)
+    this.closeModal()
+  }
+
+  openModal() {
+    if (typeof this.props.onOpen === 'function') {
+      this.props.onOpen();
+    }
+    this.setState({ showModal: true })
+  }
+
+  render() {
+    const { showModal } = this.state;
+    const {
+      oreIdOptions,
+      action,
+      options,
+    } = this.props;
+    return (
+      <div>
+        <button onClick={this.openModal}>Open</button>
+        {showModal && (
+          <div style={modalBackgroundStyle} onClick={this.closeModal}>
+            <div style={{...modalContainerStyle, backgroundColor: oreIdOptions.backgroundColor || '#fafafa'}}>
+              <span style={closeButtonStyle}><CloseIcon /></span>
+              <OreIdWebWidgetChromeless
+                oreIdOptions={oreIdOptions}
+                action={action}
+                options={options}
+                onSuccess={this.onWebWidgetSuccess}
+                onError={this.onWebWidgetError}
+              />
+            </div>
+          </div>
+        )}
+      </div>
+    )
+  }
+}
