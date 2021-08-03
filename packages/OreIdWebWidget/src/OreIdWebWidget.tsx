@@ -1,7 +1,7 @@
 import React, { CSSProperties } from 'react';
 import { WebWidget } from 'oreid-js';
+import Roboto from './assets/Roboto-Medium.ttf'
 import OreIdWebWidgetChromeless from './OreIdWebWidgetChromeless/OreIdWebWidgetChromeless';
-import { DappActions } from '../../../../oreid-js/dist/webwidget';
 
 const modalBackgroundStyle: CSSProperties = {
   position: 'fixed',
@@ -15,8 +15,8 @@ const modalBackgroundStyle: CSSProperties = {
 const modalContainerStyle: CSSProperties = {
   backgroundColor: '#fafafa',
   borderRadius: '8px',
-  maxHeight: '600px',
-  maxWidth: '600px',
+  maxHeight: '650px',
+  maxWidth: '700px',
   boxShadow: '0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0)',
   position: 'relative',
   top: '15%',
@@ -27,7 +27,8 @@ const closeButtonStyle: CSSProperties = {
   position: 'absolute',
   top: '5%',
   right: '5%',
-  zIndex: 1
+  zIndex: 1,
+  cursor: 'pointer'
 }
 
 const closeButtonIconStyle: CSSProperties = {
@@ -36,11 +37,26 @@ const closeButtonIconStyle: CSSProperties = {
   color: 'lightgray',
 }
 
+const openButtonIconStyle: CSSProperties = {
+  padding: '10px 10px 10px 10px',
+  backgroundColor: '#3E5895',
+  color: '#ffffff',
+  fontFamily: Roboto + 'sans-serif',
+  fontWeight: 500,
+  fontSize: '14px',
+  width: 200,
+  lineHeight: '22px',
+  letterSpacing: '1px',
+  textAlign: 'center',
+  border: 'none',
+  borderRadius: '5px',
+  boxShadow: '0 4px 12px rgba(0,0,0,0.25)',
+  cursor: 'pointer'
+}
 interface OreIdReactWebWidgetProps extends WebWidget.WebWidgetProps {
-  onClose: Function;
-  onOpen: Function;
-  oreIdOptions: any;
-  action: DappActions;
+  onClose?: Function;
+  onOpen?: Function;
+  disableBackdropClick?: boolean
 }
 
 const CloseIcon = () => (
@@ -90,14 +106,15 @@ export default class OreIdWebWidget extends React.Component<OreIdReactWebWidgetP
       oreIdOptions,
       action,
       options,
+      disableBackdropClick = false
     } = this.props;
     return (
       <div>
-        <button onClick={this.openModal}>Open</button>
+        <button style={openButtonIconStyle} onClick={this.openModal}>Open</button>
         {showModal && (
-          <div style={modalBackgroundStyle} onClick={this.closeModal}>
+          <div style={modalBackgroundStyle} onClick={!disableBackdropClick ? this.closeModal : undefined}>
             <div style={{...modalContainerStyle, backgroundColor: oreIdOptions.backgroundColor || '#fafafa'}}>
-              <span style={closeButtonStyle}><CloseIcon /></span>
+              <span onClick={this.closeModal} style={closeButtonStyle}><CloseIcon /></span>
               <OreIdWebWidgetChromeless
                 oreIdOptions={oreIdOptions}
                 action={action}
