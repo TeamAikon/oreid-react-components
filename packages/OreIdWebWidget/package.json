@@ -1,7 +1,7 @@
 {
     "name": "oreid-react-web-widget",
     "description": "React OreId WebWidget component",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "license": "MIT",
     "author": "Aikon",
     "main": "dist/index.js",
