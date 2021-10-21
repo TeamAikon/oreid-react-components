@@ -1,0 +1,13 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "allowJs": true,
+    "outDir": "./dist",
+    "declaration": true,
+    "declarationDir": "./dist",
+    "resolveJsonModule": true,
+    "skipLibCheck": true
+  },
+  "files": ["src/index.js"],
+  "include": ["src/@customTypes/**/*"]
+}

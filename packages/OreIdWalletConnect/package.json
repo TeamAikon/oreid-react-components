@@ -1,0 +1,41 @@
+{
+  "name": "oreid-walletconnect-client",
+  "description": "OreID WalletConnect Client",
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "Aikon",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build-server": "rm -rf dist/* && tsc --build tsconfig.json && yarn copy-assets",
+    "build-browser": "rm -rf dist.browser/* && ./node_modules/.bin/ncc build src/index.ts -o dist.browser --minify",
+    "build": "yarn build-server",
+    "build-production": "yarn build && TS_NODE_PROJECT=\"tsconfig.webpack.json\" webpack",
+    "clean": "rm -rf dist && rm -rf dist.browser",
+    "copy-assets": "copyfiles -u 1 \"src/assets/*\" dist",
+    "echo": "echo \"================== oreid-walletconnect-client ===================\"",
+    "installpkg": "yarn echo && yarn",
+    "prepare": "yarn build",
+    "prebuild": "yarn clean",
+    "watch": "./tsc -w",
+    "test": "",
+    "lint": "tslint -c ../../tslint.json -p ./tsconfig.json"
+  },
+  "peerDependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "dependencies": {
+    "@walletconnect/client": "^1.6.6"
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.1",
+    "@types/react": "^17.0.31",
+    "@types/react-dom": "^17.0.10",
+    "copyfiles": "^2.4.1",
+    "typescript": "^4.4.4"
+  }
+}
