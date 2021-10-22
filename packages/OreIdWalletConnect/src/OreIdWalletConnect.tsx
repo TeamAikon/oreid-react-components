@@ -87,6 +87,10 @@ const OreIDWalletConnect = (props: OreIDWalletConnectProps) => {
   /** Declines the current session request */
   const declineSessionRequest = () => {
     const connectedClient = findConnectedClientByUri(connectedClients, activeSession)
+    if (connectedClient && connectedClient.uri) {
+      const updatedClients = connectedClients.filter(client => client.uri !== connectedClient.uri)
+      setConnectedClients([...updatedClients])
+    }
     if (connectedClient?.connector) {
       connectedClient.connector.rejectSession()
     }
