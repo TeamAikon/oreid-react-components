@@ -1,43 +1,52 @@
 {
-    "name": "oreid-react-web-widget",
-    "description": "React OreId WebWidget component",
-    "version": "1.0.2",
-    "license": "MIT",
-    "author": "Aikon",
-    "main": "dist/index.js",
-    "module": "dist/index.js",
-    "publishConfig": {
-        "access": "public"
-    },
-    "scripts": {
-        "build-server": "rm -rf dist/* && tsc --build tsconfig.json && yarn copy-assets",
-        "build-browser": "rm -rf dist.browser/* && ./node_modules/.bin/ncc build src/index.ts -o dist.browser --minify",
-        "build": "yarn build-server",
-        "build-production": "yarn build && TS_NODE_PROJECT=\"tsconfig.webpack.json\" webpack",
-        "clean": "rm -rf dist && rm -rf dist.browser",
-        "copy-assets": "copyfiles -u 1 \"src/assets/*\" dist",
-        "echo": "echo \"================== oreid-react-web-widget ===================\"",
-        "installpkg": "yarn echo && yarn",
-        "prepare": "yarn build",
-        "prebuild": "yarn clean",
-        "watch": "./tsc -w",
-        "test": "",
-        "lint": "tslint -c ../../tslint.json -p ./tsconfig.json"
-    },
-    "devDependencies": {
-        "@types/node": "^14.11.1",
-        "@types/react": "^17.0.13",
-        "@types/react-dom": "^17.0.8",
-        "@types/styled-components": "^5.1.11",
-        "@zeit/ncc": "^0.22.3",
-        "copyfiles": "^2.4.0",
-        "typescript": "4.0.3"
-    },
-    "dependencies": {
-        "oreid-js": "^2.13.4"
-    },
-    "peerDependencies": {
-        "react": "^16.13.1",
-        "react-dom": "^16.13.1"
-    }
+  "name": "oreid-react-web-widget",
+  "description": "React OreId WebWidget component",
+  "version": "1.0.3",
+  "license": "MIT",
+  "author": "Aikon",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build-server": "rm -rf dist/* && tsc --build tsconfig.json && yarn copy-assets",
+    "build-browser": "rm -rf dist.browser/* && ./node_modules/.bin/ncc build src/index.ts -o dist.browser --minify",
+    "build": "yarn build-server",
+    "build-production": "yarn build && TS_NODE_PROJECT=\"tsconfig.webpack.json\" webpack",
+    "clean": "rm -rf dist && rm -rf dist.browser",
+    "copy-assets": "copyfiles -u 1 \"src/assets/*\" dist",
+    "echo": "echo \"================== oreid-react-web-widget ===================\"",
+    "installpkg": "yarn echo && yarn",
+    "prepare": "yarn build",
+    "prebuild": "yarn clean",
+    "watch": "./tsc -w",
+    "test": "",
+    "lint": "tslint -c ../../tslint.json -p ./tsconfig.json",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.15.8",
+    "@storybook/addon-actions": "^6.3.12",
+    "@storybook/addon-essentials": "^6.3.12",
+    "@storybook/addon-links": "^6.3.12",
+    "@storybook/react": "^6.3.12",
+    "@types/node": "^14.11.1",
+    "@types/react": "^17.0.13",
+    "@types/react-dom": "^17.0.8",
+    "@types/styled-components": "^5.1.11",
+    "@zeit/ncc": "^0.22.3",
+    "babel-loader": "^8.2.3",
+    "copyfiles": "^2.4.0",
+    "typescript": "4.0.3",
+    "zoid": "^9.0.71"
+  },
+  "dependencies": {
+    "oreid-js": "^2.13.4"
+  },
+  "peerDependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  }
 }
