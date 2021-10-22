@@ -23,6 +23,9 @@ function createAndSaveSession(payload, connector, activeSession) {
       let allSessions = [...parsedSessions, session]
       const sessionString = JSON.stringify(allSessions)
       window.localStorage.setItem('sessions', sessionString)
+    } else {
+      const sessionString = JSON.stringify([session])
+      window.localStorage.setItem('sessions', sessionString)
     }
   } else {
     const sessionString = JSON.stringify([session])
@@ -45,8 +48,8 @@ function getCachedSessions() {
 
 const walletConnectConfig = {
   chainId: 1,
-  accounts: ['0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2'],
-  address: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2',
+  accounts: ['0x7FFBF659A640e181BA2Db633686Af123E9E1eE1b'],
+  address: '0x7FFBF659A640e181BA2Db633686Af123E9E1eE1b',
 }
 
 const OreIDWalletConnectClient = () => {
