@@ -7,7 +7,7 @@ export interface OreIDWalletConnectProps {
   connectUris: string[]
   sessions?: any[]
   activeSession: string
-  activePage: string
+  activePage: ActivePage
   setActivePage: Function
   onWalletConnectButtonClick: Function
   onWalletConnectURIPaste: Function
@@ -43,3 +43,17 @@ export type ConnectedClient = {
 }
 
 export type ConnectedClients = ConnectedClient[]
+
+export enum ActivePage {
+  Empty = 'Empty',
+  Active = 'Active',
+  Loading = 'Loading',
+  Connect = 'Connect',
+  ApproveSession = 'ApproveSession',
+  Connected = 'Connected',
+  Listening = 'Listening',
+  Error = 'Error',
+  SignTransaction = 'SignTransaction',
+  SignMessage = 'SignMessage',
+  Disconnected = 'Disconnected',
+}
