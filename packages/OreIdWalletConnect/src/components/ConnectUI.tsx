@@ -1,4 +1,5 @@
 import React from 'react'
+import { ActivePage } from '../types'
 
 type ConnectUIProps = {
   onWalletConnectURIPaste: Function
@@ -9,7 +10,7 @@ const ConnectUI = (props: ConnectUIProps) => {
   const handleInputChange = async (e: React.FormEvent<HTMLInputElement>) => {
     const uri = e.currentTarget.value
     props.onWalletConnectURIPaste(uri)
-    props.setActivePage('loading')
+    props.setActivePage(ActivePage.Loading)
   }
 
   return (
