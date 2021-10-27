@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { storiesOf } from '@storybook/react'
 import OreIDWalletConnect from '../dist/index'
+import { ActivePage } from '../dist/types'
 
 const containerStyle = {
   maxWidth: 500,
@@ -53,12 +54,15 @@ const walletConnectConfig = {
 }
 
 const OreIDWalletConnectClient = () => {
-  const [activePage, setActivePage] = useState('default')
+  const existingWalletConnectSessions = getCachedSessions()
+
+  const [activePage, setActivePage] = useState(ActivePage.Connected)
   const [connectUris, setConnectUris] = useState([])
   const [activeSession, setActiveSession] = useState('')
+  const [sessions, setSessions] = useState(existingWalletConnectSessions)
 
   const onWalletConnectButtonClick = connector => {
-    setActivePage('connect')
+    setActivePage(ActivePage.Connect)
   }
 
   /** Callback after the WC connection string in pasted */
@@ -68,15 +72,14 @@ const OreIDWalletConnectClient = () => {
   }
 
   const handleSessionRequest = (connector, payload) => {
-    setActivePage('approve_session')
+    setActivePage(ActivePage.ApproveSession)
   }
 
   const handleSessionUpdate = payload => {
     console.log('handleSessionUpdate - payload', payload)
   }
 
-  const handleSessionDisconnect = uri => {
-    console.log('handleSessionDisconnect - payload', uri)
+  const handleSessionDisconnect = (payload, uri, connector) => {
     // UPDATE LOCASTORAGE SESSIONS
     let existingSessions = window.localStorage.getItem('sessions')
     if (existingSessions) {
@@ -85,9 +88,10 @@ const OreIDWalletConnectClient = () => {
         const updatedSessions = parsedSessions.filter(data => data?.uri !== uri)
         const sessionString = JSON.stringify(updatedSessions)
         window.localStorage.setItem('sessions', sessionString)
+        setSessions(sessions)
       }
     }
-    setActivePage('default')
+    setActivePage(ActivePage.Connected)
   }
 
   const handleTransaction = payload => {
@@ -101,7 +105,10 @@ const OreIDWalletConnectClient = () => {
   const handleConnect = (payload, connector) => {
     console.log('handleConnect - payload', payload)
     createAndSaveSession(payload, connector, activeSession)
-    setActivePage('default')
+    const allSessions = [...sessions, { ...connector.session, uri: activeSession }]
+    console.log('allSessions', allSessions)
+    setSessions(allSessions)
+    setActivePage(ActivePage.Connected)
   }
 
   const handleError = payload => {
@@ -112,7 +119,7 @@ const OreIDWalletConnectClient = () => {
     setActiveSession(uri)
   }
 
-  const existingWalletConnectSessions = getCachedSessions()
+  // const existingWalletConnectSessions = getCachedSessions()
 
   return (
     <div style={containerStyle}>
@@ -120,7 +127,7 @@ const OreIDWalletConnectClient = () => {
         config={walletConnectConfig}
         connectUris={connectUris}
         activeSession={activeSession}
-        sessions={existingWalletConnectSessions}
+        sessions={sessions}
         activePage={activePage}
         setActivePage={setActivePage}
         onWalletConnectButtonClick={onWalletConnectButtonClick}
