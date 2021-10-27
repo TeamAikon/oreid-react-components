@@ -162,7 +162,12 @@ export function subscribeToBasicEvents(
       }
       // reset the entire app
       resetAppState(setWalletConnectState, setPendingRequests)
-      props.onSessionDisconnect(payload)
+
+      // remove the current client from connectedClients array
+      const allClientsExceptCurrent = connectedClients.filter(item => item.uri !== uri)
+      setConnectedClients([...allClientsExceptCurrent])
+    
+      props.onSessionDisconnect(payload, uri, connector)
     })
   }
 }
