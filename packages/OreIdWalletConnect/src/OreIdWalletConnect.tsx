@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 // import types and helper methods
-import { OreIDWalletConnectProps, AppConfig, ConnectedClients } from './types'
+import { OreIDWalletConnectProps, AppConfig, ConnectedClients, ActivePage } from './types'
 import {
   checkIfAlreadyConnected,
   findConnectedClientByUri,
@@ -65,9 +65,9 @@ const OreIDWalletConnect = (props: OreIDWalletConnectProps) => {
 
   /** Disconnect from the WalletConnect session, aka terminate the session */
   const disconnectFromWalletConnect = () => {
-    const connectedClient = findConnectedClientByUri(connectedClients, activeSession)
-    const updatedClients = connectedClients.filter(client => client.uri !== activeSession)
-    setConnectedClients([...updatedClients])
+    // const connectedClient = findConnectedClientByUri(connectedClients, activeSession)
+    // const updatedClients = connectedClients.filter(client => client.uri !== activeSession)
+    // setConnectedClients([...updatedClients])
     connectedClient?.connector && connectedClient?.connector.killSession()
     props.onSessionDisconnect(activeSession)
   }
@@ -103,13 +103,13 @@ const OreIDWalletConnect = (props: OreIDWalletConnectProps) => {
     const connector = client?.connector
     if (connector) {
       subscribeToLiveEvents(uri, connector, pendingRequests, setPendingRequests)
-      props.setActivePage('listening')
+      props.setActivePage(ActivePage.Listening)
     }
   }
 
   /** Display all the apps client is connected to */
   const showAllConnectedApps = () => {
-    props.setActivePage('default')
+    props.setActivePage(ActivePage.Connected)
     setPendingRequests([])
     const client = findConnectedClientByUri(connectedClients, activeSession)
     const connector = client?.connector
@@ -123,7 +123,7 @@ const OreIDWalletConnect = (props: OreIDWalletConnectProps) => {
    */
   const connectedClient = findConnectedClientByUri(connectedClients, activeSession)
 
-  if (activePage === 'default') {
+  if (activePage === ActivePage.Connected) {
     if (connectedClients && connectedClients.length > 0) {
       return (
         <div>
@@ -147,7 +147,7 @@ const OreIDWalletConnect = (props: OreIDWalletConnectProps) => {
     }
   }
 
-  if (activePage === 'listening') {
+  if (activePage === ActivePage.Listening) {
     return (
       <ListeningUI
         pendingRequests={pendingRequests}
@@ -157,10 +157,10 @@ const OreIDWalletConnect = (props: OreIDWalletConnectProps) => {
     )
   }
 
-  if (activePage === 'connect') {
+  if (activePage === ActivePage.Connect) {
     return <ConnectUI setActivePage={props.setActivePage} onWalletConnectURIPaste={onWalletConnectURIPaste} />
   }
-  if (activePage === 'approve_session') {
+  if (activePage === ActivePage.ApproveSession) {
     return (
       <ApproveSessionUI
         peerMeta={connectedClient?.peerMeta}
@@ -170,17 +170,17 @@ const OreIDWalletConnect = (props: OreIDWalletConnectProps) => {
     )
   }
 
-  if (activePage === 'loading') {
+  if (activePage === ActivePage.Loading) {
     return <LoadingUI />
   }
 
-  if (activePage === 'error') {
+  if (activePage === ActivePage.Error) {
     return <div>Error Occurred</div>
   }
 
   return (
     <div>
-      <h3>activePage is not specified or is invalid.</h3>
+      <h3>ActivePage is not specified or is invalid.</h3>
       <br />
       <DefaultUI
         onClick={() => {
