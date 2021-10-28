@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { storiesOf } from '@storybook/react'
-import OreIDWalletConnect from '../dist/index'
-import { ActivePage } from '../dist/types'
+import OreIDWalletConnect from './OreIdWalletConnect'
+import { ActivePage } from './types'
 
 const containerStyle = {
   maxWidth: 500,
