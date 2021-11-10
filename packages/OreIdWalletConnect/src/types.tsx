@@ -1,27 +1,33 @@
-import WalletConnect from '@walletconnect/client'
+import WalletConnectClient from '@walletconnect/client'
 
-export type WalletConnectClient = WalletConnect
+export type ConnectionEvent = (connection: Connection, payload?: any) => void
 
-export interface OreIDWalletConnectProps {
-  config: AppConfig
-  connectUris: string[]
-  sessions?: any[]
-  activeSession: string
-  activePage: ActivePage
-  setActivePage: Function
-  onWalletConnectButtonClick: Function
-  onWalletConnectURIPaste: Function
-  onSessionRequest: Function
-  onSessionUpdate: Function
-  onSessionDisconnect: Function
-  onChangeActiveClient: Function
-  onTransaction: Function
-  onPersonalSign: Function
-  onConnect: Function
-  onError: Function
+export type WalletConnectRefEvent = (connection: WalletConnectRef, payload?: any) => void
+
+export interface OreIDWalletConnectConfig {
+  chainId: number
+  accounts: string[]
 }
 
-export type PeerMeta = {
+export interface OreIDWalletConnectProps {
+  config: OreIDWalletConnectConfig
+  connections: Connection[]
+  setConnections: (connections: Connection[]) => void
+  modalConnections: ModalConnections
+  setModalConnections: (modalState: ModalConnections) => void
+
+  // Events
+  onSessionRequest?: ConnectionEvent
+  onSessionUpdate?: ConnectionEvent
+  onConnect?: ConnectionEvent
+  onStartListening?: ConnectionEvent
+  onRequest: ConnectionEvent
+  onStopListening?: ConnectionEvent
+  onDisconnect?: ConnectionEvent
+  onError?: (eventName: string, error: Error, connection?: Connection) => void
+}
+
+export interface PeerMeta {
   description?: string
   url?: string
   icons?: string[]
@@ -29,31 +35,34 @@ export type PeerMeta = {
   ssl?: boolean
 }
 
-export interface AppConfig {
-  peerMeta?: PeerMeta
-  chainId: number
-  accounts: string[]
-  address: string
-}
-
-export type ConnectedClient = {
-  uri: string
+export interface WalletConnectRef {
+  listening: boolean
+  subscribed: boolean
   connector: WalletConnectClient
-  peerMeta?: PeerMeta
 }
 
-export type ConnectedClients = ConnectedClient[]
+export interface StoreSessionWalletConnectClient {
+  connected: boolean
+  accounts: string[]
+  chainId: number
+  bridge: string
+  key: string
+  clientId: string
+  clientMeta: any
+  peerId: string
+  peerMeta: PeerMeta
+  handshakeId: number
+  handshakeTopic: string
+}
 
-export enum ActivePage {
-  Empty = 'Empty',
-  Active = 'Active',
-  Loading = 'Loading',
-  Connect = 'Connect',
-  ApproveSession = 'ApproveSession',
-  Connected = 'Connected',
-  Listening = 'Listening',
-  Error = 'Error',
-  SignTransaction = 'SignTransaction',
-  SignMessage = 'SignMessage',
-  Disconnected = 'Disconnected',
+export interface Connection {
+  listening: boolean
+  uri: string
+  session: StoreSessionWalletConnectClient
+}
+
+export enum ModalConnections {
+  Closed,
+  NewConnection,
+  ListConnections,
 }
