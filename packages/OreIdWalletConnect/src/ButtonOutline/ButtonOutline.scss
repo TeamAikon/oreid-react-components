@@ -1,0 +1,14 @@
+.oreIdWalletConnect-buttonOutline {
+  display: flex;
+  align-items: center;
+  border-radius: 100px;
+  color: #fff;
+  background: transparent;
+  cursor: pointer;
+  padding: 10px 12px;
+  border: 1px solid #fff;
+  &:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: transparent;
+  }
+}

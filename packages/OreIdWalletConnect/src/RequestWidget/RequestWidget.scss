@@ -1,0 +1,61 @@
+.oreIdWalletConnect-requestWidget {
+  font-family: Roboto;
+  font-style: normal;
+  color: #333333;
+  letter-spacing: 0.5px;
+
+  .oreIdWalletConnect-requestWidget-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    h2 {
+      font-family: Montserrat;
+      font-weight: bold;
+      font-size: 24px;
+      line-height: 29px;
+      text-align: center;
+    }
+
+    h3 {
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 24px;
+      text-align: center;
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 24px;
+      text-align: center;
+    }
+
+    span {
+      font-size: 16px;
+      line-height: 24px;
+      text-align: center;
+    }
+
+    .oreIdWalletConnect-requestWidget-accountAddress {
+      color: #08b6e7;
+    }
+  }
+
+  .oreIdWalletConnect-requestWidget-divider {
+    border: 1px solid #d0d3d4;
+    width: 100%;
+    margin: 32px 0px;
+  }
+
+  .oreIdWalletConnect-requestWidget-name {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    margin-bottom: 20px;
+
+    span {
+      margin: 0px 10px;
+    }
+  }
+}

@@ -1,26 +1,27 @@
 import React from 'react'
-import { StoreSessionWalletConnectClient } from '../types'
+import { PeerMeta } from '../types'
 import { ConnectionIcon } from '../ConnectionIcon'
 import { ActiveSessionButton } from '../ActiveSessionButton'
+import { ButtonOutline } from '../ButtonOutline'
 
 import './ConnectionsBadge.scss'
 
 interface ConnectedUIProps {
-  sessions: StoreSessionWalletConnectClient[]
+  isListening: boolean
+  peerMeta: PeerMeta[]
   onClick: () => void
 }
 
-export const ConnectionsBadge: React.FC<ConnectedUIProps> = ({ sessions, onClick }) => {
-  if (sessions.length === 0) return null
+export const ConnectionsBadge: React.FC<ConnectedUIProps> = ({ isListening, peerMeta, onClick }) => {
   return (
     <div className="oreIdWalletConnect-connectionsBadge">
       <div className="oreIdWalletConnect-connectionsBadge-icons">
-        {sessions.map(({ peerMeta }, key) => {
-          if (!peerMeta?.icons?.[0]) return null
-          return <ConnectionIcon key={key} icon={peerMeta.icons[0]} size={20} />
+        {peerMeta.map((metaData) => {
+          if (!metaData?.icons?.[0]) return null
+          return <ConnectionIcon key={metaData.url} icon={metaData.icons[0]} size={20} />
         })}
       </div>
-      <ActiveSessionButton onClick={onClick} />
+      {isListening ? <ActiveSessionButton onClick={onClick} /> : <ButtonOutline label="Connect" onClick={onClick} />}
     </div>
   )
 }

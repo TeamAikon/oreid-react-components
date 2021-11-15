@@ -1,12 +1,41 @@
 import WalletConnectClient from '@walletconnect/client'
 
-export type ConnectionEvent = (connection: Connection, payload?: any) => void
+export enum ModalConnections {
+  Closed,
+  NewConnection,
+  ListConnections,
+  OnRequest,
+}
 
+export enum ChainNetwork {
+  AlgoMain = 'algo_main',
+  AlgoBeta = 'algo_beta',
+  AlgoTest = 'algo_test',
+  DspEosKylin1 = 'kylin-dsp-1.liquidapps.io',
+  DspEosKylin2 = 'kylin-dsp-2.liquidapps.io',
+  DspMoonlighting = 'eos_moon_blockstartdsp_com',
+  DspMoonlightingTest = 'eos_moontest_blockstartdsp_com',
+  EosMain = 'eos_main', // 59
+  EosKylin = 'eos_kylin', // 95
+  EosJungle = 'eos_jungle',
+  MigrateEosMain = 'migrate_eos_main',
+  TelosMain = 'telos_main', // 40
+  TelosTest = 'telos_test', // 41
+  WaxMain = 'wax_main',
+  WaxTest = 'wax_test',
+  OreMain = 'ore_main',
+  OreTest = 'ore_test',
+  EthMain = 'eth_main', // 1
+  EthRopsten = 'eth_ropsten', // 3
+  EthRinkeby = 'eth_rinkeby', // 4
+}
+
+export type ConnectionEvent = (connection?: Connection, payload?: any) => void
 export type WalletConnectRefEvent = (connection: WalletConnectRef, payload?: any) => void
 
 export interface OreIDWalletConnectConfig {
-  chainId: number
-  accounts: string[]
+  chainNetwork: ChainNetwork
+  account: string
 }
 
 export interface OreIDWalletConnectProps {
@@ -21,7 +50,7 @@ export interface OreIDWalletConnectProps {
   onSessionUpdate?: ConnectionEvent
   onConnect?: ConnectionEvent
   onStartListening?: ConnectionEvent
-  onRequest: ConnectionEvent
+  onAcceptRequest: (request: WalletConnectRequest) => void
   onStopListening?: ConnectionEvent
   onDisconnect?: ConnectionEvent
   onError?: (eventName: string, error: Error, connection?: Connection) => void
@@ -41,10 +70,10 @@ export interface WalletConnectRef {
   connector: WalletConnectClient
 }
 
-export interface StoreSessionWalletConnectClient {
+export interface WalletConnectClientSession {
   connected: boolean
   accounts: string[]
-  chainId: number
+  chainNetwork: ChainNetwork
   bridge: string
   key: string
   clientId: string
@@ -56,13 +85,22 @@ export interface StoreSessionWalletConnectClient {
 }
 
 export interface Connection {
-  listening: boolean
+  listening?: boolean
   uri: string
-  session: StoreSessionWalletConnectClient
+  walletConnectClientSession: WalletConnectClientSession
 }
 
-export enum ModalConnections {
-  Closed,
-  NewConnection,
-  ListConnections,
+export interface WalletConnectRequest {
+  id: number
+  jsonrpc: string
+  method: string
+  params: [
+    {
+      gas: string
+      value: string
+      from: string
+      to: string
+      data: string
+    },
+  ]
 }
