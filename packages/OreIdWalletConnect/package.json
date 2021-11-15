@@ -1,12 +1,12 @@
 {
-  "name": "react-component-library",
+  "name": "@aikon/oreid-wallet-connect-react-component",
   "version": "1.0.0",
   "main": "build/index.js",
   "files": [
     "build"
   ],
   "types": "build/index.d.ts",
-  "description": "A skeleton to create your own React component library using Rollup, TypeScript, Sass and Storybook",
+  "description": "Wallet Connect component",
   "scripts": {
     "build": "rollup -c",
     "test": "jest",
@@ -39,7 +39,8 @@
   },
   "homepage": "https://github.com/HarveyD/react-component-library#readme",
   "peerDependencies": {
-    "react": ">=16.8.0"
+    "react": ">=16.9.0",
+    "react-dom": ">=16.9.0"
   },
   "devDependencies": {
     "@babel/core": "^7.10.3",
@@ -65,8 +66,8 @@
     "jest": "^24.9.0",
     "node-sass": "^4.14.1",
     "prettier": "^2.2.1",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
     "rollup": "^1.27.4",
     "rollup-plugin-copy": "^3.3.0",
     "rollup-plugin-peer-deps-external": "^2.2.0",

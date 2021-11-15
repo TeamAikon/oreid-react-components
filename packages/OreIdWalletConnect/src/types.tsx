@@ -50,7 +50,7 @@ export interface OreIDWalletConnectProps {
   onSessionUpdate?: ConnectionEvent
   onConnect?: ConnectionEvent
   onStartListening?: ConnectionEvent
-  onAcceptRequest: (request: WalletConnectRequest) => void
+  onAcceptRequest: (transaction: WalletConnectTransaction) => void
   onStopListening?: ConnectionEvent
   onDisconnect?: ConnectionEvent
   onError?: (eventName: string, error: Error, connection?: Connection) => void
@@ -90,7 +90,7 @@ export interface Connection {
   walletConnectClientSession: WalletConnectClientSession
 }
 
-export interface WalletConnectRequest {
+export interface WalletConnectTransaction {
   id: number
   jsonrpc: string
   method: string

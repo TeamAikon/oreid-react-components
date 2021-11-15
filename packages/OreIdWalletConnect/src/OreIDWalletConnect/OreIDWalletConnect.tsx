@@ -10,7 +10,7 @@ import {
   WalletConnectRefEvent,
   WalletConnectRef,
   PeerMeta,
-  WalletConnectRequest,
+  WalletConnectTransaction,
 } from '../types'
 import { factoryConnection, subscribeEvents, unsubscribeEvents } from '../utils'
 import { ConnectionListItem } from '../ConnectionListItem'
@@ -35,7 +35,7 @@ export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
 }) => {
   const walletConnectClientList = useRef<WalletConnectRef[]>([])
   const [incomingRequest, setIncomingRequest] = useState<
-    { peerMeta: PeerMeta; request: WalletConnectRequest } | undefined
+    { peerMeta: PeerMeta; request: WalletConnectTransaction } | undefined
   >()
 
   const forceUpdate = useForceUpdate()

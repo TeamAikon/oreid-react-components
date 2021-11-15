@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 import { Button } from '../Button'
 import { ConnectionIcon } from '../ConnectionIcon'
-import { WalletConnectRequest, PeerMeta } from '../types'
+import { WalletConnectTransaction, PeerMeta } from '../types'
 
 import './RequestWidget.scss'
 
 interface ConnectWalletWidgetProps {
   peerMeta: PeerMeta
-  request: WalletConnectRequest
-  onAcceptRequest: (request: WalletConnectRequest) => void
+  request: WalletConnectTransaction
+  onAcceptRequest: (request: WalletConnectTransaction) => void
 }
 
 export const RequestWidget: React.FC<ConnectWalletWidgetProps> = ({ peerMeta, request, onAcceptRequest }) => {
