@@ -1,2 +1,4 @@
 export * from './OreIDWalletConnect'
-export * from './sessions'
+export * from './mapper'
+export * from './types'
+export * from './hooks'

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { ApproveConnectionWidget } from '../ApproveConnectionWidget'
 import { ConnectWalletWidget } from '../ConnectWalletWidget'
 import { Loading } from '../Loading'
+import { mapChainNetworkToChainId } from '../mapper'
 
 import { OreIDWalletConnectConfig, WalletConnectRefEvent, WalletConnectRef } from '../types'
 import { factoryConnection } from '../utils'
@@ -40,9 +41,6 @@ export const ConnectWalletContainer: React.FC<ConnectWalletContainerProps> = ({
   }
 
   useEffect(() => {
-    console.log('useEffect: ')
-    console.log('!connection: ', !connection)
-    console.log('!connection.subscribed: ', !connection?.subscribed)
     if (!connection) return
     if (!connection.subscribed) {
       connection.connector.createSession()
@@ -96,11 +94,13 @@ export const ConnectWalletContainer: React.FC<ConnectWalletContainerProps> = ({
       peerMeta={connection.connector.session.peerMeta}
       approveSessionRequest={() => {
         if (connection) {
-          const { chainId, accounts } = config
-          connection.connector.approveSession({
-            chainId,
-            accounts,
-          })
+          const { chainNetwork, account } = config
+          const configConnection = {
+            chainId: mapChainNetworkToChainId(chainNetwork),
+            accounts: [account],
+          }
+          console.log({ configConnection })
+          connection.connector.approveSession(configConnection)
           connection.connector.off('session_request')
           connection.connector.off('connect')
           connection.connector.off('disconnect')

@@ -1,9 +1,16 @@
 import WalletConnect from '@walletconnect/client'
-import { WalletConnectRef, WalletConnectRefEvent } from './types'
+import { mapWalletConnectClientSessionToSession } from './mapper'
+import { WalletConnectRef, WalletConnectRefEvent, WalletConnectClientSession } from './types'
 
-export const factoryConnection = (uri: string): WalletConnectRef => {
+export const factoryConnection = (
+  uri: string,
+  walletConnectClientSession?: WalletConnectClientSession,
+): WalletConnectRef => {
   const storageId = uri.split('key=')[1]
-  const connector = new WalletConnect({ uri, storageId })
+  const session = walletConnectClientSession
+    ? mapWalletConnectClientSessionToSession(walletConnectClientSession)
+    : undefined
+  const connector = new WalletConnect({ uri, storageId, session })
   return {
     subscribed: false,
     listening: false,

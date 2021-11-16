@@ -21,19 +21,19 @@ export default {
     sass({
       insert: true
     }),
-    copy({
-      targets: [
-        {
-          src: "src/variables.scss",
-          dest: "build",
-          rename: "variables.scss"
-        },
-        {
-          src: "src/typography.scss",
-          dest: "build",
-          rename: "typography.scss"
-        }
-      ]
-    })
+    // copy({
+    //   targets: [
+    //     {
+    //       src: "src/variables.scss",
+    //       dest: "build",
+    //       rename: "variables.scss"
+    //     },
+    //     {
+    //       src: "src/typography.scss",
+    //       dest: "build",
+    //       rename: "typography.scss"
+    //     }
+    //   ]
+    // })
   ]
 };
