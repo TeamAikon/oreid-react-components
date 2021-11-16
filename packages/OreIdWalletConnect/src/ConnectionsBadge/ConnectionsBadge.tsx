@@ -1,12 +1,12 @@
 import React from 'react'
-import { StoreSessionWalletConnectClient } from '../types'
+import { IWalletConnectSession } from '@walletconnect/types'
 import { ConnectionIcon } from '../ConnectionIcon'
 import { ActiveSessionButton } from '../ActiveSessionButton'
 
 import './ConnectionsBadge.scss'
 
 interface ConnectedUIProps {
-  sessions: StoreSessionWalletConnectClient[]
+  sessions: IWalletConnectSession[]
   onClick: () => void
 }
 

@@ -200,3 +200,5 @@ export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
     </MuiThemeProvider>
   )
 }
+
+export default OreIDWalletConnect

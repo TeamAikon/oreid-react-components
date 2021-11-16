@@ -1,4 +1,5 @@
 import WalletConnectClient from '@walletconnect/client'
+import { IWalletConnectSession} from '@walletconnect/types'
 
 export type ConnectionEvent = (connection: Connection, payload?: any) => void
 
@@ -41,24 +42,24 @@ export interface WalletConnectRef {
   connector: WalletConnectClient
 }
 
-export interface StoreSessionWalletConnectClient {
-  connected: boolean
-  accounts: string[]
-  chainId: number
-  bridge: string
-  key: string
-  clientId: string
-  clientMeta: any
-  peerId: string
-  peerMeta: PeerMeta
-  handshakeId: number
-  handshakeTopic: string
-}
+// export interface StoreSessionWalletConnectClient {
+//   connected: boolean
+//   accounts: string[]
+//   chainId: number
+//   bridge: string
+//   key: string
+//   clientId: string
+//   clientMeta: any
+//   peerId: string
+//   peerMeta: PeerMeta
+//   handshakeId: number
+//   handshakeTopic: string
+// }
 
 export interface Connection {
   listening: boolean
   uri: string
-  session: StoreSessionWalletConnectClient
+  session: IWalletConnectSession
 }
 
 export enum ModalConnections {
