@@ -71,10 +71,11 @@ class LoginButton extends Component<Props, State> {
 
   render() {
     const providerMetadata = this.getProviderMetadata(this.props.provider)
+    const dataAttributes = Object.keys(this.props).reduce((prev, curr) =>  curr.startsWith('data-') ? ({ ...prev, [curr]: this.props[curr]}) : prev, {})
     let { provider, onClickCallback, buttonStyle, logoStyle, text } = this.state
     return (
       <div>
-        <button style={buttonStyle} onClick={(e) => {onClickCallback(e, provider);}}>
+        <button style={buttonStyle} onClick={(e) => {onClickCallback(e, provider);}} {...dataAttributes}>
           <img style={logoStyle} src={providerMetadata.logo} alt={text}/>
           {text}
         </button>

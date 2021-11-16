@@ -57,6 +57,7 @@ interface OreIdReactWebWidgetProps extends WebWidget.WebWidgetProps {
   onClose?: Function;
   onOpen?: Function;
   disableBackdropClick?: boolean
+  buttonText?: string
 }
 
 const CloseIcon = () => (
@@ -106,11 +107,13 @@ export default class OreIdWebWidget extends React.Component<OreIdReactWebWidgetP
       oreIdOptions,
       action,
       options,
-      disableBackdropClick = false
+      disableBackdropClick = false,
+      buttonText = 'Open'
     } = this.props;
+    const dataAttributes = Object.keys(this.props).reduce((prev, curr) =>  curr.startsWith('data-') ? ({ ...prev, [curr]: this.props[curr]}) : prev, {})
     return (
       <div>
-        <button style={openButtonIconStyle} onClick={this.openModal}>Open</button>
+        <button style={openButtonIconStyle} onClick={this.openModal} {...dataAttributes}>{buttonText}</button>
         {showModal && (
           <div style={modalBackgroundStyle} onClick={!disableBackdropClick ? this.closeModal : undefined}>
             <div style={{...modalContainerStyle, backgroundColor: oreIdOptions.backgroundColor || '#fafafa'}}>
