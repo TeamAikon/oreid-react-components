@@ -57,7 +57,11 @@ export interface OreIDWalletConnectProps {
   onError?: (eventName: string, error: Error, connection?: Connection) => void
 }
 
-export type PeerMeta = Partial<IClientMeta> & {
+export interface PeerMeta {
+  description?: string
+  url?: string
+  icons?: string[]
+  name?: string
   ssl?: boolean
 }
 
@@ -67,9 +71,18 @@ export interface WalletConnectRef {
   connector: WalletConnectClient
 }
 
-export type WalletConnectClientSession = IWalletConnectSession & {
+export interface WalletConnectClientSession {
+  connected: boolean
+  accounts: string[]
   chainNetwork: ChainNetwork
+  bridge: string
+  key: string
+  clientId: string
+  clientMeta: any
+  peerId: string
   peerMeta: PeerMeta
+  handshakeId: number
+  handshakeTopic: string
 }
 export interface Connection {
   listening?: boolean
