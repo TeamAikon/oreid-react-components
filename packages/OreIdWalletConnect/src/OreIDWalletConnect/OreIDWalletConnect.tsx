@@ -17,6 +17,7 @@ import { ConnectionListItem } from '../ConnectionListItem'
 import { ConnectionsBadge } from '../ConnectionsBadge'
 import { mapWalletConnectRefToConnection } from '../mapper'
 import { RequestWidget } from '../RequestWidget'
+import { hasChainSupport } from '../helpers'
 
 import './OreIDWalletConnect.scss'
 
@@ -38,6 +39,7 @@ export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
     { peerMeta: PeerMeta; request: WalletConnectTransaction } | undefined
   >()
 
+  const hasChainNetworkSupport = hasChainSupport(config.chainNetwork)
   const forceUpdate = useForceUpdate()
 
   useEffect(() => {
@@ -156,6 +158,7 @@ export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
   }
 
   useEffect(() => {
+    if (!hasChainNetworkSupport) return
     let update = false
     connections.forEach((propConnection) => {
       const index = getWalletConnectClientIndexByUri(propConnection.connectionUri)
@@ -176,7 +179,7 @@ export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
     })
     if (update) forceUpdate()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [connections])
+  }, [connections, hasChainNetworkSupport])
 
   useEffect(() => {
     return () => {
@@ -185,6 +188,7 @@ export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
     }
   }, [])
 
+  if (!hasChainSupport) return null
   return (
     <MuiThemeProvider theme={theme}>
       <div className="oreIdWalletConnect">
