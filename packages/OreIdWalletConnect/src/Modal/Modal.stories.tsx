@@ -1,6 +1,7 @@
 import { MuiThemeProvider } from '@material-ui/core'
 import React, { useState } from 'react'
 import theme from '../assets/_styles/theme'
+import { Loading } from '../Loading'
 import { Modal } from './Modal'
 
 export default {
@@ -15,7 +16,9 @@ const ModalExample = (props: any) => {
       <button onClick={() => setOpen(true)}>Open Modal</button>
       <MuiThemeProvider theme={theme}>
         <Modal open={open} onClose={() => setOpen(false)} {...props}>
-          MODAL CONTENT
+          MODAL CONTENT EXAMPLE
+          <Loading />
+          MODAL CONTENT EXAMPLE
         </Modal>
       </MuiThemeProvider>
     </>

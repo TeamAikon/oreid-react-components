@@ -9,9 +9,9 @@ export const LogoIcon: React.FC = () => (
     xmlns="http://www.w3.org/2000/svg"
     xmlnsXlink="http://www.w3.org/1999/xlink"
   >
-    <rect width="128" height="128" fill="url(#pattern0)" />
+    <rect width="128" height="128" fill="url(#pattern-logo)" />
     <defs>
-      <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+      <pattern id="pattern-logo" patternContentUnits="objectBoundingBox" width="1" height="1">
         <use xlinkHref="#image0_818:1989" transform="scale(0.00333333)" />
       </pattern>
       <image
