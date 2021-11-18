@@ -1,5 +1,5 @@
 import WalletConnectClient from '@walletconnect/client'
-import { IWalletConnectSession, IClientMeta } from '@walletconnect/types'
+import { GQLModel } from '@aikon/oreid-shared/dist/models'
 
 export enum ModalConnections {
   Closed,
@@ -71,23 +71,8 @@ export interface WalletConnectRef {
   connector: WalletConnectClient
 }
 
-export interface WalletConnectClientSession {
-  connected: boolean
-  accounts: string[]
-  chainNetwork: ChainNetwork
-  bridge: string
-  key: string
-  clientId: string
-  clientMeta: any
-  peerId: string
-  peerMeta: PeerMeta
-  handshakeId: number
-  handshakeTopic: string
-}
-export interface Connection {
-  listening?: boolean
-  uri: string
-  walletConnectClientSession: WalletConnectClientSession
+export interface Connection extends GQLModel.WalletConnectSession {
+  listening?: boolean // add need this type
 }
 
 export interface WalletConnectTransaction {

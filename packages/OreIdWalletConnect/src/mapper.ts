@@ -1,31 +1,45 @@
 import WalletConnectClient from '@walletconnect/client'
-import { ChainNetwork, Connection, WalletConnectRef, WalletConnectClientSession } from './types'
+import { ChainNetwork, Connection, WalletConnectRef, OreIDWalletConnectConfig } from './types'
 
 export const mapWalletConnectRefToConnection = (conection: WalletConnectRef): Connection => {
   const { chainId, ...session } = conection.connector.session
   return {
-    uri: conection.connector.uri,
-    listening: conection.listening,
-    walletConnectClientSession: mapSessionToWalletConnectClientSession(conection.connector),
-  }
-}
-
-const mapSessionToWalletConnectClientSession = (
-  walletConnectClient: WalletConnectClient,
-): WalletConnectClientSession => {
-  const { chainId, ...session } = walletConnectClient.session
-  return {
-    ...(session as any),
+    name: session?.peerMeta?.name || '',
+    description: session.peerMeta?.description || '',
+    logoUrl: session.peerMeta?.icons?.[session.peerMeta?.icons.length - 1] || '',
+    peerUrl: session.peerMeta?.url || '',
+    connectionUri: conection.connector.uri,
     chainNetwork: mapChainIdToChainNetwork(chainId),
+    bridge: session.bridge,
+    key: session.key,
+    handshakeId: session.handshakeId.toString(),
+    handshakeTopic: session.handshakeTopic,
+    peerId: session.peerId,
+    clientId: session.clientId,
+    listening: conection.listening,
   }
 }
 
-export const mapWalletConnectClientSessionToSession = (walletConnectClientSession: WalletConnectClientSession): any => {
-  const { chainNetwork, ...session } = walletConnectClientSession
-  return {
-    ...session,
-    chainId: mapChainNetworkToChainId(chainNetwork),
+export const mapConnectionToWalletConnectRefSession = (connection: Connection, confif: OreIDWalletConnectConfig) => {
+  const session = {
+    bridge: connection.bridge,
+    key: connection.key,
+    peerId: connection.peerId,
+    peerMeta: {
+      description: connection.description || '',
+      icons: connection.logoUrl ? [connection.logoUrl] : [],
+      name: connection.name,
+      url: connection.peerUrl,
+    },
+    handshakeId: Number(connection.handshakeId),
+    handshakeTopic: connection.handshakeTopic,
+    chainId: mapChainNetworkToChainId(connection.chainNetwork),
+    connected: true,
+    accounts: [confif.account],
+    clientId: connection.clientId,
+    clientMeta: { description: '', icons: [], name: '', url: `${window.location.protocol}//${window.location.host}` },
   }
+  return session
 }
 
 const mapChainIdToChainNetwork = (chainId: number): ChainNetwork => {
@@ -39,13 +53,13 @@ const mapChainIdToChainNetwork = (chainId: number): ChainNetwork => {
   throw Error(`Unsupported chainId: ${chainId}`)
 }
 
-export const mapChainNetworkToChainId = (chainNetwork: ChainNetwork): number => {
-  if (chainNetwork === ChainNetwork.EthMain) return 1
-  if (chainNetwork === ChainNetwork.EthRopsten) return 3
-  if (chainNetwork === ChainNetwork.EthRinkeby) return 4
-  if (chainNetwork === ChainNetwork.TelosMain) return 40
-  if (chainNetwork === ChainNetwork.TelosTest) return 41
-  if (chainNetwork === ChainNetwork.EosMain) return 59
-  if (chainNetwork === ChainNetwork.EosKylin) return 95
+export const mapChainNetworkToChainId = (chainNetwork: string): number => {
+  if (chainNetwork === ChainNetwork.EthMain.toString()) return 1
+  if (chainNetwork === ChainNetwork.EthRopsten.toString()) return 3
+  if (chainNetwork === ChainNetwork.EthRinkeby.toString()) return 4
+  if (chainNetwork === ChainNetwork.TelosMain.toString()) return 40
+  if (chainNetwork === ChainNetwork.TelosTest.toString()) return 41
+  if (chainNetwork === ChainNetwork.EosMain.toString()) return 59
+  if (chainNetwork === ChainNetwork.EosKylin.toString()) return 95
   throw Error(`Unsupported chainNetwork: ${chainNetwork}`)
 }

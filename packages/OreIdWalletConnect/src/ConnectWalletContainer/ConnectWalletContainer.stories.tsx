@@ -3,7 +3,7 @@ import { MuiThemeProvider } from '@material-ui/core'
 import { Modal } from '../Modal'
 import { ConnectWalletContainer } from './ConnectWalletContainer'
 import theme from '../assets/_styles/theme'
-import { ChainNetwork } from '../types'
+import { ChainNetwork, WalletConnectRef } from '../types'
 
 export default {
   title: 'ConnectWalletContainer',
@@ -34,7 +34,9 @@ Defaul.args = {
     chainNetwork: ChainNetwork.EthMain,
     account: '0x7FFBF659A640e181BA2Db633686Af123E9E1eE1b',
   },
-  createConnection: (...args) => console.log('createConnection', args),
+  createConnection: (walletConnectRef: WalletConnectRef) => {
+    console.log('createConnection: ', JSON.stringify(walletConnectRef.connector.session))
+  },
   onSessionRequest: (...args) => console.log('onSessionRequest', args),
   onConnect: (...args) => console.log('onConnect', args),
   onDisconnect: (...args) => console.log('onDisconnect', args),

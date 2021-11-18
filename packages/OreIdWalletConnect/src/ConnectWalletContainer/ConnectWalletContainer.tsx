@@ -35,7 +35,7 @@ export const ConnectWalletContainer: React.FC<ConnectWalletContainerProps> = ({
   const [state, setState] = useState<WalletContainerState>(WalletContainerState.WaitingUri)
 
   const connect = (uri: string) => {
-    const update = factoryConnection(uri)
+    const update = factoryConnection(uri, config)
     setConnection(update)
     setState(WalletContainerState.LoadingScreen)
   }
@@ -44,7 +44,6 @@ export const ConnectWalletContainer: React.FC<ConnectWalletContainerProps> = ({
     if (!connection) return
     if (!connection.subscribed) {
       connection.connector.createSession()
-      console.log('createSession()')
       connection.connector.on('session_request', (error, payload) => {
         if (error) {
           onError('session_request', error)
@@ -99,11 +98,11 @@ export const ConnectWalletContainer: React.FC<ConnectWalletContainerProps> = ({
             chainId: mapChainNetworkToChainId(chainNetwork),
             accounts: [account],
           }
-          console.log({ configConnection })
           connection.connector.approveSession(configConnection)
           connection.connector.off('session_request')
           connection.connector.off('connect')
           connection.connector.off('disconnect')
+          connection.listening = true
           createConnection(connection)
         }
       }}

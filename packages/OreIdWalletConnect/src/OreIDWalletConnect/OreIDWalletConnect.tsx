@@ -83,7 +83,6 @@ export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
   const onRequest: WalletConnectRefEvent = (connection, payload) => {
     const index = getWalletConnectClientIndexByUri(connection.connector.uri)
     const { peerMeta } = walletConnectClientList.current[index].connector.session
-    console.log('IF: ', walletConnectClientList.current[index].listening && !!peerMeta)
     if (walletConnectClientList.current[index].listening && !!peerMeta) {
       setIncomingRequest({
         peerMeta,
@@ -101,7 +100,6 @@ export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
       }
     }
     const index = getWalletConnectClientIndexByUri(connection.connector.uri)
-    console.log(index)
     walletConnectClientList.current.splice(index, 1)
     updateConnections()
   }
@@ -160,9 +158,9 @@ export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
   useEffect(() => {
     let update = false
     connections.forEach((propConnection) => {
-      const index = getWalletConnectClientIndexByUri(propConnection.uri)
+      const index = getWalletConnectClientIndexByUri(propConnection.connectionUri)
       if (index === -1) {
-        const connection = factoryConnection(propConnection.uri, propConnection.walletConnectClientSession)
+        const connection = factoryConnection(propConnection.connectionUri, config, propConnection)
         subscribeEvents({
           connection,
           removeWalletConnectItem,
@@ -232,21 +230,21 @@ export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
           {modalConnections === ModalConnections.ListConnections && (
             <>
               {connections.map((conection) => {
-                const index = getWalletConnectClientIndexByUri(conection.uri)
+                const index = getWalletConnectClientIndexByUri(conection.connectionUri)
                 const meta = walletConnectClientList.current[index]?.connector?.session?.peerMeta
                 if (!meta) return null
                 return (
-                  <React.Fragment key={conection.uri}>
+                  <React.Fragment key={conection.connectionUri}>
                     <ConnectionListItem
                       isActivedSession={!!conection.listening}
                       activeSession={() => {
-                        activeSession(conection.uri)
+                        activeSession(conection.connectionUri)
                       }}
                       disconnect={() => {
-                        disconnect(conection.uri)
+                        disconnect(conection.connectionUri)
                       }}
                       endSession={() => {
-                        endSession(conection.uri)
+                        endSession(conection.connectionUri)
                       }}
                       peerMeta={meta}
                     />
@@ -269,7 +267,7 @@ export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
           isListening={connections.filter((connection) => connection.listening).length >= 1}
           peerMeta={connections
             .map((connection) => {
-              const index = getWalletConnectClientIndexByUri(connection.uri)
+              const index = getWalletConnectClientIndexByUri(connection.connectionUri)
               return walletConnectClientList.current[index]?.connector.session.peerMeta as PeerMeta
             })
             .filter((peerMeta) => !!peerMeta)}
