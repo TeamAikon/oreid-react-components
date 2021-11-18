@@ -1,0 +1,29 @@
+.oreIdWalletConnect-connectionListItem {
+  font-family: Roboto;
+  font-style: normal;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 5px;
+  border-bottom: 1px solid #d0d3d4;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  .oreIdWalletConnect-connectionListItem-actions {
+    width: 135 px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .oreIdWalletConnect-connectionListItem-menu {
+    & > button {
+      background: transparent;
+      border: none;
+      padding: 2px 5px;
+      cursor: pointer;
+      color: #08b6e7;
+    }
+  }
+}
