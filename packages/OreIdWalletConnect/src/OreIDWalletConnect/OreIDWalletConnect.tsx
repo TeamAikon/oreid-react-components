@@ -11,6 +11,7 @@ import {
   WalletConnectRef,
   PeerMeta,
   WalletConnectTransaction,
+  Connection,
 } from '../types'
 import { factoryConnection, subscribeEvents, unsubscribeEvents } from '../utils'
 import { ConnectionListItem } from '../ConnectionListItem'
@@ -51,13 +52,21 @@ export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
   const getWalletConnectClientIndexByUri = (uri: string): number =>
     walletConnectClientList.current.findIndex((c) => c.connector.uri === uri)
 
+  const getCurrentConnectionByUri = (uri: string): Connection | undefined => {
+    const current = walletConnectClientList.current.find((c) => c.connector.uri === uri)
+    if (current) {
+      return mapWalletConnectRefToConnection(current)
+    }
+  }
+
   const updateConnections = () => setConnections(walletConnectClientList.current.map(mapWalletConnectRefToConnection))
 
   // This block is for customizing the events if necessary
   const onSessionRequest: WalletConnectRefEvent = (connection, payload) => {
     if (props.onSessionRequest) {
       try {
-        props.onSessionRequest(mapWalletConnectRefToConnection(connection), payload)
+        const currentConnection = getCurrentConnectionByUri(connection.connector.uri)
+        props.onSessionRequest(currentConnection, payload)
       } catch (err) {
         props.onSessionRequest(undefined, payload)
       }
@@ -66,7 +75,8 @@ export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
   const onConnect: WalletConnectRefEvent = (connection, payload) => {
     if (props.onConnect) {
       try {
-        props.onConnect(mapWalletConnectRefToConnection(connection), payload)
+        const currentConnection = getCurrentConnectionByUri(connection.connector.uri)
+        props.onConnect(currentConnection, payload)
       } catch (err) {
         props.onConnect(undefined, payload)
       }
@@ -76,7 +86,8 @@ export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
   const onSessionUpdate: WalletConnectRefEvent = (connection, payload) => {
     if (props.onSessionUpdate) {
       try {
-        props.onSessionUpdate(mapWalletConnectRefToConnection(connection), payload)
+        const currentConnection = getCurrentConnectionByUri(connection.connector.uri)
+        props.onSessionUpdate(currentConnection, payload)
       } catch (err) {
         props.onSessionUpdate(undefined, payload)
       }
@@ -96,7 +107,8 @@ export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
   const onDisconnect: WalletConnectRefEvent = (connection, payload) => {
     if (props.onDisconnect) {
       try {
-        props.onDisconnect(mapWalletConnectRefToConnection(connection), payload)
+        const currentConnection = getCurrentConnectionByUri(connection.connector.uri)
+        props.onDisconnect(currentConnection, payload)
       } catch (err) {
         props.onDisconnect(undefined, payload)
       }
@@ -107,9 +119,10 @@ export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
   }
   const onError = (eventName: string, error: Error, connection: WalletConnectRef) => {
     if (props.onError) {
-      props.onError(eventName, error, mapWalletConnectRefToConnection(connection))
+      const currentConnection = getCurrentConnectionByUri(connection.connector.uri)
+      props.onError(eventName, error, currentConnection)
       try {
-        props.onError(eventName, error, mapWalletConnectRefToConnection(connection))
+        props.onError(eventName, error, currentConnection)
       } catch (err) {
         props.onError(eventName, error)
       }
