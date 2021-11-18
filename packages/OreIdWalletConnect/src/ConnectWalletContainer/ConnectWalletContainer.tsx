@@ -89,7 +89,7 @@ export const ConnectWalletContainer: React.FC<ConnectWalletContainerProps> = ({
 
   return (
     <ApproveConnectionWidget
-      address="___address___"
+      address={config.account}
       peerMeta={connection.connector.session.peerMeta}
       approveSessionRequest={() => {
         if (connection) {

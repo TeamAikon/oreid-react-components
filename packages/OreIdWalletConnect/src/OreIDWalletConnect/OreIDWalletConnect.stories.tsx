@@ -10,7 +10,7 @@ export default {
 
 const Started: Connection[] = []
 
-const OreIDWalletConnectExample: React.FC = () => {
+const OreIDWalletConnectExample: React.FC = (props: any) => {
   const [connections, setConnections] = useState<Connection[]>(Started)
   const [modalConnections, setModalConnections] = useModalConnections()
 
@@ -27,10 +27,7 @@ const OreIDWalletConnectExample: React.FC = () => {
       <br />
       <br />
       <OreIDWalletConnect
-        config={{
-          chainNetwork: ChainNetwork.EthMain,
-          account: '0x7FFBF659A640e181BA2Db633686Af123E9E1eE1b',
-        }}
+        config={props.config}
         connections={connections}
         setConnections={setConnections}
         modalConnections={modalConnections}
@@ -74,7 +71,7 @@ const OreIDWalletConnectExample: React.FC = () => {
   )
 }
 
-const Template = () => {
+const Template = (props: any) => {
   return (
     <div
       style={{
@@ -82,9 +79,15 @@ const Template = () => {
         padding: '50px',
       }}
     >
-      <OreIDWalletConnectExample />
+      <OreIDWalletConnectExample {...props} />
     </div>
   )
 }
 
 export const Defaul = Template.bind({})
+Defaul.args = {
+  config: {
+    chainNetwork: ChainNetwork.EthMain,
+    account: '0x7FFBF659A640e181BA2Db633686Af123E9E1eE1b',
+  },
+}
