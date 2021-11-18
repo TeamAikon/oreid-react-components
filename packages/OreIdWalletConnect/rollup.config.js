@@ -2,7 +2,7 @@ import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import commonjs from "@rollup/plugin-commonjs";
 import typescript from "rollup-plugin-typescript2";
 import sass from "rollup-plugin-sass";
-import copy from "rollup-plugin-copy";
+// import copy from "rollup-plugin-copy";
 
 export default {
   input: ["src/index.ts", "src/OreIdWalletConnect/index.ts"],
