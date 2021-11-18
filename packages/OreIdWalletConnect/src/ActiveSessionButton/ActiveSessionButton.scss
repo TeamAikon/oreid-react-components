@@ -1,0 +1,16 @@
+.oreIdWalletConnect-activeSessionButton-button {
+  display: flex;
+  align-items: center;
+  border: none;
+  border-radius: 100px;
+  color: #fff;
+  background: transparent;
+  cursor: pointer;
+  padding: 10px 12px;
+  &:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+  & > *:last-child {
+    margin-left: 5px;
+  }
+}

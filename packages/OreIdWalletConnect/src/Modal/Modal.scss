@@ -1,0 +1,25 @@
+.oreIdWalletConnect-modal-paper {
+  width: 25%;
+  min-width: 400px;
+  padding: 40px;
+
+  .oreIdWalletConnect-modal-paper-header {
+    button {
+      font-family: Montserrat;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 12px;
+      color: #08b6e7;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .oreIdWalletConnect-modal-paper-header-img {
+      margin: 10px 0px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}

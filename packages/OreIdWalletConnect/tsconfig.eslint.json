@@ -1,0 +1,5 @@
+{
+  "compilerOptions": { "strict": true },
+  "include": ["./**/*.js", "./**/*.jsx", "./**/*.ts", "./**/*.tsx"],
+  "exclude": ["node_modules", "dist", ".vscode", "doc", "env"]
+}
