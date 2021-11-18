@@ -188,7 +188,6 @@ export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
     }
   }, [])
 
-  console.log({ hasChainNetworkSupport })
   if (!hasChainNetworkSupport) return null
   return (
     <MuiThemeProvider theme={theme}>
