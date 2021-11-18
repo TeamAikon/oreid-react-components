@@ -1,14 +1,14 @@
 import WalletConnectClient from '@walletconnect/client'
 import { ChainNetwork, Connection, WalletConnectRef, OreIDWalletConnectConfig } from './types'
 
-export const mapWalletConnectRefToConnection = (conection: WalletConnectRef): Connection => {
-  const { chainId, ...session } = conection.connector.session
+export const mapWalletConnectRefToConnection = (connection: WalletConnectRef): Connection => {
+  const { chainId, ...session } = connection.connector.session
   return {
     name: session?.peerMeta?.name || '',
     description: session.peerMeta?.description || '',
     logoUrl: session.peerMeta?.icons?.[session.peerMeta?.icons.length - 1] || '',
     peerUrl: session.peerMeta?.url || '',
-    connectionUri: conection.connector.uri,
+    connectionUri: connection.connector.uri,
     chainNetwork: mapChainIdToChainNetwork(chainId),
     bridge: session.bridge,
     key: session.key,
@@ -16,7 +16,7 @@ export const mapWalletConnectRefToConnection = (conection: WalletConnectRef): Co
     handshakeTopic: session.handshakeTopic,
     peerId: session.peerId,
     clientId: session.clientId,
-    listening: conection.listening,
+    listening: connection.listening,
   }
 }
 

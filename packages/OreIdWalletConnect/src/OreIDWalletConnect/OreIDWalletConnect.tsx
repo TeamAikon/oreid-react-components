@@ -229,22 +229,22 @@ export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
           )}
           {modalConnections === ModalConnections.ListConnections && (
             <>
-              {connections.map((conection) => {
-                const index = getWalletConnectClientIndexByUri(conection.connectionUri)
+              {connections.map((connection) => {
+                const index = getWalletConnectClientIndexByUri(connection.connectionUri)
                 const meta = walletConnectClientList.current[index]?.connector?.session?.peerMeta
                 if (!meta) return null
                 return (
-                  <React.Fragment key={conection.connectionUri}>
+                  <React.Fragment key={connection.connectionUri}>
                     <ConnectionListItem
-                      isActivedSession={!!conection.listening}
+                      isActivedSession={!!connection.listening}
                       activeSession={() => {
-                        activeSession(conection.connectionUri)
+                        activeSession(connection.connectionUri)
                       }}
                       disconnect={() => {
-                        disconnect(conection.connectionUri)
+                        disconnect(connection.connectionUri)
                       }}
                       endSession={() => {
-                        endSession(conection.connectionUri)
+                        endSession(connection.connectionUri)
                       }}
                       peerMeta={meta}
                     />
