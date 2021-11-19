@@ -11,7 +11,7 @@ import { OutlineButton } from '../OutlineButton'
 interface ConnectionListItemProps {
   endSession: () => void
   disconnect: () => void
-  activeSession: () => void
+  startSession: () => void
   isActivedSession: boolean
   peerMeta: PeerMeta
 }
@@ -19,7 +19,7 @@ interface ConnectionListItemProps {
 export const ConnectionListItem: React.FC<ConnectionListItemProps> = ({
   endSession,
   disconnect,
-  activeSession,
+  startSession,
   isActivedSession,
   peerMeta,
 }) => {
@@ -43,7 +43,7 @@ export const ConnectionListItem: React.FC<ConnectionListItemProps> = ({
         {isActivedSession ? (
           <ActiveSessionButton onClick={() => {}} fontColor="#000" />
         ) : (
-          <OutlineButton onClick={activeSession}>Active Session</OutlineButton>
+          <OutlineButton onClick={startSession}>Start Session</OutlineButton>
         )}
       </div>
       <div className="oreIdWalletConnect-connectionListItem-menu">
