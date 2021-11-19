@@ -62,6 +62,8 @@ export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
   const updateConnections = () => setConnections(walletConnectClientList.current.map(mapWalletConnectRefToConnection))
 
   // This block is for customizing the events if necessary
+
+  /** handle a new session request (a new wallet connect session to be approved) */
   const onSessionRequest: WalletConnectRefEvent = (connection, payload) => {
     if (props.onSessionRequest) {
       try {
@@ -72,17 +74,35 @@ export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
       }
     }
   }
-  const onConnect: WalletConnectRefEvent = (connection, payload) => {
-    if (props.onConnect) {
+
+  /** Handle a new connection fron app */
+  const onConnectionCreate: WalletConnectRefEvent = (connection, payload) => {
+    if (props.onConnectionCreate) {
       try {
         const currentConnection = getCurrentConnectionByUri(connection.connector.uri)
-        props.onConnect(currentConnection, payload)
+        props.onConnectionCreate(currentConnection, payload)
       } catch (err) {
-        props.onConnect(undefined, payload)
+        props.onConnectionCreate(undefined, payload)
       }
     }
   }
 
+  /** handle deleting a connection */
+  const onConnectionDelete: WalletConnectRefEvent = (connection, payload) => {
+    if (props.onConnectionDelete) {
+      try {
+        const currentConnection = getCurrentConnectionByUri(connection.connector.uri)
+        props.onConnectionDelete(currentConnection, payload)
+      } catch (err) {
+        props.onConnectionDelete(undefined, payload)
+      }
+    }
+    const index = getWalletConnectClientIndexByUri(connection.connector.uri)
+    walletConnectClientList.current.splice(index, 1)
+    updateConnections()
+  }
+
+  /** Handle a new connection from app */
   const onSessionUpdate: WalletConnectRefEvent = (connection, payload) => {
     if (props.onSessionUpdate) {
       try {
@@ -93,6 +113,8 @@ export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
       }
     }
   }
+
+  /** Handle a new request (for a transaction) */
   const onRequest: WalletConnectRefEvent = (connection, payload) => {
     const index = getWalletConnectClientIndexByUri(connection.connector.uri)
     const { peerMeta } = walletConnectClientList.current[index].connector.session
@@ -104,19 +126,8 @@ export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
       setModalConnections(ModalConnections.OnRequest)
     }
   }
-  const onDisconnect: WalletConnectRefEvent = (connection, payload) => {
-    if (props.onDisconnect) {
-      try {
-        const currentConnection = getCurrentConnectionByUri(connection.connector.uri)
-        props.onDisconnect(currentConnection, payload)
-      } catch (err) {
-        props.onDisconnect(undefined, payload)
-      }
-    }
-    const index = getWalletConnectClientIndexByUri(connection.connector.uri)
-    walletConnectClientList.current.splice(index, 1)
-    updateConnections()
-  }
+
+  /** Handle errors */
   const onError = (eventName: string, error: Error, connection: WalletConnectRef) => {
     if (props.onError) {
       const currentConnection = getCurrentConnectionByUri(connection.connector.uri)
@@ -130,30 +141,36 @@ export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
   }
   // end of events block
 
-  const activeSession = (uri: string) => {
+  /** Handle starting listening to a session */
+  const startSession = (uri: string) => {
     const index = getWalletConnectClientIndexByUri(uri)
     if (index === -1) return
-    walletConnectClientList.current[index].listening = true
+    const connection = walletConnectClientList.current[index]
+    connection.listening = true
     if (props.onStartListening) {
-      props.onStartListening(mapWalletConnectRefToConnection(walletConnectClientList.current[index]))
+      props.onStartListening(mapWalletConnectRefToConnection(connection))
     }
     updateConnections()
   }
 
+  /** Handle stopping listening to a session */
   const endSession = (uri: string) => {
     const index = getWalletConnectClientIndexByUri(uri)
     if (index === -1) return
-    walletConnectClientList.current[index].listening = false
+    const connection = walletConnectClientList.current[index]
+    connection.listening = false
     if (props.onStopListening) {
-      props.onStopListening(mapWalletConnectRefToConnection(walletConnectClientList.current[index]))
+      props.onStopListening(mapWalletConnectRefToConnection(connection))
     }
     updateConnections()
   }
 
+  /** Trigger disconnect (deletion) of this session from the wallet connect server - this will trigger a 'disconnect' event and call onConnectionDelete */
   const disconnect = (uri: string) => {
     const index = getWalletConnectClientIndexByUri(uri)
     if (index === -1) return
-    walletConnectClientList.current[index].connector.killSession()
+    const connection = walletConnectClientList.current[index]
+    connection.connector.killSession()
   }
 
   const removeWalletConnectItem = (uri: string) => {
@@ -182,7 +199,7 @@ export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
           removeWalletConnectItem,
           onSessionUpdate,
           onRequest,
-          onDisconnect,
+          onConnectionDelete,
           onError,
         })
         connection.listening = !!propConnection.listening
@@ -239,8 +256,8 @@ export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
               config={config}
               createConnection={createConnection}
               onSessionRequest={onSessionRequest}
-              onConnect={onConnect}
-              onDisconnect={onDisconnect}
+              onConnectionCreate={onConnectionCreate}
+              onConnectionDelete={onConnectionDelete}
               onError={onError}
             />
           )}
@@ -254,8 +271,8 @@ export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
                   <React.Fragment key={connection.connectionUri}>
                     <ConnectionListItem
                       isActivedSession={!!connection.listening}
-                      activeSession={() => {
-                        activeSession(connection.connectionUri)
+                      startSession={() => {
+                        startSession(connection.connectionUri)
                       }}
                       disconnect={() => {
                         disconnect(connection.connectionUri)

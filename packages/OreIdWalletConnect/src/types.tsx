@@ -1,4 +1,5 @@
 import WalletConnectClient from '@walletconnect/client'
+import { JsonRpc } from '@walletconnect/types'
 // import { GQLModel } from '@aikon/oreid-shared/dist/models'
 // interface copied from shared @aikon/oreid-shared/dist/models
 interface WalletConnectSession {
@@ -66,11 +67,11 @@ export interface OreIDWalletConnectProps {
   // Events
   onSessionRequest?: ConnectionEvent
   onSessionUpdate?: ConnectionEvent
-  onConnect?: ConnectionEvent
+  onConnectionCreate?: ConnectionEvent
+  onConnectionDelete?: ConnectionEvent
   onStartListening?: ConnectionEvent
-  onAcceptRequest: (transaction: WalletConnectTransaction) => void
   onStopListening?: ConnectionEvent
-  onDisconnect?: ConnectionEvent
+  onAcceptRequest: (transaction: WalletConnectTransaction) => void
   onError?: (eventName: string, error: Error, connection?: Connection) => void
 }
 
