@@ -19,4 +19,4 @@ const Template = (props: any) => {
   )
 }
 
-export const Defaul = Template.bind({})
+export const Default = Template.bind({})

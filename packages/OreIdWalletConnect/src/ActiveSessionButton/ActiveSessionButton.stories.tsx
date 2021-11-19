@@ -19,7 +19,7 @@ const Template = (props: any) => {
   )
 }
 
-export const Defaul = Template.bind({})
-Defaul.args = {
+export const Default = Template.bind({})
+Default.args = {
   onClick: () => console.log('Click'),
 }

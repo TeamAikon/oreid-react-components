@@ -24,8 +24,8 @@ const Template = (props: any) => {
   )
 }
 
-export const Defaul = Template.bind({})
-Defaul.args = {
+export const Default = Template.bind({})
+Default.args = {
   endSession: console.log,
   disconnect: console.log,
   startSession: console.log,

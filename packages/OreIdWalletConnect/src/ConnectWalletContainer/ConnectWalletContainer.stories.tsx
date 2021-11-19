@@ -28,8 +28,8 @@ const Template = (props: any) => {
   return <ConnectWalletContainerExample {...props} />
 }
 
-export const Defaul = Template.bind({})
-Defaul.args = {
+export const Default = Template.bind({})
+Default.args = {
   config: {
     chainNetwork: ChainNetwork.EthMain,
     account: '0x7FFBF659A640e181BA2Db633686Af123E9E1eE1b',

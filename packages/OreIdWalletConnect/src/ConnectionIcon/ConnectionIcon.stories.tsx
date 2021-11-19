@@ -26,8 +26,8 @@ const Template = (props: any) => {
   )
 }
 
-export const Defaul = Template.bind({})
-Defaul.args = {
+export const Default = Template.bind({})
+Default.args = {
   icon: 'https://app.uniswap.org/./favicon.png',
   size: 20,
 }

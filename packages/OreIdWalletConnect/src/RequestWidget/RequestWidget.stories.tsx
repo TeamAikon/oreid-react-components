@@ -19,8 +19,8 @@ const Template = (props: any) => {
   )
 }
 
-export const Defaul = Template.bind({})
-Defaul.args = {
+export const Default = Template.bind({})
+Default.args = {
   request: {
     id: 1636687046318467,
     jsonrpc: '2.0',

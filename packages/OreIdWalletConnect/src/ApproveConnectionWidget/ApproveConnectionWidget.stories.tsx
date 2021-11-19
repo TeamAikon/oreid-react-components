@@ -19,8 +19,8 @@ const Template = (props: any) => {
   )
 }
 
-export const Defaul = Template.bind({})
-Defaul.args = {
+export const Default = Template.bind({})
+Default.args = {
   approveSessionRequest: () => console.log('approveSessionRequest'),
   declineSessionRequest: () => console.log('declineSessionRequest'),
   peerMeta: {

@@ -12,7 +12,7 @@ const Template = (props: any) => {
   return <OutlineButton {...props}>Start Session</OutlineButton>
 }
 
-export const Defaul = Template.bind({})
-Defaul.args = {
+export const Default = Template.bind({})
+Default.args = {
   onClick: () => console.log('Click'),
 }
