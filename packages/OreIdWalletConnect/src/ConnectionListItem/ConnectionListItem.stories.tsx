@@ -28,7 +28,7 @@ export const Defaul = Template.bind({})
 Defaul.args = {
   endSession: console.log,
   disconnect: console.log,
-  activeSession: console.log,
+  startSession: console.log,
   isActivedSession: true,
   peerMeta: {
     description: 'Swap or provide liquidity on the Uniswap Protocol',

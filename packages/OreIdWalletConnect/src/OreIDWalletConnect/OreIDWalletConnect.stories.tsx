@@ -45,9 +45,9 @@ const OreIDWalletConnectExample: React.FC = (props: any) => {
           // optional
           console.log('onSessionUpdate', { payload })
         }}
-        onConnect={(connection, payload) => {
+        onConnectionCreate={(connection, payload) => {
           // optional
-          console.log('onConnect', { payload })
+          console.log('onConnectionCreate', { payload })
         }}
         onStartListening={(connection, payload) => {
           // optional
@@ -57,9 +57,9 @@ const OreIDWalletConnectExample: React.FC = (props: any) => {
           // optional
           console.log('onStopListening', { payload })
         }}
-        onDisconnect={(connection, payload) => {
+        onConnectionDelete={(connection, payload) => {
           // optional
-          console.log('onDisconnect', { payload })
+          console.log('onConnectionDelete', { payload })
         }}
         onError={(eventName, error, connection) => {
           // optional

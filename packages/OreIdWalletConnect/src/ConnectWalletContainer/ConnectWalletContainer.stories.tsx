@@ -38,7 +38,7 @@ Defaul.args = {
     console.log('createConnection: ', JSON.stringify(walletConnectRef.connector.session))
   },
   onSessionRequest: (...args) => console.log('onSessionRequest', args),
-  onConnect: (...args) => console.log('onConnect', args),
-  onDisconnect: (...args) => console.log('onDisconnect', args),
+  onConnectionCreate: (...args) => console.log('onConnectionCreate', args),
+  onConnectionDelete: (...args) => console.log('onConnectionDelete', args),
   onError: (...args) => console.log('onError', args),
 }

@@ -16,10 +16,9 @@ enum WalletContainerState {
 interface ConnectWalletContainerProps {
   config: OreIDWalletConnectConfig
   createConnection: (walletConnectRef: WalletConnectRef) => void
-
   onSessionRequest: WalletConnectRefEvent
-  onConnect: WalletConnectRefEvent
-  onDisconnect: WalletConnectRefEvent
+  onConnectionCreate: WalletConnectRefEvent
+  onConnectionDelete: WalletConnectRefEvent
   onError: (eventName: string, error: Error, connection?: WalletConnectRef) => void
 }
 
@@ -27,8 +26,8 @@ export const ConnectWalletContainer: React.FC<ConnectWalletContainerProps> = ({
   config,
   createConnection,
   onSessionRequest,
-  onConnect,
-  onDisconnect,
+  onConnectionCreate,
+  onConnectionDelete,
   onError,
 }) => {
   const [connection, setConnection] = useState<WalletConnectRef | undefined>()
@@ -44,6 +43,7 @@ export const ConnectWalletContainer: React.FC<ConnectWalletContainerProps> = ({
     if (!connection) return
     if (!connection.subscribed) {
       connection.connector.createSession()
+      // listen to session_request event
       connection.connector.on('session_request', (error, payload) => {
         if (error) {
           onError('session_request', error)
@@ -52,23 +52,25 @@ export const ConnectWalletContainer: React.FC<ConnectWalletContainerProps> = ({
         onSessionRequest(connection, payload)
         setState(WalletContainerState.Confirm)
       })
+      // listen to connect event - this happens on a new request to connect to app
       connection.connector.on('connect', (error, payload) => {
         if (error) {
           onError('connect', error)
           return
         }
-        onConnect(connection, payload)
+        onConnectionCreate(connection, payload)
       })
+      // listen to disconnect event
       connection.connector.on('disconnect', (error, payload) => {
         if (error) {
           onError('disconnect', error, connection)
           return
         }
-        onDisconnect(connection, payload)
+        onConnectionDelete(connection, payload)
       })
       setConnection({ ...connection, subscribed: true })
     }
-  }, [connection])
+  }, [connection, onConnectionCreate, onConnectionDelete, onError, onSessionRequest])
 
   useEffect(() => {
     return () => {
@@ -78,7 +80,7 @@ export const ConnectWalletContainer: React.FC<ConnectWalletContainerProps> = ({
         connection.connector.off('disconnect')
       }
     }
-  }, [])
+  }, [connection])
 
   if (state === WalletContainerState.WaitingUri) {
     return <ConnectWalletWidget onClickConect={connect} />
