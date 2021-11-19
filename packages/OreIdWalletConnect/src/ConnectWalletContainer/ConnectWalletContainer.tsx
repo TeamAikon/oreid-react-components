@@ -40,7 +40,11 @@ export const ConnectWalletContainer: React.FC<ConnectWalletContainerProps> = ({
   }
 
   useEffect(() => {
-    if (!connection) return
+    // if missing or connection already used, abort
+    if (!connection || connection.connector.connected) {
+      setState(WalletContainerState.WaitingUri)
+      return
+    }
     if (!connection.subscribed) {
       connection.connector.createSession()
       // listen to session_request event
