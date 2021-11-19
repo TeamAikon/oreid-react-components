@@ -2,17 +2,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
-  & > svg {
-    animation: oreIdWalletConnecLoadingSpin 0.5s infinite ease-in-out;
-  }
 }
 
-@keyframes oreIdWalletConnecLoadingSpin {
-  0% {
-    transform: perspective(0px) rotateX(0deg) rotateY(0deg);
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
   }
-  100% {
-    transform: perspective(0px) rotateX(0deg) rotateY(360deg);
+  to {
+    transform: rotate(359deg);
   }
 }
