@@ -30,6 +30,17 @@ export const ConnectionListItem: React.FC<ConnectionListItemProps> = ({
   const handleClose = () => {
     setAnchorEl(null)
   }
+
+  const handleEndSessionClick = () => {
+    setAnchorEl(null)
+    endSession()
+  }
+
+  const handleStartessionClick = () => {
+    setAnchorEl(null)
+    startSession()
+  }
+
   if (!peerMeta) return null
   return (
     <div className="oreIdWalletConnect-connectionListItem">
@@ -51,7 +62,8 @@ export const ConnectionListItem: React.FC<ConnectionListItemProps> = ({
           <MoreVert />
         </button>
         <Menu anchorEl={anchorEl} open={!!anchorEl} onClose={handleClose}>
-          <MenuItem onClick={endSession}>End Session</MenuItem>
+          {isActiveSession && <MenuItem onClick={handleEndSessionClick}>End Session</MenuItem>}
+          {!isActiveSession && <MenuItem onClick={handleStartessionClick}>Start Session</MenuItem>}
           <MenuItem onClick={disconnect}>Disconnect</MenuItem>
         </Menu>
       </div>
