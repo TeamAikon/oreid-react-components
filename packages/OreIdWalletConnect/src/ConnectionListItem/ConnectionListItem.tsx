@@ -12,7 +12,7 @@ interface ConnectionListItemProps {
   endSession: () => void
   disconnect: () => void
   startSession: () => void
-  isActivedSession: boolean
+  isActiveSession: boolean
   peerMeta: PeerMeta
 }
 
@@ -20,7 +20,7 @@ export const ConnectionListItem: React.FC<ConnectionListItemProps> = ({
   endSession,
   disconnect,
   startSession,
-  isActivedSession,
+  isActiveSession,
   peerMeta,
 }) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
@@ -40,7 +40,7 @@ export const ConnectionListItem: React.FC<ConnectionListItemProps> = ({
       )}
       <div>{peerMeta.name}</div>
       <div className="oreIdWalletConnect-connectionListItem-actions">
-        {isActivedSession ? (
+        {isActiveSession ? (
           <ActiveSessionButton onClick={() => {}} fontColor="#000" />
         ) : (
           <OutlineButton onClick={startSession}>Start Session</OutlineButton>

@@ -270,7 +270,7 @@ export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
                 return (
                   <React.Fragment key={connection.connectionUri}>
                     <ConnectionListItem
-                      isActivedSession={!!connection.listening}
+                      isActiveSession={!!connection.listening}
                       startSession={() => {
                         startSession(connection.connectionUri)
                       }}

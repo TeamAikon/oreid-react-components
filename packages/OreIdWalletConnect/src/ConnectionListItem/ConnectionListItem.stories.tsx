@@ -29,7 +29,7 @@ Defaul.args = {
   endSession: console.log,
   disconnect: console.log,
   startSession: console.log,
-  isActivedSession: true,
+  isActiveSession: true,
   peerMeta: {
     description: 'Swap or provide liquidity on the Uniswap Protocol',
     url: 'https://app.uniswap.org',
