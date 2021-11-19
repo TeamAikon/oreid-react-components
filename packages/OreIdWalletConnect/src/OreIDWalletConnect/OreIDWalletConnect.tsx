@@ -237,7 +237,7 @@ export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
                   setModalConnections(ModalConnections.NewConnection)
                 }}
               >
-                NewConnection
+                New Connection
               </button>
               <button
                 className={`oreIdWalletConnect-modal-btn ${
@@ -247,7 +247,7 @@ export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
                   setModalConnections(ModalConnections.ListConnections)
                 }}
               >
-                ListConnections
+                Connections
               </button>
             </div>
           )}
