@@ -70,7 +70,9 @@ export const ConnectWalletContainer: React.FC<ConnectWalletContainerProps> = ({
       })
       setConnection({ ...connection, subscribed: true })
     }
-  }, [connection, onConnectionCreate, onConnectionDelete, onError, onSessionRequest])
+    // IMPORTANT: Must remain only [connection] below or will silently fail
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [connection])
 
   useEffect(() => {
     return () => {
@@ -80,7 +82,9 @@ export const ConnectWalletContainer: React.FC<ConnectWalletContainerProps> = ({
         connection.connector.off('disconnect')
       }
     }
-  }, [connection])
+    // IMPORTANT: Must remain an empty array below or will silently fail
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   if (state === WalletContainerState.WaitingUri) {
     return <ConnectWalletWidget onClickConect={connect} />
