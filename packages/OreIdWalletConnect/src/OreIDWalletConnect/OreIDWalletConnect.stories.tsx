@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useModalConnections } from '../hooks'
-import { Connection, ModalConnections, ChainNetwork } from '../types'
+import { Connection, ChainNetwork, ModalConnections, OreIDWalletConnectProps } from '../types'
 import { OreIDWalletConnect } from './OreIDWalletConnect'
 
 export default {
@@ -84,10 +84,14 @@ const Template = (props: any) => {
   )
 }
 
-export const Default = Template.bind({})
+export const Default: { args: Partial<OreIDWalletConnectProps> } = Template.bind({})
 Default.args = {
   config: {
     chainNetwork: ChainNetwork.EthMain,
     account: '0x7FFBF659A640e181BA2Db633686Af123E9E1eE1b',
+    clientName: 'OREID WalletConnect',
+    clientDescription: 'OREID React Component WalletConnect',
+    clientIcons: ['https://storage.googleapis.com/oreid-files/partners/aikon-logo.png'],
+    clientUrl: 'https://github.com/TeamAikon/oreid-react-components',
   },
 }

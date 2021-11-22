@@ -20,7 +20,9 @@ export const mapWalletConnectRefToConnection = (connection: WalletConnectRef): C
   }
 }
 
-export const mapConnectionToWalletConnectRefSession = (connection: Connection, confif: OreIDWalletConnectConfig) => {
+export const mapConnectionToWalletConnectRefSession = (connection: Connection, config: OreIDWalletConnectConfig) => {
+  const { clientDescription, clientIcons, clientName, clientUrl } = config
+  const currentUrl = `${window.location.protocol}//${window.location.host}`
   const session = {
     bridge: connection.bridge,
     key: connection.key,
@@ -35,9 +37,9 @@ export const mapConnectionToWalletConnectRefSession = (connection: Connection, c
     handshakeTopic: connection.handshakeTopic,
     chainId: mapChainNetworkToChainId(connection.chainNetwork),
     connected: true,
-    accounts: [confif.account],
+    accounts: [config.account],
     clientId: connection.clientId,
-    clientMeta: { description: '', icons: [], name: '', url: `${window.location.protocol}//${window.location.host}` },
+    clientMeta: { description: clientDescription, icons: clientIcons, name: clientName, url: clientUrl || currentUrl },
   }
   return session
 }

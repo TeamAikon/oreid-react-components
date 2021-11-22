@@ -55,6 +55,10 @@ export type WalletConnectRefEvent = (connection: WalletConnectRef, payload?: any
 export interface OreIDWalletConnectConfig {
   chainNetwork: ChainNetwork
   account: string
+  clientDescription: string
+  clientIcons: string[]
+  clientUrl: string
+  clientName: string
 }
 
 export interface OreIDWalletConnectProps {

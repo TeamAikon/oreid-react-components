@@ -40,7 +40,11 @@ export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
     { peerMeta: PeerMeta; request: WalletConnectTransaction } | undefined
   >()
 
-  const hasChainNetworkSupport = hasChainSupport(config.chainNetwork)
+  if (!config.clientIcons || !config.clientDescription || !config.clientName) {
+    throw Error(`config missing at least one: clientIcons, clientDescription, clientName, clientUrl`)
+  }
+
+  const hasChainNetworkSupport = hasChainSupport(config?.chainNetwork)
   const forceUpdate = useForceUpdate()
 
   useEffect(() => {
