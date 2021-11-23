@@ -1,5 +1,6 @@
 import React from 'react'
-import { Dialog as MuiDialog, DialogProps } from '@material-ui/core'
+import { Button, Dialog as MuiDialog, DialogProps } from '@material-ui/core'
+import { Close as CloseIcon } from '@material-ui/icons'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import theme from '../assets/_styles/theme'
 
@@ -26,7 +27,13 @@ export const Modal: React.FC<ModalProps> = ({ children, header, ...props }) => {
         <>
           {header && (
             <div className="oreIdWalletConnect-modal-paper-header">
-              <button onClick={() => props.onClose && props.onClose({}, 'backdropClick')}>X Close</button>
+              <Button
+                className="oreIdWalletConnect-modal-paper-header-btn"
+                startIcon={<CloseIcon />}
+                onClick={() => props.onClose && props.onClose({}, 'backdropClick')}
+              >
+                Cancel
+              </Button>
               <div className="oreIdWalletConnect-modal-paper-header-img">
                 <ModalHeaderIcon />
               </div>
