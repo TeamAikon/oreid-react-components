@@ -47,7 +47,7 @@ const OreIDWalletConnectExample: React.FC = (props: any) => {
         }}
         onConnectionCreate={(connection, payload) => {
           // optional
-          console.log('onConnectionCreate', { payload })
+          console.log('onConnectionCreate', { connection, payload })
         }}
         onStartListening={(connection, payload) => {
           // optional
