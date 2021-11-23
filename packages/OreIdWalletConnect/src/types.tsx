@@ -1,10 +1,7 @@
 import WalletConnectClient from '@walletconnect/client'
 import { JsonRpc } from '@walletconnect/types'
-// import { GQLModel } from '@aikon/oreid-shared/dist/models'
-// interface copied from shared @aikon/oreid-shared/dist/models
+
 interface WalletConnectSession {
-  __typename?: 'WalletConnectSession'
-  _id?: string
   key: string
   peerId: string
   peerUrl: string
