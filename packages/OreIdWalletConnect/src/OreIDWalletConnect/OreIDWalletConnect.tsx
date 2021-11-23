@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { MuiThemeProvider } from '@material-ui/core'
+import { MuiThemeProvider, Tabs, Tab } from '@material-ui/core'
 import theme from '../assets/_styles/theme'
 
 import { Modal } from '../Modal'
@@ -11,7 +11,6 @@ import {
   WalletConnectRef,
   PeerMeta,
   WalletConnectTransaction,
-  Connection,
 } from '../types'
 import { factoryConnection, subscribeEvents, unsubscribeEvents } from '../utils'
 import { ConnectionListItem } from '../ConnectionListItem'
@@ -56,11 +55,12 @@ export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
   const getWalletConnectClientIndexByUri = (uri: string): number =>
     walletConnectClientList.current.findIndex((c) => c.connector.uri === uri)
 
-  const getCurrentConnectionByUri = (uri: string): Connection | undefined => {
+  const getCurrentConnectionByUri = (uri: string) => {
     const current = walletConnectClientList.current.find((c) => c.connector.uri === uri)
     if (current) {
       return mapWalletConnectRefToConnection(current)
     }
+    return undefined
   }
 
   const updateConnections = () => setConnections(walletConnectClientList.current.map(mapWalletConnectRefToConnection))
@@ -83,8 +83,7 @@ export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
   const onConnectionCreate: WalletConnectRefEvent = (connection, payload) => {
     if (props.onConnectionCreate) {
       try {
-        const currentConnection = getCurrentConnectionByUri(connection.connector.uri)
-        props.onConnectionCreate(currentConnection, payload)
+        props.onConnectionCreate(mapWalletConnectRefToConnection(connection), payload)
       } catch (err) {
         props.onConnectionCreate(undefined, payload)
       }
@@ -222,6 +221,10 @@ export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
     }
   }, [])
 
+  const handleChange = (event, newValue: number) => {
+    setModalConnections(newValue)
+  }
+
   if (!hasChainNetworkSupport) return null
   return (
     <MuiThemeProvider theme={theme}>
@@ -232,28 +235,26 @@ export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
           header={modalConnections !== ModalConnections.OnRequest}
         >
           {modalConnections !== ModalConnections.OnRequest && (
-            <div className="oreIdWalletConnect-modal-divider">
-              <button
-                className={`oreIdWalletConnect-modal-btn ${
-                  modalConnections === ModalConnections.NewConnection ? 'oreIdWalletConnect-modal-btn-active' : ''
-                }`}
-                onClick={() => {
-                  setModalConnections(ModalConnections.NewConnection)
-                }}
-              >
-                New Connection
-              </button>
-              <button
-                className={`oreIdWalletConnect-modal-btn ${
-                  modalConnections === ModalConnections.ListConnections ? 'oreIdWalletConnect-modal-btn-active' : ''
-                }`}
-                onClick={() => {
-                  setModalConnections(ModalConnections.ListConnections)
-                }}
-              >
-                Connections
-              </button>
-            </div>
+            <Tabs
+              centered
+              variant="fullWidth"
+              className="oreIdWalletConnect-modal"
+              textColor="primary"
+              indicatorColor="primary"
+              value={modalConnections}
+              onChange={handleChange}
+            >
+              <Tab
+                className="oreIdWalletConnect-modal-tab"
+                label="New Connection"
+                value={ModalConnections.NewConnection}
+              />
+              <Tab
+                className="oreIdWalletConnect-modal-tab"
+                label="Connected Sites"
+                value={ModalConnections.ListConnections}
+              />
+            </Tabs>
           )}
           {modalConnections === ModalConnections.NewConnection && (
             <ConnectWalletContainer
