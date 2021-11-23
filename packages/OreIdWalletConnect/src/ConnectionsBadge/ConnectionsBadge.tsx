@@ -16,9 +16,9 @@ export const ConnectionsBadge: React.FC<ConnectedUIProps> = ({ isListening, peer
   return (
     <div className="oreIdWalletConnect-connectionsBadge">
       <div className="oreIdWalletConnect-connectionsBadge-icons">
-        {peerMeta.map((metaData) => {
+        {peerMeta.map((metaData, index) => {
           if (!metaData?.icons?.[0]) return null
-          return <ConnectionIcon key={metaData.url} icon={metaData.icons[0]} size={20} />
+          return <ConnectionIcon key={index} icon={metaData.icons[0]} size={20} />
         })}
       </div>
       {isListening ? <ActiveSessionButton onClick={onClick} /> : <ButtonOutline label="Connect" onClick={onClick} />}

@@ -1,27 +1,14 @@
 .oreIdWalletConnect {
   display: flex;
-}
-
-.oreIdWalletConnect-modal-divider {
+  &-modal {
   border-bottom: 1px solid #d0d3d4;
-  width: 100%;
-
-  display: flex;
-
-  .oreIdWalletConnect-modal-btn {
-    background: none;
-    border: none;
-    font-family: Montserrat;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 14px;
-    line-height: 17px;
-    text-align: center;
-    letter-spacing: 0.5px;
-    color: #333333;
-
-    &.oreIdWalletConnect-modal-btn-active {
-      color: #08b6e7;
+    &-tab {
+      text-transform: capitalize !important;
+      font-weight: 600 !important;
     }
   }
+}
+
+.tabs-divider {
+  height: 2px !important;
 }

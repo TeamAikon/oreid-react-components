@@ -3,20 +3,20 @@
   min-width: 400px;
   padding: 40px;
 
-  .oreIdWalletConnect-modal-paper-header {
-    button {
-      font-family: Montserrat;
-      font-style: normal;
-      font-weight: 500;
-      font-size: 12px;
-      color: #08b6e7;
-      border: none;
-      background: transparent;
-      cursor: pointer;
+  &-header {
+    &-btn {
+      color: #08b6e7 !important;
+      text-transform: capitalize !important;
+      margin: -20px 0 0 -20px !important;
+      border-radius: 100px !important;
+    }
+    .MuiButton-label {
+      font-size: 12px !important;
+      font-weight: 500 !important;
     }
 
-    .oreIdWalletConnect-modal-paper-header-img {
-      margin: 10px 0px 40px;
+    &-img {
+      margin-bottom: 40px;
       display: flex;
       align-items: center;
       justify-content: center;
