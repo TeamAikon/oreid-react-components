@@ -37,9 +37,7 @@ export const ConnectWalletWidget: React.FC<ConnectWalletWidgetProps> = ({ onClic
         <div>
           <QrCodeImage size={30} />
         </div>
-        <div>
-          <OutlinedInput value={uri} onChange={(e) => setUri(e.target.value)} />
-        </div>
+        <OutlinedInput fullWidth value={uri} onChange={(e) => setUri(e.target.value)} />
       </div>
 
       <Button onClick={() => onClickConect(uri)} disabled={!uri}>
