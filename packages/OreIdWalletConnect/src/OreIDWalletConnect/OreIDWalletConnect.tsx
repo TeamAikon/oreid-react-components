@@ -225,6 +225,13 @@ export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
     setModalConnections(newValue)
   }
 
+  const clearConnectionApp = (app?: string) => {
+    if (!app) return
+    walletConnectClientList.current
+      .filter((c) => c.connector.peerMeta?.url === app)
+      .forEach((c) => disconnect(c.connector.uri))
+  }
+
   if (!hasChainNetworkSupport) return null
   return (
     <MuiThemeProvider theme={theme}>
@@ -258,6 +265,7 @@ export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
           )}
           {modalConnections === ModalConnections.NewConnection && (
             <ConnectWalletContainer
+              clearConnectionApp={clearConnectionApp}
               config={config}
               createConnection={createConnection}
               onSessionRequest={onSessionRequest}
