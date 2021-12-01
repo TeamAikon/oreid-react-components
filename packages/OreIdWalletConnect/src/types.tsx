@@ -72,7 +72,7 @@ export interface OreIDWalletConnectProps {
   onConnectionDelete?: ConnectionEvent
   onStartListening?: ConnectionEvent
   onStopListening?: ConnectionEvent
-  onAcceptRequest: (transaction: WalletConnectTransaction) => void
+  onAcceptRequest: (transaction: WalletConnectTransaction, connection: Connection) => void
   onError?: (eventName: string, error: Error, connection?: Connection) => void
 }
 
