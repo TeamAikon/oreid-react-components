@@ -36,7 +36,7 @@ export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
 }) => {
   const walletConnectClientList = useRef<WalletConnectRef[]>([])
   const [incomingRequest, setIncomingRequest] = useState<
-    { peerMeta: PeerMeta; request: WalletConnectTransaction } | undefined
+    { peerMeta: PeerMeta; request: WalletConnectTransaction, connectionUri: string } | undefined
   >()
 
   if (!config.clientIcons || !config.clientDescription || !config.clientName) {
@@ -129,6 +129,7 @@ export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
       setIncomingRequest({
         peerMeta,
         request: payload,
+        connectionUri: connection.connector.uri
       })
       setModalConnections(ModalConnections.OnRequest)
     }
@@ -311,7 +312,10 @@ export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
             <RequestWidget
               {...incomingRequest}
               onAcceptRequest={(request) => {
-                props.onAcceptRequest(request)
+                const currentConnection = getCurrentConnectionByUri(incomingRequest.connectionUri)
+                if(!currentConnection) throw new Error(`Invalid connection uri: ${incomingRequest.connectionUri}`)
+                currentConnection.name // pearName
+                props.onAcceptRequest(request, currentConnection)
                 setModalConnections(ModalConnections.Closed)
               }}
             />
