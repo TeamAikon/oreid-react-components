@@ -43,6 +43,10 @@ export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
     throw Error(`config missing at least one: clientIcons, clientDescription, clientName, clientUrl`)
   }
 
+  if (connections.filter((c) => c.chainNetwork !== config.chainNetwork).length) {
+    throw Error(`The chainNetwork of the configuration is not the same as the connection`)
+  }
+
   const hasChainNetworkSupport = hasChainSupport(config?.chainNetwork)
   const forceUpdate = useForceUpdate()
 
@@ -286,6 +290,9 @@ export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
                       isActiveSession={!!connection.listening}
                       startSession={() => {
                         startSession(connection.connectionUri)
+                      }}
+                      resetConnection={() => {
+                        setModalConnections(ModalConnections.NewConnection)
                       }}
                       disconnect={() => {
                         disconnect(connection.connectionUri)
