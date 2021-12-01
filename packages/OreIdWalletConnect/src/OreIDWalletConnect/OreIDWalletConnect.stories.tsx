@@ -32,9 +32,9 @@ const OreIDWalletConnectExample: React.FC = (props: any) => {
         setConnections={setConnections}
         modalConnections={modalConnections}
         setModalConnections={setModalConnections}
-        onAcceptRequest={(request) => {
+        onAcceptRequest={(request, connection) => {
           console.log('onAcceptRequest')
-          console.log({ request })
+          console.log({ request, connection })
           console.log(JSON.stringify(request))
         }}
         onSessionRequest={(connection, payload) => {
@@ -88,7 +88,7 @@ export const Default: { args: Partial<OreIDWalletConnectProps> } = Template.bind
 Default.args = {
   config: {
     chainNetwork: ChainNetwork.EthMain,
-    account: '0x7FFBF659A640e181BA2Db633686Af123E9E1eE1b',
+    account: '0x091E83Fdfba12170CF293BB26c89Cdd26c09b33B',
     clientName: 'OREID WalletConnect',
     clientDescription: 'OREID React Component WalletConnect',
     clientIcons: ['https://storage.googleapis.com/oreid-files/partners/aikon-logo.png'],
