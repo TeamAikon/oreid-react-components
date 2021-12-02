@@ -1,6 +1,6 @@
 {
   "name": "@aikon/oreid-wallet-connect-react-component",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "main": "build/index.js",
   "files": [
     "build"
@@ -8,7 +8,7 @@
   "types": "build/index.d.ts",
   "description": "Wallet Connect component",
   "scripts": {
-    "build": "rollup -c",
+    "build": "rm -rf build && rollup -c",
     "test": "jest",
     "test:watch": "jest --watch",
     "storybook": "start-storybook -p 6007",
