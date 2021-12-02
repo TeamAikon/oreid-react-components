@@ -1,6 +1,23 @@
 import WalletConnectClient from '@walletconnect/client'
-import { chainNetworkMap } from '.'
-import { ChainNetwork, Connection, WalletConnectRef, OreIDWalletConnectConfig } from './types'
+import { ChainNetwork, ChainNetworkMap, Connection, WalletConnectRef, OreIDWalletConnectConfig } from './types'
+
+export const chainNetworkMap: ChainNetworkMap[] = [
+  {
+    chainNetwork: ChainNetwork.EthMain,
+    id: 1,
+    name: 'Ethereum',
+  },
+  {
+    chainNetwork: ChainNetwork.EthRopsten,
+    id: 3,
+    name: 'Ethereum Ropsten',
+  },
+  {
+    chainNetwork: ChainNetwork.EthRinkeby,
+    id: 4,
+    name: 'Ethereum Rinkeby',
+  },
+]
 
 export const mapWalletConnectRefToConnection = (connection: WalletConnectRef): Connection => {
   const { chainId, ...session } = connection.connector.session
