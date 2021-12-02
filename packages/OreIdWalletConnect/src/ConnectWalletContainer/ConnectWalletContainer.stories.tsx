@@ -37,7 +37,7 @@ Default.args = {
   createConnection: (walletConnectRef: WalletConnectRef) => {
     console.log('createConnection: ', JSON.stringify(walletConnectRef.connector.session))
   },
-  clearConnectionApp: (app?: string) => console.log({ app }),
+  destroyDuplicateAppConnection: (url?: string) => console.log({ url }),
   onSessionRequest: (...args) => console.log('onSessionRequest', args),
   onConnectionCreate: (...args) => console.log('onConnectionCreate', args),
   onConnectionDelete: (...args) => console.log('onConnectionDelete', args),

@@ -230,10 +230,10 @@ export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
     setModalConnections(newValue)
   }
 
-  const clearConnectionApp = (app?: string) => {
-    if (!app) return
+  const destroyDuplicateAppConnection = (url?: string) => {
+    if (!url) return
     walletConnectClientList.current
-      .filter((c) => c.connector.peerMeta?.url === app)
+      .filter((c) => c.connector.peerMeta?.url === url)
       .forEach((c) => disconnect(c.connector.uri))
   }
 
@@ -270,7 +270,7 @@ export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
           )}
           {modalConnections === ModalConnections.NewConnection && (
             <ConnectWalletContainer
-              clearConnectionApp={clearConnectionApp}
+              destroyDuplicateAppConnection={destroyDuplicateAppConnection}
               config={config}
               createConnection={createConnection}
               onSessionRequest={onSessionRequest}
@@ -309,7 +309,7 @@ export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
                 })}
               </div>
 
-              {connections.length && (
+              {connections.length > 0 && (
                 <div className="oreIdWalletConnect-reconnection-text">
                   Having problems connecting? Try
                   <button

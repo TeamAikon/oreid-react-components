@@ -16,7 +16,7 @@ enum WalletContainerState {
 
 interface ConnectWalletContainerProps {
   config: OreIDWalletConnectConfig
-  clearConnectionApp: (app?: string) => void
+  destroyDuplicateAppConnection: (url?: string) => void
   createConnection: (walletConnectRef: WalletConnectRef) => void
   onSessionRequest: WalletConnectRefEvent
   onConnectionCreate: WalletConnectRefEvent
@@ -26,7 +26,7 @@ interface ConnectWalletContainerProps {
 
 export const ConnectWalletContainer: React.FC<ConnectWalletContainerProps> = ({
   config,
-  clearConnectionApp,
+  destroyDuplicateAppConnection,
   createConnection,
   onSessionRequest,
   onConnectionCreate,
@@ -160,7 +160,7 @@ export const ConnectWalletContainer: React.FC<ConnectWalletContainerProps> = ({
             accounts: [account],
           }
 
-          clearConnectionApp(connection.connector.session.peerMeta?.url)
+          destroyDuplicateAppConnection(connection.connector.session.peerMeta?.url)
 
           connection.connector.approveSession(configConnection)
           connection.connector.off('session_request')
