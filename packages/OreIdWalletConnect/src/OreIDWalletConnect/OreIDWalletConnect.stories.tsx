@@ -88,7 +88,7 @@ export const Default: { args: Partial<OreIDWalletConnectProps> } = Template.bind
 Default.args = {
   config: {
     chainNetwork: ChainNetwork.EthMain,
-    account: '0x091E83Fdfba12170CF293BB26c89Cdd26c09b33B',
+    account: '0x7362A91D36382fC14dAEF0eDD2Ebd9437DD812e7',
     clientName: 'OREID WalletConnect',
     clientDescription: 'OREID React Component WalletConnect',
     clientIcons: ['https://storage.googleapis.com/oreid-files/partners/aikon-logo.png'],

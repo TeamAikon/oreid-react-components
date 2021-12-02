@@ -8,9 +8,10 @@ import './ConnectWalletWidget.scss'
 
 interface ConnectWalletWidgetProps {
   onClickConect: (uir: string) => void
+  errorMessage?: string
 }
 
-export const ConnectWalletWidget: React.FC<ConnectWalletWidgetProps> = ({ onClickConect }) => {
+export const ConnectWalletWidget: React.FC<ConnectWalletWidgetProps> = ({ onClickConect, errorMessage }) => {
   const [uri, setUri] = useState('')
   return (
     <div className="oreIdWalletConnect-connectWalletWidget">
@@ -34,10 +35,13 @@ export const ConnectWalletWidget: React.FC<ConnectWalletWidgetProps> = ({ onClic
       </div>
 
       <div className="oreIdWalletConnect-connectWalletWidget-input">
-        <div>
-          <QrCodeImage size={30} />
+        <div className="oreIdWalletConnect-connectWalletWidget-input-container">
+          <div>
+            <QrCodeImage size={30} />
+          </div>
+          <OutlinedInput fullWidth value={uri} onChange={(e) => setUri(e.target.value)} />
         </div>
-        <OutlinedInput fullWidth value={uri} onChange={(e) => setUri(e.target.value)} />
+        {errorMessage && <div className="oreIdWalletConnect-connectWalletWidget-error">{errorMessage}</div>}
       </div>
 
       <Button onClick={() => onClickConect(uri)} disabled={!uri}>

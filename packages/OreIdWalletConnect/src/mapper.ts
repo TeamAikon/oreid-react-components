@@ -65,3 +65,14 @@ export const mapChainNetworkToChainId = (chainNetwork: string): number => {
   if (chainNetwork === ChainNetwork.EosKylin.toString()) return 95
   throw Error(`Unsupported chainNetwork: ${chainNetwork}`)
 }
+
+export const mapChainNetworkToName = (chainNetwork: string): string => {
+  if (chainNetwork === ChainNetwork.EthMain.toString()) return 'Ethereum'
+  if (chainNetwork === ChainNetwork.EthRopsten.toString()) return 'Ethereum Ropsten'
+  if (chainNetwork === ChainNetwork.EthRinkeby.toString()) return 'Ethereum Rinkeby'
+  if (chainNetwork === ChainNetwork.TelosMain.toString()) return 'Telos Mainnet'
+  if (chainNetwork === ChainNetwork.TelosTest.toString()) return 'Telos Testnet'
+  if (chainNetwork === ChainNetwork.EosMain.toString()) return 'EOS Mainnet'
+  if (chainNetwork === ChainNetwork.EosKylin.toString()) return 'EOS Kylin'
+  throw Error(`Unsupported chainNetwork: ${chainNetwork}`)
+}

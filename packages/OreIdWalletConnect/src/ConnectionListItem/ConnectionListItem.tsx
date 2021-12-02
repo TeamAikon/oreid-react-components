@@ -71,8 +71,8 @@ export const ConnectionListItem: React.FC<ConnectionListItemProps> = ({
         <Menu anchorEl={anchorEl} open={!!anchorEl} onClose={handleClose}>
           {isActiveSession && <MenuItem onClick={handleEndSessionClick}>End Session</MenuItem>}
           {!isActiveSession && <MenuItem onClick={handleStartessionClick}>Start Session</MenuItem>}
-          <MenuItem onClick={handleResetConnectionClick}>Reset Connection</MenuItem>
           <MenuItem onClick={disconnect}>Forget Connection</MenuItem>
+          <MenuItem onClick={handleResetConnectionClick}>Reset Connection</MenuItem>
         </Menu>
       </div>
     </div>
