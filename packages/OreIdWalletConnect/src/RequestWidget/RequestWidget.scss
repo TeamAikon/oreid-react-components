@@ -38,6 +38,8 @@
 
     .oreIdWalletConnect-requestWidget-accountAddress {
       color: #08b6e7;
+      text-overflow: ellipsis;
+      overflow: hidden;
     }
   }
 

@@ -12,6 +12,7 @@ interface ConnectionListItemProps {
   endSession: () => void
   disconnect: () => void
   startSession: () => void
+  resetConnection: () => void
   isActiveSession: boolean
   peerMeta: PeerMeta
 }
@@ -20,6 +21,7 @@ export const ConnectionListItem: React.FC<ConnectionListItemProps> = ({
   endSession,
   disconnect,
   startSession,
+  resetConnection,
   isActiveSession,
   peerMeta,
 }) => {
@@ -39,6 +41,11 @@ export const ConnectionListItem: React.FC<ConnectionListItemProps> = ({
   const handleStartessionClick = () => {
     setAnchorEl(null)
     startSession()
+  }
+
+  const handleResetConnectionClick = () => {
+    setAnchorEl(null)
+    resetConnection()
   }
 
   if (!peerMeta) return null
@@ -64,7 +71,8 @@ export const ConnectionListItem: React.FC<ConnectionListItemProps> = ({
         <Menu anchorEl={anchorEl} open={!!anchorEl} onClose={handleClose}>
           {isActiveSession && <MenuItem onClick={handleEndSessionClick}>End Session</MenuItem>}
           {!isActiveSession && <MenuItem onClick={handleStartessionClick}>Start Session</MenuItem>}
-          <MenuItem onClick={disconnect}>Disconnect</MenuItem>
+          <MenuItem onClick={disconnect}>Forget Connection</MenuItem>
+          <MenuItem onClick={handleResetConnectionClick}>Reset Connection</MenuItem>
         </Menu>
       </div>
     </div>

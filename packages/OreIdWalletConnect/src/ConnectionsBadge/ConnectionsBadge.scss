@@ -5,7 +5,11 @@
   .oreIdWalletConnect-connectionsBadge-icons {
     display: flex;
     & > * {
-      margin-right: 8px;
+      margin-right: -8px;
+
+      &:last-child {
+        margin-right: 8px;
+      }
     }
   }
   .oreIdWalletConnect-connectionsBadge-button {

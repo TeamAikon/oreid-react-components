@@ -20,8 +20,15 @@ export const ConnectionsBadge: React.FC<ConnectedUIProps> = ({ isListening, peer
           if (!metaData?.icons?.[0]) return null
           return <ConnectionIcon key={index} icon={metaData.icons[0]} size={20} />
         })}
+        {peerMeta.length === 0 && <ConnectionIcon icon="https://example.walletconnect.org/favicon.ico" size={20} />}
       </div>
-      {isListening ? <ActiveSessionButton onClick={onClick} /> : <ButtonOutline label="Connect" onClick={onClick} />}
+      {isListening ? (
+        <ActiveSessionButton onClick={onClick} />
+      ) : (
+        <>
+          <ButtonOutline label="Connect" onClick={onClick} />
+        </>
+      )}
     </div>
   )
 }

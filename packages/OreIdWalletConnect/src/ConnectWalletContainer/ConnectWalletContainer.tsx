@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { ApproveConnectionWidget } from '../ApproveConnectionWidget'
 import { ConnectWalletWidget } from '../ConnectWalletWidget'
+import { useErrorHandler } from '../hooks/useErrorHandler'
 import { Loading } from '../Loading'
-import { mapChainNetworkToChainId } from '../mapper'
+import { mapChainNetworkToChainId, mapChainNetworkToName } from '../mapper'
 
 import { OreIDWalletConnectConfig, WalletConnectRefEvent, WalletConnectRef } from '../types'
 import { factoryConnection } from '../utils'
@@ -15,6 +16,7 @@ enum WalletContainerState {
 
 interface ConnectWalletContainerProps {
   config: OreIDWalletConnectConfig
+  destroyDuplicateAppConnection: (url?: string) => void
   createConnection: (walletConnectRef: WalletConnectRef) => void
   onSessionRequest: WalletConnectRefEvent
   onConnectionCreate: WalletConnectRefEvent
@@ -24,6 +26,7 @@ interface ConnectWalletContainerProps {
 
 export const ConnectWalletContainer: React.FC<ConnectWalletContainerProps> = ({
   config,
+  destroyDuplicateAppConnection,
   createConnection,
   onSessionRequest,
   onConnectionCreate,
@@ -32,26 +35,51 @@ export const ConnectWalletContainer: React.FC<ConnectWalletContainerProps> = ({
 }) => {
   const [connection, setConnection] = useState<WalletConnectRef | undefined>()
   const [state, setState] = useState<WalletContainerState>(WalletContainerState.WaitingUri)
+  const [localError, setLocalError, clearLocalError] = useErrorHandler()
+  const loadingCounter = useRef<NodeJS.Timeout | undefined>()
 
   const connect = (uri: string) => {
-    const update = factoryConnection(uri, config)
-    setConnection(update)
-    setState(WalletContainerState.LoadingScreen)
+    try {
+      const update = factoryConnection(uri, config)
+      setConnection(update)
+      setState(WalletContainerState.LoadingScreen)
+      loadingCounter.current = setTimeout(() => {
+        setConnection(undefined)
+        setState(WalletContainerState.WaitingUri)
+        setLocalError('Connection timeout, please try again')
+      }, 6000)
+    } catch (e) {
+      setConnection(undefined)
+      setState(WalletContainerState.WaitingUri)
+      if (e.message === 'URI format is invalid') {
+        setLocalError('URI format is invalid')
+      }
+    }
   }
 
   useEffect(() => {
-    // if missing or connection already used, abort
-    if (!connection || connection.connector.connected) {
-      setState(WalletContainerState.WaitingUri)
-      return
-    }
+    if (!connection) return
     if (!connection.subscribed) {
-      connection.connector.createSession()
+      connection.connector.createSession().catch((err) => {
+        setConnection(undefined)
+        setState(WalletContainerState.WaitingUri)
+
+        if (err.message === 'Session currently connected') {
+          setLocalError('This uri has already been used')
+          return
+        }
+        setLocalError('An error occurred while trying to connect with wallet connect')
+      })
       // listen to session_request event
       connection.connector.on('session_request', (error, payload) => {
         if (error) {
           onError('session_request', error)
+          setState(WalletContainerState.WaitingUri)
           return
+        }
+        if (loadingCounter.current) {
+          clearTimeout(loadingCounter.current)
+          loadingCounter.current = undefined
         }
         onSessionRequest(connection, payload)
         setState(WalletContainerState.Confirm)
@@ -60,6 +88,19 @@ export const ConnectWalletContainer: React.FC<ConnectWalletContainerProps> = ({
       connection.connector.on('connect', (error, payload) => {
         if (error) {
           onError('connect', error)
+          return
+        }
+
+        if (connection.connector.session.chainId !== mapChainNetworkToChainId(config.chainNetwork)) {
+          const app = connection.connector.peerMeta?.name || 'app'
+          connection?.connector?.killSession()
+          setConnection(undefined)
+          setState(WalletContainerState.WaitingUri)
+          setLocalError(
+            `This connection url is for a different blockchain network. Please change the network on ${app} to match ${mapChainNetworkToName(
+              config.chainNetwork,
+            )} and try again`,
+          )
           return
         }
         onConnectionCreate(connection, payload)
@@ -72,8 +113,10 @@ export const ConnectWalletContainer: React.FC<ConnectWalletContainerProps> = ({
         }
         onConnectionDelete(connection, payload)
       })
+
       setConnection({ ...connection, subscribed: true })
     }
+
     // IMPORTANT: Must remain only [connection] below or will silently fail
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [connection])
@@ -91,7 +134,15 @@ export const ConnectWalletContainer: React.FC<ConnectWalletContainerProps> = ({
   }, [])
 
   if (state === WalletContainerState.WaitingUri) {
-    return <ConnectWalletWidget onClickConect={connect} />
+    return (
+      <ConnectWalletWidget
+        errorMessage={localError}
+        onClickConect={(uir: string) => {
+          clearLocalError()
+          connect(uir)
+        }}
+      />
+    )
   }
   if (state === WalletContainerState.LoadingScreen || !connection?.connector.session.peerMeta) {
     return <Loading />
@@ -108,6 +159,9 @@ export const ConnectWalletContainer: React.FC<ConnectWalletContainerProps> = ({
             chainId: mapChainNetworkToChainId(chainNetwork),
             accounts: [account],
           }
+
+          destroyDuplicateAppConnection(connection.connector.session.peerMeta?.url)
+
           connection.connector.approveSession(configConnection)
           connection.connector.off('session_request')
           connection.connector.off('connect')

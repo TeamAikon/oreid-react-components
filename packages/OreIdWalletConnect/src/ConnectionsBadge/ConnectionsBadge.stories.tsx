@@ -1,5 +1,5 @@
 import React from 'react'
-import { Connection } from '../types'
+import { PeerMeta } from '../types'
 import { ConnectionsBadge } from './ConnectionsBadge'
 
 export default {
@@ -7,26 +7,20 @@ export default {
   component: ConnectionsBadge,
 }
 
-const Connections: Connection[] = [
+const peerMeta: PeerMeta[] = ([
   {
-    peerMeta: {
-      icons: [
-        'https://app.uniswap.org/./favicon.png',
-        'https://app.uniswap.org/./images/192x192_App_Icon.png',
-        'https://app.uniswap.org/./images/512x512_App_Icon.png',
-      ],
-      // ...
-    },
-    // ...
+    icons: ['https://app.uniswap.org/./favicon.png'],
   },
   {
-    peerMeta: {
-      icons: ['https://example.walletconnect.org/favicon.ico'],
-      // ...
-    },
-    // ...
+    icons: ['https://example.walletconnect.org/favicon.ico'],
   },
-] as Connection[]
+  {
+    icons: ['https://app.uniswap.org/./favicon.png'],
+  },
+  {
+    icons: ['https://example.walletconnect.org/favicon.ico'],
+  },
+] as unknown) as PeerMeta[]
 
 const Template = (props: any) => {
   return (
@@ -43,6 +37,6 @@ const Template = (props: any) => {
 
 export const Default = Template.bind({})
 Default.args = {
-  Connections,
+  peerMeta,
   onClick: () => console.log('Click'),
 }

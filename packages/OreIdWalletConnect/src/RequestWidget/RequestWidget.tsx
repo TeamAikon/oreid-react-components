@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Button } from '../Button'
 import { ConnectionIcon } from '../ConnectionIcon'
+import { LongText } from '../LongText'
 import { WalletConnectTransaction, PeerMeta } from '../types'
 
 import './RequestWidget.scss'
@@ -16,13 +17,15 @@ export const RequestWidget: React.FC<ConnectWalletWidgetProps> = ({ peerMeta, re
   return (
     <div className="oreIdWalletConnect-requestWidget">
       <div className="oreIdWalletConnect-requestWidget-content">
-        <h2>{peerMeta.name} is requesting your Signature.</h2>
+        <h2>{peerMeta.name} is requesting you add signature(s) to a transaction.</h2>
         <p>Accept this request to add it to your pending transactions. You can then sign it using ORE Vault. </p>
       </div>
 
       <div className="oreIdWalletConnect-requestWidget-content">
         <h3>Account Address</h3>
-        <span className="oreIdWalletConnect-requestWidget-accountAddress">{request.params[0].from}</span>
+        <span className="oreIdWalletConnect-requestWidget-accountAddress">
+          <LongText truncateInMiddle text={request.params[0].from} />
+        </span>
       </div>
 
       <div className="oreIdWalletConnect-requestWidget-divider" />

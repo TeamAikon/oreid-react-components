@@ -29,6 +29,7 @@ Default.args = {
   endSession: console.log,
   disconnect: console.log,
   startSession: console.log,
+  resetConnection: console.log,
   isActiveSession: true,
   peerMeta: {
     description: 'Swap or provide liquidity on the Uniswap Protocol',

@@ -36,11 +36,15 @@ export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
 }) => {
   const walletConnectClientList = useRef<WalletConnectRef[]>([])
   const [incomingRequest, setIncomingRequest] = useState<
-    { peerMeta: PeerMeta; request: WalletConnectTransaction } | undefined
+    { peerMeta: PeerMeta; request: WalletConnectTransaction; connectionUri: string } | undefined
   >()
 
   if (!config.clientIcons || !config.clientDescription || !config.clientName) {
     throw Error(`config missing at least one: clientIcons, clientDescription, clientName, clientUrl`)
+  }
+
+  if (connections.filter((c) => c.chainNetwork !== config.chainNetwork).length) {
+    throw Error(`The chainNetwork of the configuration is not the same as the connection`)
   }
 
   const hasChainNetworkSupport = hasChainSupport(config?.chainNetwork)
@@ -125,6 +129,7 @@ export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
       setIncomingRequest({
         peerMeta,
         request: payload,
+        connectionUri: connection.connector.uri,
       })
       setModalConnections(ModalConnections.OnRequest)
     }
@@ -225,6 +230,13 @@ export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
     setModalConnections(newValue)
   }
 
+  const destroyDuplicateAppConnection = (url?: string) => {
+    if (!url) return
+    walletConnectClientList.current
+      .filter((c) => c.connector.peerMeta?.url === url)
+      .forEach((c) => disconnect(c.connector.uri))
+  }
+
   if (!hasChainNetworkSupport) return null
   return (
     <MuiThemeProvider theme={theme}>
@@ -258,6 +270,7 @@ export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
           )}
           {modalConnections === ModalConnections.NewConnection && (
             <ConnectWalletContainer
+              destroyDuplicateAppConnection={destroyDuplicateAppConnection}
               config={config}
               createConnection={createConnection}
               onSessionRequest={onSessionRequest}
@@ -268,35 +281,56 @@ export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
           )}
           {modalConnections === ModalConnections.ListConnections && (
             <>
-              {connections.map((connection) => {
-                const index = getWalletConnectClientIndexByUri(connection.connectionUri)
-                const meta = walletConnectClientList.current[index]?.connector?.session?.peerMeta
-                if (!meta) return null
-                return (
-                  <React.Fragment key={connection.connectionUri}>
-                    <ConnectionListItem
-                      isActiveSession={!!connection.listening}
-                      startSession={() => {
-                        startSession(connection.connectionUri)
-                      }}
-                      disconnect={() => {
-                        disconnect(connection.connectionUri)
-                      }}
-                      endSession={() => {
-                        endSession(connection.connectionUri)
-                      }}
-                      peerMeta={meta}
-                    />
-                  </React.Fragment>
-                )
-              })}
+              <div>
+                {connections.map((connection) => {
+                  const index = getWalletConnectClientIndexByUri(connection.connectionUri)
+                  const meta = walletConnectClientList.current[index]?.connector?.session?.peerMeta
+                  if (!meta) return null
+                  return (
+                    <React.Fragment key={connection.connectionUri}>
+                      <ConnectionListItem
+                        isActiveSession={!!connection.listening}
+                        startSession={() => {
+                          startSession(connection.connectionUri)
+                        }}
+                        resetConnection={() => {
+                          setModalConnections(ModalConnections.NewConnection)
+                        }}
+                        disconnect={() => {
+                          disconnect(connection.connectionUri)
+                        }}
+                        endSession={() => {
+                          endSession(connection.connectionUri)
+                        }}
+                        peerMeta={meta}
+                      />
+                    </React.Fragment>
+                  )
+                })}
+              </div>
+
+              {connections.length > 0 && (
+                <div className="oreIdWalletConnect-reconnection-text">
+                  Having problems connecting? Try
+                  <button
+                    className="oreIdWalletConnect-reconnection-text-btn"
+                    onClick={() => {
+                      setModalConnections(ModalConnections.NewConnection)
+                    }}
+                  >
+                    Reset Connection
+                  </button>
+                </div>
+              )}
             </>
           )}
           {modalConnections === ModalConnections.OnRequest && incomingRequest && (
             <RequestWidget
               {...incomingRequest}
               onAcceptRequest={(request) => {
-                props.onAcceptRequest(request)
+                const currentConnection = getCurrentConnectionByUri(incomingRequest.connectionUri)
+                if (!currentConnection) throw new Error(`Invalid connection uri: ${incomingRequest.connectionUri}`)
+                props.onAcceptRequest(request, currentConnection)
                 setModalConnections(ModalConnections.Closed)
               }}
             />

@@ -23,6 +23,12 @@ export enum ModalConnections {
   OnRequest,
 }
 
+interface ChainNetworkMap {
+  chainNetwork: ChainNetwork
+  id: number
+  name: string
+}
+
 export enum ChainNetwork {
   AlgoMain = 'algo_main',
   AlgoBeta = 'algo_beta',
@@ -45,6 +51,24 @@ export enum ChainNetwork {
   EthRopsten = 'eth_ropsten', // 3
   EthRinkeby = 'eth_rinkeby', // 4
 }
+
+export const chainNetworkMap: ChainNetworkMap[] = [
+  {
+    chainNetwork: ChainNetwork.EthMain,
+    id: 1,
+    name: 'Ethereum',
+  },
+  {
+    chainNetwork: ChainNetwork.EthRopsten,
+    id: 3,
+    name: 'Ethereum Ropsten',
+  },
+  {
+    chainNetwork: ChainNetwork.EthRinkeby,
+    id: 4,
+    name: 'Ethereum Rinkeby',
+  },
+]
 
 export type ConnectionEvent = (connection?: Connection, payload?: any) => void
 export type WalletConnectRefEvent = (connection: WalletConnectRef, payload?: any) => void
@@ -72,7 +96,7 @@ export interface OreIDWalletConnectProps {
   onConnectionDelete?: ConnectionEvent
   onStartListening?: ConnectionEvent
   onStopListening?: ConnectionEvent
-  onAcceptRequest: (transaction: WalletConnectTransaction) => void
+  onAcceptRequest: (transaction: WalletConnectTransaction, connection: Connection) => void
   onError?: (eventName: string, error: Error, connection?: Connection) => void
 }
 
