@@ -1,6 +1,6 @@
 {
   "name": "@aikon/oreid-wallet-connect-react-component",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "main": "build/index.js",
   "files": [
     "build"
