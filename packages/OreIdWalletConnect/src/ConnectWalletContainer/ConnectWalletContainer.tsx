@@ -166,7 +166,6 @@ export const ConnectWalletContainer: React.FC<ConnectWalletContainerProps> = ({
           connection.connector.off('session_request')
           connection.connector.off('connect')
           connection.connector.off('disconnect')
-          connection.listening = true
           createConnection(connection)
         }
       }}

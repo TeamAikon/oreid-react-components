@@ -7,12 +7,15 @@ import { ButtonOutline } from '../ButtonOutline'
 import './ConnectionsBadge.scss'
 
 interface ConnectedUIProps {
-  isListening: boolean
+  hideWhenNoConnections: boolean
   peerMeta: PeerMeta[]
   onClick: () => void
 }
 
-export const ConnectionsBadge: React.FC<ConnectedUIProps> = ({ isListening, peerMeta, onClick }) => {
+export const ConnectionsBadge: React.FC<ConnectedUIProps> = ({ hideWhenNoConnections, peerMeta, onClick }) => {
+  if (hideWhenNoConnections && peerMeta.length === 0) {
+    return null
+  }
   return (
     <div className="oreIdWalletConnect-connectionsBadge">
       <div className="oreIdWalletConnect-connectionsBadge-icons">
@@ -22,7 +25,7 @@ export const ConnectionsBadge: React.FC<ConnectedUIProps> = ({ isListening, peer
         })}
         {peerMeta.length === 0 && <ConnectionIcon icon="https://example.walletconnect.org/favicon.ico" size={20} />}
       </div>
-      {isListening ? (
+      {peerMeta.length > 0 ? (
         <ActiveSessionButton onClick={onClick} />
       ) : (
         <>

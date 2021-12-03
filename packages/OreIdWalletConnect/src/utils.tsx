@@ -12,7 +12,6 @@ export const factoryConnection = (
   const connector = new WalletConnect({ uri, storageId, session })
   return {
     subscribed: false,
-    listening: false,
     connector,
   }
 }
@@ -62,6 +61,7 @@ export const subscribeEvents = ({
     onConnectionDelete(connection, payload)
     removeWalletConnectItem(connection.connector.uri)
   })
+  connection.subscribed = true
 }
 
 export const unsubscribeEvents = (connection: WalletConnectRef) => {

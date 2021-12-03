@@ -26,7 +26,6 @@ it('convert WalletConnectRef To Connection', () => {
   }
   const connection = mapWalletConnectRefToConnection({
     connector: { session, uri: 'connection-uri-test' },
-    listening: true,
   } as any)
   expect(connection).toEqual({
     bridge: 'https://z.bridge.walletconnect.org',
@@ -41,7 +40,6 @@ it('convert WalletConnectRef To Connection', () => {
     description: 'Swap or provide liquidity on the Uniswap Protocol',
     logoUrl: 'https://app.uniswap.org/./images/512x512_App_Icon.png',
     clientId: 'c236d0fc-3584-4c0d-abe4-680dceee290b',
-    listening: true,
   })
 })
 
@@ -60,9 +58,15 @@ it('convert Connection To WalletConnectRef', () => {
       description: 'Swap or provide liquidity on the Uniswap Protocol',
       logoUrl: 'https://app.uniswap.org/./images/512x512_App_Icon.png',
       clientId: 'c236d0fc-3584-4c0d-abe4-680dceee290b',
-      listening: true,
     },
-    { account: '0x7FFBF659A640e181BA2Db633686Af123E9E1eE1b', chainNetwork: ChainNetwork.EthMain },
+    {
+      account: '0x7FFBF659A640e181BA2Db633686Af123E9E1eE1b',
+      chainNetwork: ChainNetwork.EthMain,
+      clientDescription: 'clientDescription',
+      clientIcons: ['clientIcons'],
+      clientUrl: 'clientUrl',
+      clientName: 'clientName',
+    },
   )
 
   expect(connection).toEqual({
@@ -72,7 +76,7 @@ it('convert Connection To WalletConnectRef', () => {
     bridge: 'https://z.bridge.walletconnect.org',
     key: '791d8f450954a57102d39320639471accdc4fde6fd89fffe1fcf421e2ce138c2',
     clientId: 'c236d0fc-3584-4c0d-abe4-680dceee290b',
-    clientMeta: { description: '', url: 'http://localhost', icons: [], name: '' },
+    clientMeta: { description: 'clientDescription', url: 'clientUrl', icons: ['clientIcons'], name: 'clientName' },
     peerId: 'd4a9a4e2-b8eb-4d5d-9b10-7ce2db50c78b',
     peerMeta: {
       description: 'Swap or provide liquidity on the Uniswap Protocol',

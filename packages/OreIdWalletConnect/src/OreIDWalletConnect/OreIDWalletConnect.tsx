@@ -32,6 +32,7 @@ export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
   setModalConnections,
   connections,
   setConnections,
+  hideWhenNoConnections,
   ...props
 }) => {
   const walletConnectClientList = useRef<WalletConnectRef[]>([])
@@ -125,7 +126,7 @@ export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
   const onRequest: WalletConnectRefEvent = (connection, payload) => {
     const index = getWalletConnectClientIndexByUri(connection.connector.uri)
     const { peerMeta } = walletConnectClientList.current[index].connector.session
-    if (walletConnectClientList.current[index].listening && !!peerMeta) {
+    if (peerMeta) {
       setIncomingRequest({
         peerMeta,
         request: payload,
@@ -148,30 +149,6 @@ export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
     }
   }
   // end of events block
-
-  /** Handle starting listening to a session */
-  const startSession = (uri: string) => {
-    const index = getWalletConnectClientIndexByUri(uri)
-    if (index === -1) return
-    const connection = walletConnectClientList.current[index]
-    connection.listening = true
-    if (props.onStartListening) {
-      props.onStartListening(mapWalletConnectRefToConnection(connection))
-    }
-    updateConnections()
-  }
-
-  /** Handle stopping listening to a session */
-  const endSession = (uri: string) => {
-    const index = getWalletConnectClientIndexByUri(uri)
-    if (index === -1) return
-    const connection = walletConnectClientList.current[index]
-    connection.listening = false
-    if (props.onStopListening) {
-      props.onStopListening(mapWalletConnectRefToConnection(connection))
-    }
-    updateConnections()
-  }
 
   /** Trigger disconnect (deletion) of this session from the wallet connect server - this will trigger a 'disconnect' event and call onConnectionDelete */
   const disconnect = (uri: string) => {
@@ -210,7 +187,6 @@ export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
           onConnectionDelete,
           onError,
         })
-        connection.listening = !!propConnection.listening
         walletConnectClientList.current.push(connection)
         update = true
       }
@@ -289,18 +265,11 @@ export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
                   return (
                     <React.Fragment key={connection.connectionUri}>
                       <ConnectionListItem
-                        isActiveSession={!!connection.listening}
-                        startSession={() => {
-                          startSession(connection.connectionUri)
-                        }}
                         resetConnection={() => {
                           setModalConnections(ModalConnections.NewConnection)
                         }}
                         disconnect={() => {
                           disconnect(connection.connectionUri)
-                        }}
-                        endSession={() => {
-                          endSession(connection.connectionUri)
                         }}
                         peerMeta={meta}
                       />
@@ -337,7 +306,7 @@ export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
           )}
         </Modal>
         <ConnectionsBadge
-          isListening={connections.filter((connection) => connection.listening).length >= 1}
+          hideWhenNoConnections={!!hideWhenNoConnections}
           peerMeta={connections
             .map((connection) => {
               const index = getWalletConnectClientIndexByUri(connection.connectionUri)

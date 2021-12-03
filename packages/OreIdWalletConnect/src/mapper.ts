@@ -34,7 +34,6 @@ export const mapWalletConnectRefToConnection = (connection: WalletConnectRef): C
     handshakeTopic: session.handshakeTopic,
     peerId: session.peerId,
     clientId: session.clientId,
-    listening: connection.listening,
   }
 }
 

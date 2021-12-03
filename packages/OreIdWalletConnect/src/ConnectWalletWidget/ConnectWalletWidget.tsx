@@ -29,7 +29,11 @@ export const ConnectWalletWidget: React.FC<ConnectWalletWidgetProps> = ({ onClic
           <p>Copy to clipboard</p>
         </div>
         <div className="oreIdWalletConnect-connectWalletWidget-example-content">
-          <p>To connect with an app, copy the code provided by Wallet connect and paste it below</p>
+          <ul>
+            <li>1. Go to your app</li>
+            <li>2. Connect to WalletConnect - copy code </li>
+            <li>3. Paste the code here</li>
+          </ul>
           <ArowIcon />
         </div>
       </div>
