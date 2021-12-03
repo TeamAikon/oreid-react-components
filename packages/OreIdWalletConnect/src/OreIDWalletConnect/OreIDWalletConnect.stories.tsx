@@ -27,6 +27,7 @@ const OreIDWalletConnectExample: React.FC = (props: any) => {
       <br />
       <br />
       <OreIDWalletConnect
+        {...props}
         config={props.config}
         connections={connections}
         setConnections={setConnections}
@@ -48,14 +49,6 @@ const OreIDWalletConnectExample: React.FC = (props: any) => {
         onConnectionCreate={(connection, payload) => {
           // optional
           console.log('onConnectionCreate', { connection, payload })
-        }}
-        onStartListening={(connection, payload) => {
-          // optional
-          console.log('onStartListening', { payload })
-        }}
-        onStopListening={(connection, payload) => {
-          // optional
-          console.log('onStopListening', { payload })
         }}
         onConnectionDelete={(connection, payload) => {
           // optional

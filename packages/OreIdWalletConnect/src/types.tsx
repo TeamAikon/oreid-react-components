@@ -1,21 +1,6 @@
 import WalletConnectClient from '@walletconnect/client'
 import { JsonRpc } from '@walletconnect/types'
 
-interface WalletConnectSession {
-  key: string
-  peerId: string
-  peerUrl: string
-  clientId: string
-  chainNetwork: string
-  bridge: string
-  handshakeId: string
-  handshakeTopic: string
-  connectionUri: string
-  name: string
-  description?: string
-  logoUrl?: string
-}
-
 export enum ModalConnections {
   Closed,
   NewConnection,
@@ -70,14 +55,13 @@ export interface OreIDWalletConnectProps {
   setConnections: (connections: Connection[]) => void
   modalConnections: ModalConnections
   setModalConnections: (modalState: ModalConnections) => void
+  hideWhenNoConnections?: boolean
 
   // Events
   onSessionRequest?: ConnectionEvent
   onSessionUpdate?: ConnectionEvent
   onConnectionCreate?: ConnectionEvent
   onConnectionDelete?: ConnectionEvent
-  onStartListening?: ConnectionEvent
-  onStopListening?: ConnectionEvent
   onAcceptRequest: (transaction: WalletConnectTransaction, connection: Connection) => void
   onError?: (eventName: string, error: Error, connection?: Connection) => void
 }
@@ -91,13 +75,23 @@ export interface PeerMeta {
 }
 
 export interface WalletConnectRef {
-  listening: boolean
   subscribed: boolean
   connector: WalletConnectClient
 }
 
-export interface Connection extends WalletConnectSession {
-  listening?: boolean // add need this type
+export interface Connection {
+  key: string
+  peerId: string
+  peerUrl: string
+  clientId: string
+  chainNetwork: string
+  bridge: string
+  handshakeId: string
+  handshakeTopic: string
+  connectionUri: string
+  name: string
+  description?: string
+  logoUrl?: string
 }
 
 export interface WalletConnectTransaction {
