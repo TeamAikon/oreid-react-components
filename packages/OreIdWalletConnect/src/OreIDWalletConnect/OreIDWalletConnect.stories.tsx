@@ -79,6 +79,7 @@ const Template = (props: any) => {
 
 export const Default: { args: Partial<OreIDWalletConnectProps> } = Template.bind({})
 Default.args = {
+  hideWhenNoConnections: false,
   config: {
     chainNetwork: ChainNetwork.EthMain,
     account: '0x7362A91D36382fC14dAEF0eDD2Ebd9437DD812e7',
