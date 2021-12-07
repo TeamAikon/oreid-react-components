@@ -2,6 +2,7 @@ import React, { CSSProperties } from 'react';
 import { WebWidget } from 'oreid-js';
 import Roboto from './assets/Roboto-Medium.ttf'
 import OreIdWebWidgetChromeless from './OreIdWebWidgetChromeless/OreIdWebWidgetChromeless';
+import { MouseEventHandler } from 'react';
 
 const modalBackgroundStyle: CSSProperties = {
   position: 'fixed',
@@ -54,10 +55,9 @@ const openButtonIconStyle: CSSProperties = {
   cursor: 'pointer'
 }
 interface OreIdReactWebWidgetProps extends WebWidget.WebWidgetProps {
-  onClose?: Function;
-  onOpen?: Function;
+  onClose?: MouseEventHandler;
+  show?: boolean;
   disableBackdropClick?: boolean
-  buttonText?: string
 }
 
 const CloseIcon = () => (
@@ -65,65 +65,29 @@ const CloseIcon = () => (
 )
 
 export default class OreIdWebWidget extends React.Component<OreIdReactWebWidgetProps> {
-  state = {
-    showModal: false
-  }
-
-  constructor(props: OreIdReactWebWidgetProps) {
-    super(props);
-    this.closeModal = this.closeModal.bind(this);
-    this.openModal = this.openModal.bind(this);
-    this.onWebWidgetError = this.onWebWidgetError.bind(this);
-    this.onWebWidgetSuccess = this.onWebWidgetSuccess.bind(this);
-  }
-
-  closeModal() {
-    if (typeof this.props.onClose === 'function') {
-      this.props.onClose();
-    }
-    this.setState({ showModal: false })
-  }
-
-  onWebWidgetError(result: any) {
-    this.props.onError(result)
-    this.closeModal()
-  }
-
-  onWebWidgetSuccess(result: any) {
-    this.props.onSuccess(result)
-    this.closeModal()
-  }
-
-  openModal() {
-    if (typeof this.props.onOpen === 'function') {
-      this.props.onOpen();
-    }
-    this.setState({ showModal: true })
-  }
-
   render() {
-    const { showModal } = this.state;
     const {
       oreIdOptions,
       action,
       options,
       disableBackdropClick = false,
-      buttonText = 'Open'
+      show = false,
+      onSuccess,
+      onError,
+      onClose
     } = this.props;
-    const dataAttributes = Object.keys(this.props).reduce((prev, curr) =>  curr.startsWith('data-') ? ({ ...prev, [curr]: this.props[curr]}) : prev, {})
     return (
       <div>
-        <button style={openButtonIconStyle} onClick={this.openModal} {...dataAttributes}>{buttonText}</button>
-        {showModal && (
-          <div style={modalBackgroundStyle} onClick={!disableBackdropClick ? this.closeModal : undefined}>
+        {show && (
+          <div style={modalBackgroundStyle} onClick={!disableBackdropClick ? onClose : undefined}>
             <div style={{...modalContainerStyle, backgroundColor: oreIdOptions.backgroundColor || '#fafafa'}}>
-              <span onClick={this.closeModal} style={closeButtonStyle}><CloseIcon /></span>
+              <span onClick={onClose} style={closeButtonStyle}><CloseIcon /></span>
               <OreIdWebWidgetChromeless
                 oreIdOptions={oreIdOptions}
                 action={action}
                 options={options}
-                onSuccess={this.onWebWidgetSuccess}
-                onError={this.onWebWidgetError}
+                onSuccess={onSuccess}
+                onError={onError}
               />
             </div>
           </div>
