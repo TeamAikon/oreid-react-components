@@ -69,7 +69,7 @@ export default class OreIdWebWidget extends React.Component<OreIdReactWebWidgetP
     const {
       oreIdOptions,
       action,
-      options,
+      // options,
       disableBackdropClick = false,
       show = false,
       onSuccess,
@@ -85,7 +85,7 @@ export default class OreIdWebWidget extends React.Component<OreIdReactWebWidgetP
               <OreIdWebWidgetChromeless
                 oreIdOptions={oreIdOptions}
                 action={action}
-                options={options}
+                // options={options}
                 onSuccess={onSuccess}
                 onError={onError}
               />
