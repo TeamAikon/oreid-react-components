@@ -30,6 +30,7 @@ export enum ChainNetwork {
   TelosTest = 'telos_test', // 41
   WaxMain = 'wax_main',
   WaxTest = 'wax_test',
+  UxMain = 'ux_main',
   OreMain = 'ore_main',
   OreTest = 'ore_test',
   EthMain = 'eth_main', // 1
