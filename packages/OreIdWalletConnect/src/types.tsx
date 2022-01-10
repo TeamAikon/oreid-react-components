@@ -25,16 +25,18 @@ export enum ChainNetwork {
   EosMain = 'eos_main', // 59
   EosKylin = 'eos_kylin', // 95
   EosJungle = 'eos_jungle',
-  MigrateEosMain = 'migrate_eos_main',
-  TelosMain = 'telos_main', // 40
-  TelosTest = 'telos_test', // 41
-  WaxMain = 'wax_main',
-  WaxTest = 'wax_test',
-  OreMain = 'ore_main',
-  OreTest = 'ore_test',
   EthMain = 'eth_main', // 1
   EthRopsten = 'eth_ropsten', // 3
   EthRinkeby = 'eth_rinkeby', // 4
+  MigrateEosMain = 'migrate_eos_main',
+  OreMain = 'ore_main',
+  OreTest = 'ore_test',
+  TelosMain = 'telos_main', // 40
+  TelosTest = 'telos_test', // 41
+  UxMain = 'ux_main',
+  // UxTest = 'ux_test', (there is no test network) - this is left here as a placeholder
+  WaxMain = 'wax_main',
+  WaxTest = 'wax_test',
 }
 
 export type ConnectionEvent = (connection?: Connection, payload?: any) => void
