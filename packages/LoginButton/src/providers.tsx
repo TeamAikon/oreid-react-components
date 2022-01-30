@@ -22,6 +22,8 @@ import twitter_logo from './assets/twitter-logo@2x.png'
 import twitter_style from './assets/twitter-style.json'
 import wechat_logo from './assets/wechat-logo@2x.png'
 import wechat_style from './assets/wechat-style.json'
+import instagram_style from './assets/instagram-style.json'
+import instagram_logo from './assets/instagram-logo.png'
 // Passwordless
 import email_logo from './assets/email-logo@2x.png'
 import email_style from './assets/email-style.json'
@@ -68,6 +70,7 @@ const providers = [
   {id:'twitch',logo: twitch_logo,style: twitch_style},
   {id:'twitter',logo: twitter_logo,style: twitter_style},
   {id:'wechat',logo: wechat_logo,style: wechat_style},
+  {id:'instagram',logo: instagram_logo,style: instagram_style},
   {id:'keycat',logo: keycat_logo,style: keycat_style},
   {id:'ledger',logo: ledger_logo,style: ledger_style},
   {id:'lynx',logo: lynx_logo,style: lynx_style},

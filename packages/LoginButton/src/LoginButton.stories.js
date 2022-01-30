@@ -155,5 +155,11 @@ storiesOf("LoginButton", module).add("Default", () => (
         alert("Clicked");
       }}
     ></LoginButton>
+    <LoginButton
+      provider={"instagram"}
+      onClick={() => {
+        alert("Clicked Instagram");
+      }}
+    />
   </div>
 ));

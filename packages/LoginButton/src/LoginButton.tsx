@@ -15,7 +15,10 @@ let defaultButtonStyle = {
   textAlign: 'left',
   border: 'none',
   borderRadius: '5px',
-  boxShadow: '0 4px 12px rgba(0,0,0,0.25)'
+  boxShadow: '0 4px 12px rgba(0,0,0,0.25)',
+  display: 'flex',
+  alignItems: 'center',
+  whiteSpace: 'nowrap'
 }
 
 const defaultLogoStyle = {
@@ -77,7 +80,7 @@ class LoginButton extends Component<Props, State> {
       <div>
         <button style={buttonStyle} onClick={(e) => {onClickCallback(e, provider);}} {...dataAttributes}>
           <img style={logoStyle} src={providerMetadata.logo} alt={text}/>
-          {text}
+          <span>{text}</span>
         </button>
       </div>
     )
