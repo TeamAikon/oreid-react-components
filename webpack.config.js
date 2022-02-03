@@ -22,7 +22,7 @@
 const pkg = require('./package.json');
 const rules = require('./configs/rules.config');
 const { aliases } = require('./configs/aliases.config');
-import path from 'path';
+const path = require('path');
 
 const commonConfig = {
   mode: 'production',
