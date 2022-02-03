@@ -1,13 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { WebWidget } from "oreid-js";
+import { createWebWidget } from "oreid-js/dist/webwidget";
 
 declare const window: any;
 let OreIdWebWidgetChromeless: any;
 
 if (window) {
-  const widget = WebWidget.createWebWidget();
-  window["WrapperComponent"] = widget;
+  window["WrapperComponent"] = createWebWidget();
   OreIdWebWidgetChromeless = window.WrapperComponent.driver("react", {
     React,
     ReactDOM,
