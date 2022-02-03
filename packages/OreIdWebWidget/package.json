@@ -11,9 +11,9 @@
   },
   "scripts": {
     "build-server": "rm -rf dist/* && tsc --build tsconfig.json && yarn copy-assets",
-    "build-browser": "rm -rf dist.browser/* && ./node_modules/.bin/ncc build src/index.ts -o dist.browser --minify",
+    "build-browser": "rm -rf dist.browser/* && ./node_modules/.bin/ncc build src/index.js -o dist.browser --minify",
     "build": "yarn build-server",
-    "build-production": "yarn build && TS_NODE_PROJECT=\"tsconfig.webpack.json\" webpack",
+    "build-production": "yarn build && TS_NODE_PROJECT=\"tsconfig.json\" webpack",
     "clean": "rm -rf dist && rm -rf dist.browser",
     "copy-assets": "copyfiles -u 1 \"src/assets/*\" dist",
     "echo": "echo \"================== oreid-react-web-widget ===================\"",
