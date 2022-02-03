@@ -6,3 +6,6 @@ node_modules
 
 # Builds
 dist
+
+
+**/.DS_Store
