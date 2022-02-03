@@ -19,7 +19,7 @@ storiesOf("OreIdWebWidget", module).add("Default", () => (
         account: "",
         provider: "google",
       }}
-      action="newAccount"
+      action={{ name: "newAccount", params: null }}
       onSuccess={(result) => {
         console.log("onSuccess", result);
       }}
@@ -47,7 +47,7 @@ storiesOf("OreIdWebWidgetChromeless", module).add("Default", () => (
         account: "",
         provider: "google",
       }}
-      action="newAccount"
+      action={{ name: "newAccount", params: null }}
       onSuccess={(result) => {
         console.log("onSuccess", result);
       }}
