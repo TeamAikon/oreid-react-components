@@ -1,14 +1,17 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "allowJs": true,
-    "outDir": "./dist",
+    "outDir": "dist",
+    "module": "esnext",
     "declaration": true,
-    "declarationDir": "./dist",
-    "resolveJsonModule": true,
-    "typeRoots": [
-      "custom_typings"
-    ]
+    "noUnusedParameters": true,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "baseUrl": "./"
   },
-  "files": ["src/index.js", "src/custom.d.ts"]
+  "include": ["src"],
+  "exclude": ["node_modules", "dist", "**/*.stories.tsx"]
 }
