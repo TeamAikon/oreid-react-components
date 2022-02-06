@@ -39,11 +39,11 @@ type OreIdReactWebWidgetProps = {
   onClose?: MouseEventHandler;
   show?: boolean;
   disableBackdropClick?: boolean;
-  scriptUrl?: string;
+  widgetUrl?: string; // optional override of endpoint to download widget javascript (for dev purposes only)
 } & WebWidgetProps; // all other properties from WebWidgetProps type
 
 const oreIdServiceBaseUrl = "https://service.oreid.io";
-const defaultScriptUrl = `${oreIdServiceBaseUrl}/.well-known/ore-id-web-widget.js`;
+const defaultWidgetUrl = `${oreIdServiceBaseUrl}/.well-known/ore-id-web-widget.js`;
 
 let WebWidgetWithReactDriver: any;
 let scriptStatus: ScriptStatus = ScriptStatus.Idle
@@ -59,7 +59,7 @@ if(window) window.onerror = function(message, source, lineno, colno, error) {
 };
 
 export default function OreIdWebWidget(props: OreIdReactWebWidgetProps) {
-  const loadFromUrl: string = props?.scriptUrl || defaultScriptUrl;
+  const loadFromUrl: string = props?.widgetUrl || defaultWidgetUrl;
   const [widgetLoaded, setWidgetLoaded] = useState<boolean>(false);
   scriptStatus = useExternalScript(loadFromUrl);
 
