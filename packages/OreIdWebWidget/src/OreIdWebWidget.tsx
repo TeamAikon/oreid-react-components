@@ -1,4 +1,4 @@
-import React, { CSSProperties, useEffect, useState } from "react";
+import React, { Component, CSSProperties, useEffect, useCallback, useState } from "react";
 import ReactDOM from "react-dom";
 import { MouseEventHandler } from "react";
 import { useExternalScript, ScriptStatus } from "./hooks/useExternalScript";
@@ -35,7 +35,7 @@ const modalContainerStyle: CSSProperties = {
 // We don't define props here - they ahould be passed down from script from service endpoint
 type WebWidgetProps = { [key: string]: any };
 
-type OreIdReactWebWidgetProps = {
+export type OreIdReactWebWidgetProps = {
   onClose?: MouseEventHandler;
   show?: boolean;
   disableBackdropClick?: boolean;
@@ -46,36 +46,40 @@ const oreIdServiceBaseUrl = "https://service.oreid.io";
 const defaultWidgetUrl = `${oreIdServiceBaseUrl}/.well-known/ore-id-web-widget.js`;
 
 let WebWidgetWithReactDriver: any;
-let scriptStatus: ScriptStatus = ScriptStatus.Idle
-let errorMessage: string
-
-// catch any webwidget script errors
-if(window) window.onerror = function(message, source, lineno, colno, error) { 
-  if(!error) return
-  if(message === 'Script error.')  {
-    scriptStatus = ScriptStatus.ErrorExecution 
-  }
-  console.log('Javascript error:', message, source, lineno, colno, error) 
-};
+let scriptStatus: ScriptStatus = ScriptStatus.Idle;
+let errorMessage: string;
 
 export default function OreIdWebWidget(props: OreIdReactWebWidgetProps) {
   const loadFromUrl: string = props?.widgetUrl || defaultWidgetUrl;
   const [widgetLoaded, setWidgetLoaded] = useState<boolean>(false);
   scriptStatus = useExternalScript(loadFromUrl);
 
+  useEffect(() => {
+    // catch any webwidget script errors
+    if (typeof window !== "undefined")
+      window.onerror = (message, source, lineno, colno, error) => {
+        if (props?.onError) props.onError({ errors: message || error });
+        console.error(message, source, lineno, colno, error);
+        if (!error) return;
+        if (message === "Script error.") {
+          scriptStatus = ScriptStatus.ErrorExecution;
+        }
+      };
+  }, []);
+
   /**  init widget after script is downloaded, return errors */
   useEffect(() => {
     if (scriptStatus === ScriptStatus.ErrorDownloading) {
-      errorMessage = `error downloading webwidget script from ${loadFromUrl}`
+      errorMessage = `error downloading webwidget script from ${loadFromUrl}`;
     }
     if (scriptStatus === ScriptStatus.ErrorExecution) {
-      errorMessage = `error running webwidget script from ${loadFromUrl}`
+      errorMessage = `error running webwidget script from ${loadFromUrl}`;
     }
     // call error callback if any errors
-    if(errorMessage) {
-      console.log(errorMessage)
-      props?.onError({errors: errorMessage})
-      return
+    if (errorMessage) {
+      console.log(errorMessage);
+      props?.onError({ errors: errorMessage });
+      return;
     }
     if (!window) return;
     const myWindow = window as Window;
@@ -85,9 +89,9 @@ export default function OreIdWebWidget(props: OreIdReactWebWidgetProps) {
   }, [scriptStatus]);
 
   /** runs after webwidget script is loaded */
-  function initWidget() {
+  const initWidget = useCallback(() => {
     const myWindow = window as Window;
-    if(!myWindow?.webwidget) return
+    if (!myWindow?.webwidget) return;
     // create widget instance using downloaded webwidget script (which is attached to window)
     const widget = myWindow?.webwidget?.createWebWidget();
     myWindow.WrapperComponent = widget;
@@ -96,39 +100,33 @@ export default function OreIdWebWidget(props: OreIdReactWebWidgetProps) {
       ReactDOM,
     });
     setWidgetLoaded(true);
-  }
+  }, [typeof window, scriptStatus]);
 
   return <div>{widgetLoaded && <WebWidgetWrapper {...props} />}</div>;
 }
 
 /** Wrapper around WebWidget that handles 'show', 'disableBackdropClick', and background styles */
-export function WebWidgetWrapper(props: OreIdReactWebWidgetProps) {
-  const {
-    disableBackdropClick = false,
-    show = false,
-    onClose,
-    ...webWidgetProps
-  } = props;
-  return (
-    <div>
-      {show && (
+export class WebWidgetWrapper extends Component<OreIdReactWebWidgetProps> {
+  componentDidCatch(error: any, errorInfo: any) {
+    console.error(error);
+    console.trace(errorInfo);
+    this.props.onError && this.props.onError(error);
+  }
+
+  render() {
+    const { disableBackdropClick = false, show = false, onClose, ...webWidgetProps } = this.props;
+    if (!show) return null;
+    return (
+      <div style={modalBackgroundStyle} onClick={!disableBackdropClick ? onClose : undefined}>
         <div
-          style={modalBackgroundStyle}
-          onClick={!disableBackdropClick ? onClose : undefined}
+          style={{
+            ...modalContainerStyle,
+            backgroundColor: webWidgetProps?.oreIdOptions?.backgroundColor || "#f3f3f3",
+          }}
         >
-          <div
-            style={{
-              ...modalContainerStyle,
-              backgroundColor:
-                props?.oreIdOptions?.backgroundColor || "#f3f3f3",
-            }}
-          >
-            <div>
-              <WebWidgetWithReactDriver {...webWidgetProps} />
-            </div>
-          </div>
+          <WebWidgetWithReactDriver {...webWidgetProps} />
         </div>
-      )}
-    </div>
-  );
+      </div>
+    );
+  }
 }
