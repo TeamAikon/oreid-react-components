@@ -42,8 +42,9 @@ type OreIdReactWebWidgetProps = {
   widgetUrl?: string; // optional override of endpoint to download widget javascript (for dev purposes only)
 } & WebWidgetProps; // all other properties from WebWidgetProps type
 
+const widgetVersion = '1'
 const oreIdServiceBaseUrl = "https://service.oreid.io";
-const defaultWidgetUrl = `${oreIdServiceBaseUrl}/.well-known/ore-id-web-widget.js`;
+const defaultWidgetUrl = `${oreIdServiceBaseUrl}/.well-known/ore-id-web-widget-v${widgetVersion}.js`;
 
 let WebWidgetWithReactDriver: any;
 let scriptStatus: ScriptStatus = ScriptStatus.Idle
