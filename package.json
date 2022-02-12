@@ -50,7 +50,7 @@
         "webpack-cli": "3.2.3"
     },
     "dependencies": {
-        "@storybook/cli": "^5.3",
+        "@storybook/cli": "^5.3.22",
         "@storybook/react": "^5.3",
         "react": "16.14.0",
         "react-dom": "16.14.0"
