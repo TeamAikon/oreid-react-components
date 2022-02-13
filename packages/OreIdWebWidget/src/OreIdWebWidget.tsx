@@ -44,7 +44,7 @@ type OreIdReactWebWidgetProps = {
 
 const widgetVersion = '1'
 const oreIdServiceBaseUrl = "https://service.oreid.io";
-const defaultWidgetUrl = `${oreIdServiceBaseUrl}/.well-known/ore-id-web-widget-v${widgetVersion}.js`;
+const defaultWidgetUrl = `${oreIdServiceBaseUrl}/download/oreid-webwidget-v${widgetVersion}.js`;
 
 let WebWidgetWithReactDriver: any;
 let scriptStatus: ScriptStatus = ScriptStatus.Idle
