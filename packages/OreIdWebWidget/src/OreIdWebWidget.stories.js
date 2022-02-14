@@ -1,25 +1,25 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
-import OreIdWebWidget from "../dist/index";
-import OreIdWebWidgetChromeless from "../dist/OreIdWebWidgetChromeless/OreIdWebWidgetChromeless";
+import OreIdWebWidget from "../dist/OreIdWebWidget";
 
 storiesOf("OreIdWebWidget", module).add("Default", () => (
   <div>
     <h1>OreIdWebWidget Component</h1>
     <OreIdWebWidget
       oreIdOptions={{
-        appName: "Storybooks App",
-        appId: process.env.REACT_APP_OREID_APP_ID,
-        signCallbackUrl: process.env.REACT_APP_OREID_AUTH_CALLBACK_URL,
-      }}
-      options={{
         accessToken: "",
-        chainNetwork: "",
-        accountType: "native",
-        account: "",
-        provider: "google",
+        appName: "Storybooks App",
+        appId: "demo_0097ed83e0a54e679ca46d082ee0e33a",
       }}
-      action="newAccount"
+      action={{ 
+        name: "newAccount", 
+        params: {
+          account: "",
+          accountType: "native",
+          chainNetwork: "",
+          provider: "google",
+        } 
+      }}
       onSuccess={(result) => {
         console.log("onSuccess", result);
       }}
@@ -27,27 +27,28 @@ storiesOf("OreIdWebWidget", module).add("Default", () => (
         console.log("onError", result);
         alert(JSON.stringify(result));
       }}
+      show={true}
     />
   </div>
 ));
 
-storiesOf("OreIdWebWidgetChromeless", module).add("Default", () => (
+storiesOf("OreIdWebWidget", module).add("Default", () => (
   <div>
-    <h1>OreIdWebWidgetChromeless Component</h1>
-    <OreIdWebWidgetChromeless
+    <h1>OreIdWebWidget Component</h1>
+    <OreIdWebWidget
       oreIdOptions={{
-        appName: "Storybooks App",
-        appId: process.env.REACT_APP_OREID_APP_ID,
-        signCallbackUrl: process.env.REACT_APP_OREID_AUTH_CALLBACK_URL,
-      }}
-      options={{
         accessToken: "",
-        chainNetwork: "",
-        accountType: "native",
-        account: "",
-        provider: "google",
+        appName: "Storybooks App",
+        appId: "demo_0097ed83e0a54e679ca46d082ee0e33a",
       }}
-      action="newAccount"
+      action={{ 
+        name: "logout", 
+        params: {
+          appId: "demo_0097ed83e0a54e679ca46d082ee0e33a",
+          providers: "google",
+          state: "mystate"
+        } 
+      }}
       onSuccess={(result) => {
         console.log("onSuccess", result);
       }}
@@ -55,6 +56,7 @@ storiesOf("OreIdWebWidgetChromeless", module).add("Default", () => (
         console.log("onError", result);
         alert(JSON.stringify(result));
       }}
+      show={true}
     />
   </div>
 ));
