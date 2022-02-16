@@ -32,9 +32,9 @@ export const Providers = providers.map((provider) => provider.id);
 export interface LoginProviderButtonProps {
   onClick: (event: React.MouseEvent, provider: string) => void;
   provider: string;
-  text: string;
-  buttonStyle: any;
-  logoStyle: any;
+  text?: string;
+  buttonStyle?: any;
+  logoStyle?: any;
 }
 
 export const LoginProviderButton: FunctionComponent<LoginProviderButtonProps> = (props) => {
