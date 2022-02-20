@@ -8,6 +8,6 @@
     "resolveJsonModule": true,
     "skipLibCheck": true
   },
-  "files": ["src/index.js"],
+  "files": ["src/index.ts"],
   "include": ["src/@customTypes/**/*"]
 }
