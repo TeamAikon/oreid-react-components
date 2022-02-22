@@ -37,7 +37,7 @@ const hasWindow = typeof window !== "undefined"
 // We don't define props here - they ahould be passed down from script from service endpoint
 type WebWidgetProps = { [key: string]: any };
 
-type OreIdReactWebWidgetProps = {
+export type OreIdReactWebWidgetProps = {
   onClose?: MouseEventHandler;
   show?: boolean;
   disableBackdropClick?: boolean;
