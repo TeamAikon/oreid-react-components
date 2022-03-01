@@ -1,10 +1,8 @@
-import React, { CSSProperties, FunctionComponent, useEffect } from "react";
+import React, { CSSProperties, FunctionComponent, useState, useEffect, useRef, memo } from "react";
 import ReactDOM from "react-dom";
 import { WebWidget } from "oreid-js";
-import { MouseEventHandler } from "react";
-import { useState } from "react";
 
-const modalBackgroundStyle: CSSProperties = {
+const iFrameBackgroundStyle: CSSProperties = {
   position: "fixed",
   display: "flex",
   backgroundColor: "rgba(0,0,0,0.3)",
@@ -15,8 +13,8 @@ const modalBackgroundStyle: CSSProperties = {
   justifyContent: "center",
 };
 
-const modalContainerStyle: CSSProperties = {
-  backgroundColor: "#fafafa",
+const iFrameContainerStyle = (backgroundColor: CSSProperties['backgroundColor'] = '#fafafa'): CSSProperties => ({
+  backgroundColor,
   borderRadius: "8px",
   maxHeight: "650px",
   maxWidth: "700px",
@@ -24,50 +22,49 @@ const modalContainerStyle: CSSProperties = {
   position: "relative",
   alignSelf: "center",
   overflow: "hidden",
-};
+});
 
-let OreIdReactActionComponent: any;
-
-export interface OreIdActionWidgetProps extends WebWidget.ActionWidgetProps {
-  onClose?: MouseEventHandler;
-  show?: boolean;
-  disableBackdropClick?: boolean;
+export interface OreIdActionWidgetProps extends WebWidget.WebWidgetProps {
+  onDestroy: () => void;
 }
+
+let OreIdReactActionComponent: any
 
 const OreIdActionWidget: FunctionComponent<OreIdActionWidgetProps> = (props) => {
   const {
-    oreIdOptions = { backgroundColor: "#f3f3f3" },
+    oreIdOptions,
     action = {},
-    disableBackdropClick = false,
-    show = false,
     onSuccess,
     onError,
-    onClose,
   } = props;
 
+  const [actionComponentKey, setActionComponentKey] = useState<string>('')
+  const actionComponentRef = useRef<any>(null)
+
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      window.OreIdActionComponent = WebWidget.createActionWidget();
-      OreIdReactActionComponent = window.OreIdActionComponent.driver("react", {
-        React,
-        ReactDOM,
-      });
+    if (typeof window !== "undefined" && !OreIdReactActionComponent) {
+      OreIdReactActionComponent = true
+      window.OreIdActionWidget = WebWidget.createActionWidget();
+      OreIdReactActionComponent = window.OreIdActionWidget.driver("react", { React, ReactDOM })
+      setActionComponentKey('OreIdReactActionComponent')
     }
-  }, []);
+    // clean-up
+    return () => {
+      OreIdReactActionComponent = null
+      actionComponentRef.current?.state?.parent?.close()
+      props.onDestroy()
+    }
+  }, [])
 
   return (
-    <>
-      {show && (
-        <div style={modalBackgroundStyle} onClick={!disableBackdropClick ? onClose : undefined}>
-          <div style={{ ...modalContainerStyle, backgroundColor: oreIdOptions.backgroundColor || "#f3f3f3" }}>
-            {OreIdReactActionComponent && (
-              <OreIdReactActionComponent oreIdOptions={oreIdOptions} action={action} onSuccess={onSuccess} onError={onError} />
-            )}
-          </div>
-        </div>
-      )}
-    </>
+    <div key={actionComponentKey} style={iFrameBackgroundStyle}>
+      <div style={iFrameContainerStyle(oreIdOptions?.backgroundColor || "#f3f3f3")}>
+        {OreIdReactActionComponent && (
+          <OreIdReactActionComponent ref={actionComponentRef} oreIdOptions={oreIdOptions} action={action} onSuccess={onSuccess} onError={onError} />
+        )}
+      </div>
+    </div>
   );
 };
 
-export default OreIdActionWidget;
+export default memo(OreIdActionWidget);
