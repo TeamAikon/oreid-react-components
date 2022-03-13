@@ -2,7 +2,7 @@ export * from "./useActionAuth";
 export * from "./useActionLogout";
 export * from "./useActionNewChainAccount";
 export * from "./useActionSign";
-export * from "./useIsAuth";
+export * from "./useIsLoggedIn";
 export * from "./useOreId";
 export * from "./useUpdateUser";
 export * from "./useUser";
