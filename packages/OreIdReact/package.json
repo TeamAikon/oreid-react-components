@@ -30,7 +30,7 @@
         "react-router-dom": "^5.0.0"
     },
     "devDependencies": {
-        "oreid-js": "3.0.1",
+        "oreid-js": "3.0.2",
         "oreid-webwidget": "1.0.2",
         "@babel/core": "^7.10.3",
         "@rollup/plugin-commonjs": "^21.0.1",
