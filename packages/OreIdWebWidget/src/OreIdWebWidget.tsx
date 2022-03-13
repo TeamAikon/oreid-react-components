@@ -6,7 +6,7 @@ import { useExternalScript, ScriptStatus } from "./hooks/useExternalScript";
 interface Window {
   [key: string]: any;
   WrapperComponent?: any;
-  webwidget?: any;
+  oreidWebWidgetCore?: any;
 }
 
 const modalBackgroundStyle: CSSProperties = {
@@ -46,7 +46,7 @@ export type OreIdReactWebWidgetProps = {
 
 const widgetVersion = '1'
 const oreIdServiceBaseUrl = "https://service.oreid.io";
-const defaultWidgetUrl = `${oreIdServiceBaseUrl}/download/oreid-webwidget-v${widgetVersion}.js`;
+const defaultWidgetUrl = `${oreIdServiceBaseUrl}/dist/v${widgetVersion}/oreid-web-widget-core.js`;
 
 let WebWidgetWithReactDriver: any;
 let scriptStatus: ScriptStatus = ScriptStatus.Idle
@@ -57,7 +57,7 @@ export default function OreIdWebWidget(props: OreIdReactWebWidgetProps) {
   const [widgetLoaded, setWidgetLoaded] = useState<boolean>(false);
   scriptStatus = useExternalScript(loadFromUrl);
 
-  // catch any webwidget script errors
+  // catch any oreidWebWidget script errors
   useEffect(() => {
     if (hasWindow)
       window.onerror = (message, source, lineno, colno, error) => {
@@ -73,10 +73,10 @@ export default function OreIdWebWidget(props: OreIdReactWebWidgetProps) {
   /**  init widget after script is downloaded, return errors */
   useEffect(() => {
     if (scriptStatus === ScriptStatus.ErrorDownloading) {
-      errorMessage = `error downloading webwidget script from ${loadFromUrl}`
+      errorMessage = `error downloading oreidWebWidget script from ${loadFromUrl}`
     }
     if (scriptStatus === ScriptStatus.ErrorExecution) {
-      errorMessage = `error running webwidget script from ${loadFromUrl}`
+      errorMessage = `error running oreidWebWidget script from ${loadFromUrl}`
     }
     // call error callback if any errors
     if(errorMessage) {
@@ -94,9 +94,9 @@ export default function OreIdWebWidget(props: OreIdReactWebWidgetProps) {
   /** runs after webwidget script is loaded */
   const initWidget = useCallback(() => {
     const myWindow = window as Window;
-    if (!myWindow?.webwidget) return;
+    if (!myWindow?.oreidWebWidgetCore) return;
     // create widget instance using downloaded webwidget script (which is attached to window)
-    const widget = myWindow?.webwidget?.createWebWidget();
+    const widget = myWindow?.oreidWebWidgetCore?.createWebWidget();
     myWindow.WrapperComponent = widget;
     WebWidgetWithReactDriver = myWindow.WrapperComponent.driver("react", {
       React,
