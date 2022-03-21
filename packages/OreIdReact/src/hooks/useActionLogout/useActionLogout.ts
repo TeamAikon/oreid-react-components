@@ -5,13 +5,8 @@ import { OreIdContext } from "src/OreIdContext";
 export const useActionLogout = () => {
 	const { webWidget, setUser } = useContext(OreIdContext);
 
-	const onLogout = ({
-		onSuccess,
-		onError,
-	}: {
-		onError?: OnError;
-		onSuccess?: () => void;
-	}) => {
+	const onLogout = (input?: { onError?: OnError; onSuccess?: () => void }) => {
+		const { onSuccess = undefined, onError = undefined } = input || {};
 		const errorAction: OnError = (error) => {
 			if (!onError) {
 				console.error(error);

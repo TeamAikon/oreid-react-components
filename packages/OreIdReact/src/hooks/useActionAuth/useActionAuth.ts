@@ -7,15 +7,12 @@ import merge from "lodash/merge";
 export const useActionAuth = () => {
 	const { webWidget, setUser } = useContext(OreIdContext);
 
-	const onAuth = ({
-		params,
-		onSuccess,
-		onError,
-	}: {
+	const onAuth = (input?: {
 		params?: WebWidgetAuthParams;
 		onError?: OnError;
 		onSuccess?: (user: UserData) => void;
 	}) => {
+		const { params, onSuccess, onError } = input || {};
 		const defaultParams = merge({ provider: AuthProvider.Google }, params);
 
 		const errorAction: OnError = (error) => {
