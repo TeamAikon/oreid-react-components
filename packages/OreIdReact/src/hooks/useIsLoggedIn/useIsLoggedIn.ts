@@ -7,5 +7,5 @@ export const useIsLoggedIn = () => {
 	useEffect(() => updateUser(), []);
 
 	const { oreId } = useContext(OreIdContext);
-	return oreId?.auth?.isLoggedIn;
+	return !!oreId?.auth?.isLoggedIn;
 };

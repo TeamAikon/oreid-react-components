@@ -19,11 +19,6 @@ export const useActionNewChainAccount = () => {
 		onError?: OnError;
 		onSuccess?: (user: UserData) => void;
 	}) => {
-		const defaultParams: {
-			accountType: string;
-			chainNetwork: ChainNetwork;
-		} = merge({ accountType: "native" }, options);
-
 		const errorAction: OnError = (error) => {
 			if (!onError) {
 				console.error(error);
@@ -31,6 +26,16 @@ export const useActionNewChainAccount = () => {
 			}
 			onError(error);
 		};
+
+		const defaultParams: {
+			accountType: string;
+			chainNetwork: ChainNetwork;
+		} = merge({ accountType: "native" }, options);
+
+		if (!defaultParams.chainNetwork) {
+			errorAction({ errors: "chainNetwork is required" });
+			return;
+		}
 
 		const successAction = (user: UserData) => {
 			setUser(user);

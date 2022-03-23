@@ -20,6 +20,9 @@ export const getTransaction = async ({
 		);
 	}
 	if (transaction) {
+		if (!(transaction instanceof Transaction)) {
+			throw new Error('"transaction" must be an instance of Transaction');
+		}
 		return transaction;
 	}
 

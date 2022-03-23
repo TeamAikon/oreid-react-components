@@ -2,13 +2,13 @@ import { Transaction, WebWidgetSignResult } from "oreid-js";
 import { OnError } from "oreid-webwidget";
 import { useContext } from "react";
 import { OreIdContext } from "src/OreIdContext";
-import { CreateTransaction } from "./types";
 import { getTransaction } from "./getTransaction";
+import { CreateTransaction } from "./types";
 
 export const useActionSign = () => {
 	const { webWidget, oreId } = useContext(OreIdContext);
 
-	const onSign = async ({
+	const onSign = ({
 		createTransaction,
 		transaction,
 		onSuccess,
@@ -19,12 +19,6 @@ export const useActionSign = () => {
 		onError?: OnError;
 		onSuccess?: (result: WebWidgetSignResult) => void;
 	}) => {
-		const transactionToSign: Transaction = await getTransaction({
-			transaction,
-			createTransaction,
-			oreId,
-		});
-
 		const errorAction: OnError = (error) => {
 			if (!onError) {
 				console.error(error);
@@ -33,17 +27,21 @@ export const useActionSign = () => {
 			onError(error);
 		};
 
-		const successAction = (result: WebWidgetSignResult) => {
-			if (onSuccess) {
-				onSuccess(result);
-			}
-		};
-
-		webWidget.onSign({
-			transaction: transactionToSign,
-			onError: errorAction,
-			onSuccess: successAction,
-		});
+		getTransaction({
+			transaction,
+			createTransaction,
+			oreId,
+		})
+			.then((transactionToSign) => {
+				webWidget.onSign({
+					transaction: transactionToSign,
+					onError: errorAction,
+					onSuccess: onSuccess,
+				});
+			})
+			.catch((error) => {
+				errorAction({ errors: error.message });
+			});
 	};
 
 	return onSign;

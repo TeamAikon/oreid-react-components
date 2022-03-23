@@ -45,7 +45,9 @@ export default {
       exclude: "node_modules/**", extensions: ['.js', '.svg'],
     }),
     commonjs(),
-    typescript(),
+    typescript({
+      tsconfig: "./tsconfig.build.json",
+    }),
     json(),
   ],
   external: ['react', 'react-dom'],
