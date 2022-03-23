@@ -5155,10 +5155,10 @@ oreid-js@3.0.5:
     semver "^6.3.0"
     uuid "^7.0.3"
 
-oreid-webwidget@1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/oreid-webwidget/-/oreid-webwidget-1.0.2.tgz#7bf2bf9ad45230458191dda0add1a5b91362c8aa"
-  integrity sha512-dvxBCS5JbEIAOip1eyFBWAGMA7VsKnByGpxV/6mW//BUH/5CWcaQsMIV7eNn18F03VVDiQzZdg/+KS3IpqECVg==
+oreid-webwidget@1.0.6-beta.4:
+  version "1.0.6-beta.4"
+  resolved "https://registry.yarnpkg.com/oreid-webwidget/-/oreid-webwidget-1.0.6-beta.4.tgz#b970258a89e63f46aa23d5a92cb90b457d190c5f"
+  integrity sha512-6PJVP5kIYxalJWbL7CLlGWqfHQBaEirxj2n080+hv6us1XpK7Vb30y23M0U3AQf/uiMK7lE4QjcUP8YwFzKcgQ==
   dependencies:
     await-to-js "^3.0.0"
 
