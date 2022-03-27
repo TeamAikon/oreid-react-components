@@ -28,7 +28,7 @@ test("Should call webWidget.onNewChainAccount", async () => {
 	hook.result.current(params);
 
 	expect(webWidget.onNewChainAccount).toBeCalledWith({
-		options: { accountType: "native", chainNetwork: "chainNetwork" },
+		params: { accountType: "native", chainNetwork: "chainNetwork" },
 		onSuccess: expect.any(Function),
 		onError: expect.any(Function),
 	});
