@@ -1,6 +1,6 @@
 {
     "name": "oreid-react",
-    "version": "1.0.4-beta.6",
+    "version": "1.0.4",
     "license": "MIT",
     "main": "dist/index.js",
     "module": "dist/index.module.js",
