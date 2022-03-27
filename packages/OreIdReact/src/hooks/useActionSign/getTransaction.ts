@@ -10,7 +10,7 @@ export const getTransaction = async ({
 	oreId: OreId;
 	createTransaction?: CreateTransaction;
 	transaction?: Transaction;
-}) => {
+}): Promise<Transaction> => {
 	if (!transaction && !createTransaction) {
 		throw new Error("Either transaction or createTransaction must be provided");
 	}

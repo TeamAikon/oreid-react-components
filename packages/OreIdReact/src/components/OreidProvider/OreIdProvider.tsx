@@ -4,12 +4,9 @@ import { OreIdWebWidget } from "oreid-webwidget";
 import { OreIdContext } from "src/OreIdContext";
 import { useState } from "react";
 
-interface IOreId extends OreId {}
-interface IOreIdWebWidget extends OreIdWebWidget {}
-
 interface Props {
-	oreId: IOreId;
-	webWidget: IOreIdWebWidget;
+	oreId: OreId;
+	webWidget: OreIdWebWidget;
 }
 export const OreidProvider: React.FC<Props> = ({
 	children,
