@@ -45,7 +45,7 @@ export const useActionNewChainAccount = () => {
 		};
 
 		webWidget.onNewChainAccount({
-			options: defaultParams,
+			params: defaultParams,
 			onSuccess: successAction,
 			onError: errorAction,
 		});
