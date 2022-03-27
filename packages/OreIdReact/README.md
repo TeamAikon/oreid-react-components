@@ -32,23 +32,33 @@ import ReactDOM from "react-dom";
 import App from "./App";
 
 import { OreId } from "oreid-js";
-import { OreIdWebWidget } from "oreid-webwidget";
+import { createOreIdWebWidget } from "oreid-webwidget";
 import { OreidProvider } from "oreid-react";
 
 const appId = "MY_APP_ID";
 const apiKey = "MY_API_KEY";
 
 const oreId = new OreId({ appId, apiKey });
-const webWidget = new OreIdWebWidget(oreId, window);
+let webWidget;
 
-ReactDOM.render(
-	<React.StrictMode>
-		<OreidProvider oreId={oreId} webWidget={webWidget}>
-			<App />
-		</OreidProvider>
-	</React.StrictMode>,
-	document.getElementById("root")
-);
+// initialize webWidget then render app
+createOreIdWebWidget(oreId, window).then(oreIdWebWidget => {
+	webWidget = oreIdWebWidget 
+	renderApp()
+})
+
+const renderApp = () => {
+	ReactDOM.render(
+		<React.StrictMode>
+			<AppProvider>
+			<OreidProvider oreId={oreId} webWidget={webWidget}>
+				<App />
+			</OreidProvider>
+			</AppProvider>
+		</React.StrictMode>,
+		document.getElementById("root")
+	);
+}
 ```
 
 ### Auth
