@@ -8,7 +8,13 @@ export const createTestOreId = () => {
 	return {
 		createTransaction: jest.fn(),
 		auth: {
-			user: { getData: jest.fn() },
+			user: {
+				getData: jest.fn(),
+				subscribe: jest.fn(),
+				unsubscribe: jest.fn(),
+			},
+			subscribe: jest.fn(),
+			unsubscribe: jest.fn(),
 		},
 	} as unknown as OreId;
 };
@@ -28,21 +34,38 @@ export const customRenderHook = (
 		oreId,
 		webWidget,
 		user,
+		isLoggedIn = true,
+		accessToken = "",
 	}: {
 		oreId: OreId;
 		webWidget: OreIdWebWidget;
 		user?: any;
+		isLoggedIn?: boolean;
+		accessToken?: string;
 	}
 ) => {
 	const setUser = jest.fn();
+	const setIsLoggedIn = jest.fn();
+	const setAccessToken = jest.fn();
 	const wrapper = ({ children }: any) => (
-		<OreIdContext.Provider value={{ oreId, webWidget, user, setUser }}>
+		<OreIdContext.Provider
+			value={{
+				oreId,
+				webWidget,
+				user,
+				setUser,
+				isLoggedIn,
+				setIsLoggedIn,
+				accessToken,
+				setAccessToken,
+			}}
+		>
 			{children}
 		</OreIdContext.Provider>
 	);
 
 	const result = renderHook(call, { wrapper });
-	return { ...result, mock: { setUser } };
+	return { ...result, mock: { setUser, setIsLoggedIn, setAccessToken } };
 };
 
 export * from "@testing-library/react-hooks";
