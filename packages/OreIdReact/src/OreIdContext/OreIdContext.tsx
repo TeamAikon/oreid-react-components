@@ -7,6 +7,10 @@ export const OreIdContext = createContext<{
 	webWidget: OreIdWebWidget;
 	user: UserData | undefined;
 	setUser: (user: UserData | undefined) => void;
+	isLoggedIn: boolean;
+	setIsLoggedIn: (isLoggedIn: boolean) => void;
+	accessToken: string | undefined;
+	setAccessToken: (accessToken: string | undefined) => void;
 }>({
 	//@ts-ignore
 	oreId: undefined,
@@ -14,4 +18,8 @@ export const OreIdContext = createContext<{
 	webWidget: undefined,
 	user: undefined,
 	setUser: () => undefined,
+	isLoggedIn: false,
+	setIsLoggedIn: () => undefined,
+	accessToken: undefined,
+	setAccessToken: () => undefined,
 });
