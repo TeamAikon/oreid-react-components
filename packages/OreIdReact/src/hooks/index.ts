@@ -4,6 +4,5 @@ export * from "./useActionNewChainAccount";
 export * from "./useActionSign";
 export * from "./useIsLoggedIn";
 export * from "./useOreId";
-export * from "./useUpdateUser";
 export * from "./useUser";
 export * from "./useWebWidget";
