@@ -1549,9 +1549,9 @@
   integrity sha512-wOuvG1SN4Us4rez+tylwwwCV1psiNVOkJeM3AUWUNWg/jDQY2+HE/444y5gc+jBmRqASOm2Oeh5c1axHobwRKQ==
 
 "@types/lodash@^4.14.179":
-  version "4.14.180"
-  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.180.tgz#4ab7c9ddfc92ec4a887886483bc14c79fb380670"
-  integrity sha512-XOKXa1KIxtNXgASAnwj7cnttJxS4fksBRywK/9LzRV5YxrF80BXZIGeQSuoESQ/VkUj30Ae0+YcuHc15wJCB2g==
+  version "4.14.179"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.179.tgz#490ec3288088c91295780237d2497a3aa9dfb5c5"
+  integrity sha512-uwc1x90yCKqGcIOAT6DwOSuxnrAbpkdPsUOZtwrXb4D/6wZs+6qG7QnIawDuZWg0sWpxl+ltIKCaLoMlna678w==
 
 "@types/minimatch@*":
   version "3.0.5"
@@ -5042,10 +5042,10 @@ optionator@^0.8.1:
     type-check "~0.3.2"
     word-wrap "~1.2.3"
 
-oreid-js@3.0.7:
-  version "3.0.7"
-  resolved "https://registry.yarnpkg.com/oreid-js/-/oreid-js-3.0.7.tgz#09f6bc3afe35751a222209a798c1b42b77b6e87d"
-  integrity sha512-mB4+NbLdcI+38x8kny+FPMKBaG9QQAxlg5cv1r3TOuANumpQ6GC7yC5e9T19Zw/FrhaDKCatbU+T//I658i75A==
+oreid-js@^3.0.9:
+  version "3.0.9"
+  resolved "https://registry.yarnpkg.com/oreid-js/-/oreid-js-3.0.9.tgz#47d468c71833d960064ef185842f1d8bd44e4ad2"
+  integrity sha512-34waWocLcAMY5aqCEV0A9hZe8wsOkCdpCT+aMx8CvgLS/t9Y1fInIyE31u2diTGrxOBbDad2H60cgFA6KmiAIQ==
   dependencies:
     "@aikon/eos-transit" "^4.0.8"
     "@msgpack/msgpack" "^2.7.2"

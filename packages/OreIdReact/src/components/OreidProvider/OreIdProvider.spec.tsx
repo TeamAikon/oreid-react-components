@@ -3,6 +3,10 @@ import React from "react";
 import { createTestOreId, createTestWebWidget } from "src/test-utils";
 import { OreidProvider } from "./OreIdProvider";
 
+jest.mock("../Observables", () => ({
+	Observables: () => <div>Observable-Component</div>,
+}));
+
 test("Should render children", () => {
 	const oreId = createTestOreId();
 	const webWidget = createTestWebWidget();
@@ -12,6 +16,7 @@ test("Should render children", () => {
 			<div>Second</div>
 		</OreidProvider>
 	);
+	screen.getByText("Observable-Component");
 	screen.getByText("First");
 	screen.getByText("Second");
 });
