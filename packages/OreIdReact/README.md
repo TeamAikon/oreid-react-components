@@ -50,11 +50,9 @@ createOreIdWebWidget(oreId, window).then(oreIdWebWidget => {
 const renderApp = () => {
 	ReactDOM.render(
 		<React.StrictMode>
-			<AppProvider>
 			<OreidProvider oreId={oreId} webWidget={webWidget}>
 				<App />
 			</OreidProvider>
-			</AppProvider>
 		</React.StrictMode>,
 		document.getElementById("root")
 	);
