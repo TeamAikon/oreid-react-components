@@ -1,42 +1,31 @@
-import isEqual from "lodash/isEqual";
+// @ts-nocheck
+
 import { Auth, User } from "oreid-js";
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { OreIdContext } from "src/OreIdContext";
 
 interface Props {}
 export const Observables: React.FC<Props> = () => {
-	const {
-		oreId,
-		setUser,
-		setAccessToken,
-		setIsLoggedIn,
-		user,
-		isLoggedIn,
-		accessToken,
-	} = useContext(OreIdContext);
+	const { oreId, setUser, setAccessToken, setIsLoggedIn } =
+		useContext(OreIdContext);
 	const [authUser, setAuthUser] = useState<User | undefined>(oreId.auth.user);
 
-	const updateUserState = useCallback((newUser: User) => {
-		try {
-			if (!isEqual(newUser?.data, user)) {
+	const updateUserState = useCallback(
+		(newUser: User) => {
+			try {
 				setUser(newUser?.data);
+			} catch (err) {
+				setUser(undefined);
 			}
-		} catch (err) {
-			setUser(undefined);
-		}
-	}, []);
+		},
+		[setUser]
+	);
 
 	const updateOreIdState = useCallback(
 		(auth: Auth) => {
-			if (authUser != auth?.user) {
-				setAuthUser(auth?.user);
-			}
-			if (auth.isLoggedIn !== isLoggedIn) {
-				setIsLoggedIn(auth.isLoggedIn);
-			}
-			if (accessToken !== auth.accessToken) {
-				setAccessToken(auth.accessToken);
-			}
+			setAuthUser(auth?.user);
+			setIsLoggedIn(auth.isLoggedIn);
+			setAccessToken(auth.accessToken);
 		},
 		[setAuthUser, setIsLoggedIn, setAccessToken]
 	);
@@ -46,13 +35,17 @@ export const Observables: React.FC<Props> = () => {
 		return () => {
 			oreId.auth.unsubscribe(updateOreIdState);
 		};
-	}, [oreId]);
+	}, [oreId, updateOreIdState]);
 
 	useEffect(() => {
-		authUser?.subscribe(updateUserState);
-		authUser?.getData();
+		if (!authUser) return;
+		authUser.subscribe(updateUserState);
+		authUser.getData().catch(() => {
+			// ! If it fails, nothing needs to be done.
+			// ! This function should stay here to prevent the error alert from appearing in the console
+		});
 		return () => {
-			authUser?.unsubscribe(updateUserState);
+			authUser.unsubscribe(updateUserState);
 		};
 	}, [authUser]);
 

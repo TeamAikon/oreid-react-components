@@ -66,14 +66,14 @@ test("Should send onSucess and onError to the webwidget", async () => {
 
 	const params = { options, onError, onSuccess };
 
-	const { result, mock } = renderHook(() => useActionNewChainAccount(), {
+	const { result } = renderHook(() => useActionNewChainAccount(), {
 		webWidget,
 		oreId,
 	});
 
 	(webWidget.onNewChainAccount as jest.Mock).mockImplementationOnce(
 		(args: any) => {
-			args.onSuccess({ name: "user" });
+			args.onSuccess("chainAccount");
 		}
 	);
 
@@ -81,9 +81,10 @@ test("Should send onSucess and onError to the webwidget", async () => {
 	result.current(params);
 
 	expect(onSuccess).toBeCalledTimes(1);
-	expect(onSuccess).toBeCalledWith({ name: "user" });
-	expect(mock.setUser).toBeCalledTimes(1);
-	expect(mock.setUser).toBeCalledWith({ name: "user" });
+	expect(onSuccess).toBeCalledWith({
+		chainAccount: "chainAccount",
+		chainNetwork: "chainNetwork",
+	});
 	expect(onError).toBeCalledTimes(0);
 
 	(webWidget.onNewChainAccount as jest.Mock).mockImplementationOnce(
@@ -95,7 +96,6 @@ test("Should send onSucess and onError to the webwidget", async () => {
 	//@ts-ignore
 	result.current(params);
 	expect(onSuccess).toBeCalledTimes(1);
-	expect(mock.setUser).toBeCalledTimes(1);
 	expect(onError).toBeCalledTimes(1);
 	expect(onError).toBeCalledWith({ errors: "Error" });
 });
