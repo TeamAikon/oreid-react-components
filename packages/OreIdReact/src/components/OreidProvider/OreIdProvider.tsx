@@ -8,6 +8,7 @@ import { Observables } from "../Observables";
 interface Props {
 	oreId: OreId;
 	webWidget: OreIdWebWidget;
+	children: React.ReactNode;
 }
 export const OreidProvider: React.FC<Props> = ({
 	children,
