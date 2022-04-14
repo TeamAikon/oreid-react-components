@@ -46,6 +46,8 @@ test("Should render children", async () => {
 	const setAccessToken = jest.fn();
 	const setIsLoggedIn = jest.fn();
 
+	(oreId.auth.user.getData as jest.Mock).mockResolvedValue(undefined);
+
 	expect(oreId.auth.subscribe).not.toBeCalled();
 
 	render(<Observables />, {
