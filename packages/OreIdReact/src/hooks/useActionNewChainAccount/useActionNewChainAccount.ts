@@ -1,11 +1,11 @@
 import merge from "lodash/merge";
-import { ChainNetwork, UserData } from "oreid-js";
+import { ChainNetwork } from "oreid-js";
 import { OnError } from "oreid-webwidget";
 import { useContext } from "react";
 import { OreIdContext } from "src/OreIdContext";
 
 export const useActionNewChainAccount = () => {
-	const { webWidget, setUser } = useContext(OreIdContext);
+	const { webWidget } = useContext(OreIdContext);
 
 	const onNewChainAccount = ({
 		options,
@@ -17,7 +17,10 @@ export const useActionNewChainAccount = () => {
 			chainNetwork: ChainNetwork;
 		};
 		onError?: OnError;
-		onSuccess?: (user: UserData) => void;
+		onSuccess?: (result: {
+			chainAccount: string;
+			chainNetwork: ChainNetwork;
+		}) => void;
 	}) => {
 		const errorAction: OnError = (error) => {
 			if (!onError) {
@@ -37,10 +40,12 @@ export const useActionNewChainAccount = () => {
 			return;
 		}
 
-		const successAction = (user: UserData) => {
-			setUser(user);
+		const successAction = (chainAccount: string) => {
 			if (onSuccess) {
-				onSuccess(user);
+				onSuccess({
+					chainAccount,
+					chainNetwork: options.chainNetwork,
+				});
 			}
 		};
 
