@@ -51,7 +51,7 @@
     },
     "dependencies": {
         "@storybook/cli": "^5.3.22",
-        "@storybook/react": "^5.3",
+        "@storybook/react": "^6.0.0",
         "react": "16.14.0",
         "react-dom": "16.14.0"
     }
