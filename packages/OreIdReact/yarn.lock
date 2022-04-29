@@ -1877,11 +1877,6 @@ atob@^2.1.2:
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
   integrity sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
 
-await-to-js@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/await-to-js/-/await-to-js-3.0.0.tgz#70929994185616f4675a91af6167eb61cc92868f"
-  integrity sha512-zJAaP9zxTcvTHRlejau3ZOY4V7SRpiByf3/dxx2uyKxxor19tpmpV2QRsTKikckwhaPmr2dVpxxMr7jOCYVp5g==
-
 aws-sign2@~0.7.0:
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/aws-sign2/-/aws-sign2-0.7.0.tgz#b46e890934a9591f2d2f6f86d7e6a9f1b3fe76a8"
@@ -5026,10 +5021,10 @@ optionator@^0.8.1:
     type-check "~0.3.2"
     word-wrap "~1.2.3"
 
-oreid-js@^3.0.11:
-  version "3.0.11"
-  resolved "https://registry.yarnpkg.com/oreid-js/-/oreid-js-3.0.11.tgz#e11fbf8de91ad15805701125af931d2b83e0d572"
-  integrity sha512-Ib5RdHtI5Ygs3A1+KQMHBBllIzTXfLHXzAa2oLxwN+MjOxXK7NpLNOePuFt5mWbBn1N+rbMDsqKYg8UbrslKOw==
+oreid-js@^4.0.0-beta.0:
+  version "4.0.0-beta.0"
+  resolved "https://registry.yarnpkg.com/oreid-js/-/oreid-js-4.0.0-beta.0.tgz#aedb588dbb6039c7a1cf53753778f4ab197be5a1"
+  integrity sha512-sgbpXSn2YjwGyTnlr0glaR9AKE4FNw63KNV8IIaLfVFvFusBSeFv66gFlXUrykzG6bVa9ToMforbyw9PCBDK2w==
   dependencies:
     "@aikon/eos-transit" "^4.0.8"
     "@msgpack/msgpack" "^2.7.2"
@@ -5045,13 +5040,6 @@ oreid-js@^3.0.11:
     require-from-url "^3.1.3"
     semver "^6.3.0"
     uuid "^7.0.3"
-
-oreid-webwidget@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/oreid-webwidget/-/oreid-webwidget-1.1.0.tgz#893c82272169e1c6377355db06c2e9af97c9114c"
-  integrity sha512-enRWlychuzTwPFRMSjsCcjeozV0Fs+HiaMyb8LancPYJk8rkigxiEZI/q1pk2Aps+5fgEHyE4394NjUo8qZekQ==
-  dependencies:
-    await-to-js "^3.0.0"
 
 p-each-series@^1.0.0:
   version "1.0.0"
