@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import React from "react";
-import { createTestOreId, createTestWebWidget } from "src/test-utils";
+import { createTestOreId } from "src/test-utils";
 import { OreidProvider } from "./OreIdProvider";
 
 jest.mock("../Observables", () => ({
@@ -9,9 +9,8 @@ jest.mock("../Observables", () => ({
 
 test("Should render children", () => {
 	const oreId = createTestOreId();
-	const webWidget = createTestWebWidget();
 	render(
-		<OreidProvider oreId={oreId} webWidget={webWidget}>
+		<OreidProvider oreId={oreId}>
 			<div>First</div>
 			<div>Second</div>
 		</OreidProvider>

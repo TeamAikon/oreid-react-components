@@ -1,29 +1,29 @@
 import React from "react";
 import { OreId, UserData } from "oreid-js";
-import { OreIdWebWidget } from "oreid-webwidget";
 import { OreIdContext } from "src/OreIdContext";
 import { useState } from "react";
 import { Observables } from "../Observables";
 
 interface Props {
 	oreId: OreId;
-	webWidget: OreIdWebWidget;
+
 	children: React.ReactNode;
 }
-export const OreidProvider: React.FC<Props> = ({
-	children,
-	oreId,
-	webWidget,
-}) => {
+export const OreidProvider: React.FC<Props> = ({ children, oreId }) => {
 	const [user, setUser] = useState<UserData | undefined>(undefined);
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const [accessToken, setAccessToken] = useState<string | undefined>(undefined);
+
+	if (!oreId.popup) {
+		throw new Error(
+			"oreId popup must be initialized. Make sure you added the plugin and called oreId.init()"
+		);
+	}
 
 	return (
 		<OreIdContext.Provider
 			value={{
 				oreId,
-				webWidget,
 				user,
 				setUser,
 				isLoggedIn,
