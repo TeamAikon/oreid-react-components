@@ -11,6 +11,10 @@
 1. Build components by running `npm run build:components` command;
 2. Publish components by running `npm run publish:components` command.
 
+## Publishing via circleci
+1. Update the package.json version for the package to be publish
+2. Merge into `master`
+
 ## Development
 - Create new component under `packages` directory;
 - Every component must have directory in `packages` with all of the source code. Include `index.js` file in order to avoid specific file path import declaration;
