@@ -1,21 +1,26 @@
-import { AuthProvider, UserData, WebWidgetAuthParams } from "oreid-js";
-import { OnError } from "oreid-webwidget";
+import {
+	AuthProvider,
+	PopUpError,
+	UserData,
+	WebWidgetAuthParams,
+} from "oreid-js";
+
 import { useContext } from "react";
 import { OreIdContext } from "src/OreIdContext";
 import merge from "lodash/merge";
 
 export const useActionAuth = () => {
-	const { webWidget, setUser } = useContext(OreIdContext);
+	const { oreId, setUser } = useContext(OreIdContext);
 
 	const onAuth = (input?: {
 		params?: WebWidgetAuthParams;
-		onError?: OnError;
+		onError?: PopUpError;
 		onSuccess?: (user: UserData) => void;
 	}) => {
 		const { params, onSuccess, onError } = input || {};
 		const defaultParams = merge({ provider: AuthProvider.Google }, params);
 
-		const errorAction: OnError = (error) => {
+		const errorAction: PopUpError = (error) => {
 			if (!onError) {
 				console.error(error);
 				return;
@@ -30,7 +35,7 @@ export const useActionAuth = () => {
 			}
 		};
 
-		webWidget.onAuth({
+		oreId.popup?.auth({
 			params: defaultParams,
 			onError: errorAction,
 			onSuccess: successAction,

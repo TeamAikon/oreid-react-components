@@ -1,11 +1,10 @@
 import merge from "lodash/merge";
-import { ChainNetwork } from "oreid-js";
-import { OnError } from "oreid-webwidget";
+import { ChainNetwork, PopUpError } from "oreid-js";
 import { useContext } from "react";
 import { OreIdContext } from "src/OreIdContext";
 
 export const useActionNewChainAccount = () => {
-	const { webWidget } = useContext(OreIdContext);
+	const { oreId } = useContext(OreIdContext);
 
 	const onNewChainAccount = ({
 		options,
@@ -16,13 +15,13 @@ export const useActionNewChainAccount = () => {
 			accountType?: string;
 			chainNetwork: ChainNetwork;
 		};
-		onError?: OnError;
+		onError?: PopUpError;
 		onSuccess?: (result: {
 			chainAccount: string;
 			chainNetwork: ChainNetwork;
 		}) => void;
 	}) => {
-		const errorAction: OnError = (error) => {
+		const errorAction: PopUpError = (error) => {
 			if (!onError) {
 				console.error(error);
 				return;
@@ -49,7 +48,7 @@ export const useActionNewChainAccount = () => {
 			}
 		};
 
-		webWidget.onNewChainAccount({
+		oreId.popup?.newChainAccount({
 			params: defaultParams,
 			onSuccess: successAction,
 			onError: errorAction,
