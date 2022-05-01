@@ -8,6 +8,7 @@ export const createTestOreId = () => {
 		createTransaction: jest.fn(),
 		auth: {
 			user: {
+				hasData: jest.fn(),
 				getData: jest.fn(),
 				subscribe: jest.fn(),
 				unsubscribe: jest.fn(),

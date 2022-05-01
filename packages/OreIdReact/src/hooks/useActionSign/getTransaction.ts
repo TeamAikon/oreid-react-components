@@ -20,8 +20,11 @@ export const getTransaction = async ({
 		);
 	}
 	if (transaction) {
-		if (!(transaction instanceof Transaction)) {
+		if(transaction?.autoSign === undefined) {
 			throw new Error('"transaction" must be an instance of Transaction');
+		}
+		if (!(transaction instanceof Transaction)) {
+				console.log('warning: verion mismatch of oreid-js between oreid-react and your app')
 		}
 		return transaction;
 	}
