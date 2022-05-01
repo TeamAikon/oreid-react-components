@@ -4,16 +4,14 @@ import {
 	waitFor,
 } from "@testing-library/react";
 import React from "react";
-import { createTestOreId, createTestWebWidget } from "src/test-utils";
+import { createTestOreId } from "src/test-utils";
 import { Observables } from "./Observables";
 import { OreIdContext } from "src/OreIdContext";
-import { OreIdWebWidget } from "oreid-webwidget";
 import { OreId } from "oreid-js";
 
 interface Options extends RenderOptions {
 	providerProps: {
 		oreId: OreId;
-		webWidget: OreIdWebWidget;
 		user: any;
 		setUser: (user: any) => void;
 		isLoggedIn: boolean;
@@ -41,7 +39,6 @@ const render = (
 
 test("Should render children", async () => {
 	const oreId = createTestOreId();
-	const webWidget = createTestWebWidget();
 	const setUser = jest.fn();
 	const setAccessToken = jest.fn();
 	const setIsLoggedIn = jest.fn();
@@ -53,7 +50,6 @@ test("Should render children", async () => {
 	render(<Observables />, {
 		providerProps: {
 			oreId,
-			webWidget,
 			user: undefined,
 			setUser,
 			accessToken: "",

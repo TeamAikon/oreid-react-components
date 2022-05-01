@@ -1,10 +1,6 @@
 import { Transaction } from "oreid-js";
 import * as helper from "./getTransaction";
-import {
-	createTestOreId,
-	createTestWebWidget,
-	renderHook,
-} from "src/test-utils";
+import { createTestOreId, renderHook } from "src/test-utils";
 import { useActionSign } from "./useActionSign";
 import { waitFor } from "@testing-library/react";
 
@@ -14,7 +10,6 @@ beforeEach(() => {
 
 test("Should call webWidget.onSign when getTransaction succeeded", async () => {
 	const oreId = createTestOreId();
-	const webWidget = createTestWebWidget();
 	const transaction = Object.create(Transaction.prototype);
 
 	const spy = jest.spyOn(helper, "getTransaction");
@@ -25,10 +20,7 @@ test("Should call webWidget.onSign when getTransaction succeeded", async () => {
 
 	const params = { transaction, onError, onSuccess };
 
-	const hook = renderHook(() => useActionSign(), {
-		webWidget,
-		oreId,
-	});
+	const hook = renderHook(() => useActionSign(), { oreId });
 
 	expect(spy).toBeCalledTimes(0);
 
@@ -42,7 +34,7 @@ test("Should call webWidget.onSign when getTransaction succeeded", async () => {
 	});
 
 	await waitFor(() =>
-		expect(webWidget.onSign).toBeCalledWith({
+		expect(oreId.popup?.sign).toBeCalledWith({
 			transaction,
 			onSuccess,
 			onError: expect.any(Function),
@@ -52,7 +44,6 @@ test("Should call webWidget.onSign when getTransaction succeeded", async () => {
 
 test("Should call not webWidget.onSign when getTransaction fails", async () => {
 	const oreId = createTestOreId();
-	const webWidget = createTestWebWidget();
 	const transaction = Object.create(Transaction.prototype);
 
 	const spy = jest.spyOn(helper, "getTransaction");
@@ -63,10 +54,7 @@ test("Should call not webWidget.onSign when getTransaction fails", async () => {
 
 	const params = { transaction, onError, onSuccess };
 
-	const hook = renderHook(() => useActionSign(), {
-		webWidget,
-		oreId,
-	});
+	const hook = renderHook(() => useActionSign(), { oreId });
 
 	expect(spy).toBeCalledTimes(0);
 

@@ -1,32 +1,22 @@
-import {
-	createTestOreId,
-	createTestWebWidget,
-	renderHook,
-} from "src/test-utils";
+import { createTestOreId, renderHook } from "src/test-utils";
 import { useActionAuth } from "./useActionAuth";
 
 beforeEach(() => {
 	jest.resetAllMocks();
 });
 
-test("Should call webWidget.onAuth", async () => {
+test("Should call oreId.popup?.auth", async () => {
 	const oreId = createTestOreId();
-	const webWidget = createTestWebWidget();
-
 	const onError = jest.fn();
 	const onSuccess = jest.fn();
-
 	const params = { params: { provider: "my-provider" }, onError, onSuccess };
 
-	const hook = renderHook(() => useActionAuth(), {
-		webWidget,
-		oreId,
-	});
+	const hook = renderHook(() => useActionAuth(), { oreId });
 
 	//@ts-ignore
 	hook.result.current(params);
 
-	expect(webWidget.onAuth).toBeCalledWith({
+	expect(oreId.popup?.auth).toBeCalledWith({
 		params: {
 			provider: "my-provider",
 		},
@@ -37,22 +27,17 @@ test("Should call webWidget.onAuth", async () => {
 
 test("Should be google the default provider", async () => {
 	const oreId = createTestOreId();
-	const webWidget = createTestWebWidget();
-
 	const onError = jest.fn();
 	const onSuccess = jest.fn();
 
 	const params = { onError, onSuccess };
 
-	const hook = renderHook(() => useActionAuth(), {
-		webWidget,
-		oreId,
-	});
+	const hook = renderHook(() => useActionAuth(), { oreId });
 
 	//@ts-ignore
 	hook.result.current(params);
 
-	expect(webWidget.onAuth).toBeCalledWith({
+	expect(oreId.popup?.auth).toBeCalledWith({
 		params: { provider: "google" },
 		onSuccess: expect.any(Function),
 		onError: expect.any(Function),
@@ -61,19 +46,13 @@ test("Should be google the default provider", async () => {
 
 test("Should send onSucess and onError to the webwidget", async () => {
 	const oreId = createTestOreId();
-	const webWidget = createTestWebWidget();
-
 	const onError = jest.fn();
 	const onSuccess = jest.fn();
 
 	const params = { onError, onSuccess };
 
-	const { result, mock } = renderHook(() => useActionAuth(), {
-		webWidget,
-		oreId,
-	});
-
-	(webWidget.onAuth as jest.Mock).mockImplementationOnce((args: any) => {
+	const { result, mock } = renderHook(() => useActionAuth(), { oreId });
+	(oreId.popup?.auth as jest.Mock).mockImplementationOnce((args: any) => {
 		args.onSuccess();
 	});
 
@@ -85,7 +64,7 @@ test("Should send onSucess and onError to the webwidget", async () => {
 	expect(mock.setUser).toBeCalledWith(undefined);
 	expect(onError).toBeCalledTimes(0);
 
-	(webWidget.onAuth as jest.Mock).mockImplementationOnce((args: any) => {
+	(oreId.popup?.auth as jest.Mock).mockImplementationOnce((args: any) => {
 		args.onError({ errors: "Error" });
 	});
 

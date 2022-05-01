@@ -1,18 +1,23 @@
-import { OnError } from "oreid-webwidget";
+import { PopupPluginError } from "oreid-js";
 import { useContext } from "react";
 import { OreIdContext } from "src/OreIdContext";
 
-export const useActionLogout = () => {
-	const { webWidget, setUser } = useContext(OreIdContext);
+type onErrorResult = { errors?: string; data?: any }
 
-	const onLogout = (input?: { onError?: OnError; onSuccess?: () => void }) => {
+export const useActionLogout = () => {
+	const { oreId, setUser } = useContext(OreIdContext);
+
+	const onLogout = (input?: {
+		onError?: PopupPluginError;
+		onSuccess?: () => void;
+	}) => {
 		const { onSuccess = undefined, onError = undefined } = input || {};
-		const errorAction: OnError = (error) => {
+		const errorAction: PopupPluginError = (errorResult: onErrorResult) => {
 			if (!onError) {
-				console.error(error);
+				console.error(errorResult);
 				return;
 			}
-			onError(error);
+			onError(errorResult);
 		};
 
 		const successAction = () => {
@@ -22,7 +27,7 @@ export const useActionLogout = () => {
 			}
 		};
 
-		webWidget.onLogout({
+		oreId.popup?.logout({
 			onError: errorAction,
 			onSuccess: successAction,
 		});
