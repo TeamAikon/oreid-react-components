@@ -1,8 +1,9 @@
 # ORE ID React Library
 Popup User Experience and React helpers for ORE ID
 
-This library should be used in a React application. If you aren't using React, you should use the generic web version of this library instead rad `oreid-webwidget`.
-This library uses `oreid-webwidget` and `oreid-js`.
+This library should be used in a React application. If you aren't using React, you should instead use the pure HTML/Javascript version of this library here: [oreid-webwidget](https://github.com/API-market/oreid-webwidget).
+
+This library requires the  `oreid-js` npm package.
 
 ## Overview
 
@@ -23,7 +24,7 @@ or
 yarn add oreid-js oreid-webwidget oreid-react
 ```
 
-After installation, initalize `oreid-js` and `oreid-webwidget`. Currently only 1 instance of the web widget is supported. For this reason, we recommend that you initialize both, `oreid-js` and `oreid-webwidget`, during your application's bootstrap.
+After installation, initalize `oreid-js`. We recommend that you initialize it once during your application's bootstrap.
 
 ```ts
 // index.tsx
@@ -35,34 +36,29 @@ import { OreId } from "oreid-js";
 import { createOreIdWebWidget } from "oreid-webwidget";
 import { OreidProvider } from "oreid-react";
 
+let isInitialized;
 const appId = "MY_APP_ID";
-const apiKey = "MY_API_KEY";
-
-const oreId = new OreId({ appId, apiKey });
-let webWidget;
+const oreId = new OreId({ appId, plugins:{ popup: WebWidget() }});
 
 // initialize webWidget then render app
-createOreIdWebWidget(oreId, window).then(oreIdWebWidget => {
-	webWidget = oreIdWebWidget 
-	renderApp()
+oreId.init().then(() => {
+	isInitialized =true
 })
 
-const renderApp = () => {
-	ReactDOM.render(
-		<React.StrictMode>
-			<OreidProvider oreId={oreId} webWidget={webWidget}>
-				<App />
-			</OreidProvider>
-		</React.StrictMode>,
-		document.getElementById("root")
-	);
-}
+ReactDOM.render(
+	<React.StrictMode>
+		<OreidProvider oreId={oreId}>
+			{isInitialized && <div>Your App</div>}
+		</OreidProvider>
+	</React.StrictMode>,
+	document.getElementById("root")
+);
+
 ```
 
 ### Auth
 
 ```ts
-import { AuthProvider } from "oreid-js";
 import { useActionAuth } from "oreid-react";
 import React from "react";
 
@@ -71,15 +67,13 @@ export const Action: React.FunctionComponent = () => {
 
 	const onClick = () => {
 		onAuth({
-			// optional
-			params: { provider: AuthProvider.Google },
-
+			params: { provider: 'google' },
 			onError: console.error,
 			onSuccess: console.log,
 		});
 	};
 
-	return <button onClick={onClick}>Action</button>;
+	return <button onClick={onClick}>Login to Google</button>;
 };
 ```
 
@@ -96,39 +90,34 @@ export const Action: React.FunctionComponent = () => {
 	const onClick = () => {
 		if (!user) return;
 
-		const transactionData = {
-			account: "demoapphello",
-			name: "hi",
-			authorization: [
-				{
-					actor: user.chainAccounts[0].chainAccount,
-					permission: user.chainAccounts[0].defaultPermission?.name || "",
-				},
-			],
-			data: {
-				user: user.chainAccounts[0].chainAccount,
-			},
-		};
+		const userChainAccounts = oreId.auth.user.data.chainAccounts;
+    // get first Ethereum account in user’s OREID account
+    const ethAccount = userChainAccounts.find(ca => ca.chainNetwork === 'eth_main')
+		// transactionBody is blockchain transaction (differs by chainNetwork)
+    const transactionBody = {
+      from: "0xF478d…",
+      to: "0xA200c…",
+      value: "1"
+    };
 
-		onSign({
-			createTransaction: {
-				transaction: transactionData,
-				chainAccount: user.chainAccounts[0].chainAccount,
-				chainNetwork: user.chainAccounts[0].chainNetwork,
-			},
-			onError: console.error,
-			onSuccess: console.log,
-		});
+	onSign({
+		createTransaction: {
+			transaction: transactionData,
+			chainAccount: ethAccount.chainAccount,
+			chainNetwork: ethAccount.chainNetwork,
+		},
+		onError: console.error,
+		onSuccess: ({ transactionId } => { ... } ),
+	});
 	};
 
-	return <button onClick={onClick}>Action</button>;
+	return <button onClick={onClick}>Sign Transaction</button>;
 };
 ```
 
 ### Create New Blockchain Account
 
 ```ts
-import { ChainNetwork } from "oreid-js";
 import { useActionNewChainAccount } from "oreid-react";
 import React from "react";
 
@@ -137,13 +126,13 @@ export const Action: React.FunctionComponent = () => {
 
 	const onClick = () => {
 		onNewChainAccount({
-			options: { chainNetwork: ChainNetwork.EosKylin },
-			onSuccess: console.log,
+			options: { chainNetwork: 'eos-kylin' },
 			onError: console.error,
+			onSuccess: ({ chainAccount } => { ... } ),
 		});
 	};
 
-	return <button onClick={onClick}>Action</button>;
+	return <button onClick={onClick}>Create New Blockchain Account</button>;
 };
 ```
 
