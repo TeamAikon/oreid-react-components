@@ -1,21 +1,23 @@
-import { PopUpError } from "oreid-js";
+import { PopupPluginError } from "oreid-js";
 import { useContext } from "react";
 import { OreIdContext } from "src/OreIdContext";
+
+type onErrorResult = { errors?: string; data?: any }
 
 export const useActionLogout = () => {
 	const { oreId, setUser } = useContext(OreIdContext);
 
 	const onLogout = (input?: {
-		onError?: PopUpError;
+		onError?: PopupPluginError;
 		onSuccess?: () => void;
 	}) => {
 		const { onSuccess = undefined, onError = undefined } = input || {};
-		const errorAction: PopUpError = (error) => {
+		const errorAction: PopupPluginError = (errorResult: onErrorResult) => {
 			if (!onError) {
-				console.error(error);
+				console.error(errorResult);
 				return;
 			}
-			onError(error);
+			onError(errorResult);
 		};
 
 		const successAction = () => {

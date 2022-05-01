@@ -58,7 +58,7 @@ test("Should send onSucess and onError to the webwidget", async () => {
 
 	(oreId.popup?.newChainAccount as jest.Mock).mockImplementationOnce(
 		(args: any) => {
-			args.onSuccess("chainAccount");
+			args.onSuccess({ chainAccount: "chainAccount"});
 		}
 	);
 

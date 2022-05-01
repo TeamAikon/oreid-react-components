@@ -1,8 +1,10 @@
-import { PopUpError, Transaction, WebWidgetSignResult } from "oreid-js";
+import { PopupPluginError, Transaction, WebWidgetSignResult } from "oreid-js";
 import { useContext } from "react";
 import { OreIdContext } from "src/OreIdContext";
 import { getTransaction } from "./getTransaction";
 import { CreateTransaction } from "./types";
+
+type onErrorResult = { errors?: string; data?: any }
 
 export const useActionSign = () => {
 	const { oreId } = useContext(OreIdContext);
@@ -15,15 +17,15 @@ export const useActionSign = () => {
 	}: {
 		createTransaction?: CreateTransaction;
 		transaction?: Transaction;
-		onError?: PopUpError;
+		onError?: PopupPluginError;
 		onSuccess?: (result: WebWidgetSignResult) => void;
 	}) => {
-		const errorAction: PopUpError = (error) => {
+		const errorAction: PopupPluginError = (errorResult: onErrorResult) => {
 			if (!onError) {
-				console.error(error);
+				console.error(errorResult);
 				return;
 			}
-			onError(error);
+			onError(errorResult);
 		};
 
 		getTransaction({
