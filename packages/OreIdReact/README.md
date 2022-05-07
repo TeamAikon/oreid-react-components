@@ -33,7 +33,7 @@ import ReactDOM from "react-dom";
 import App from "./App";
 
 import { OreId } from "oreid-js";
-import { createOreIdWebWidget } from "oreid-webwidget";
+import { WebWidget } from "oreid-webwidget";
 import { OreidProvider } from "oreid-react";
 
 let isInitialized;
@@ -59,18 +59,16 @@ ReactDOM.render(
 ### Auth
 
 ```ts
-import { useActionAuth } from "oreid-react";
 import React from "react";
 
-export const Action: React.FunctionComponent = () => {
-	const onAuth = useActionAuth();
+export const Login: React.FunctionComponent = () => {
 
 	const onClick = () => {
-		onAuth({
-			params: { provider: 'google' },
-			onError: console.error,
-			onSuccess: console.log,
-		});
+		oreId.popup.auth({
+			provider: 'google'
+		})
+		.then(onSuccess)
+		.catch(onError);
 	};
 
 	return <button onClick={onClick}>Login to Google</button>;
@@ -80,16 +78,13 @@ export const Action: React.FunctionComponent = () => {
 ### Sign
 
 ```ts
-import { useActionSign, useUser } from "oreid-react";
+import { useUser } from "oreid-react";
 import React from "react";
 
-export const Action: React.FunctionComponent = () => {
-	const onSign = useActionSign();
+export const Sign: React.FunctionComponent = () => {
 	const user = useUser();
 
 	const onClick = () => {
-		if (!user) return;
-
 		const userChainAccounts = oreId.auth.user.data.chainAccounts;
     // get first Ethereum account in user’s OREID account
     const ethAccount = userChainAccounts.find(ca => ca.chainNetwork === 'eth_main')
@@ -100,15 +95,16 @@ export const Action: React.FunctionComponent = () => {
       value: "1"
     };
 
-	onSign({
-		createTransaction: {
-			transaction: transactionData,
-			chainAccount: ethAccount.chainAccount,
-			chainNetwork: ethAccount.chainNetwork,
-		},
-		onError: console.error,
-		onSuccess: ({ transactionId } => { ... } ),
-	});
+		oreId.createTransaction({
+				transaction: transactionBody,
+				chainAccount: ethAccount.chainAccount,
+				chainNetwork: ethAccount.chainNetwork,
+			}).then(transaction => {
+				// have the user approve signature
+				oreId.popup.sign({ transaction })
+					.then({ transactionId } => { ... })
+					.catch(onError);
+			})
 	};
 
 	return <button onClick={onClick}>Sign Transaction</button>;
@@ -118,18 +114,15 @@ export const Action: React.FunctionComponent = () => {
 ### Create New Blockchain Account
 
 ```ts
-import { useActionNewChainAccount } from "oreid-react";
 import React from "react";
 
-export const Action: React.FunctionComponent = () => {
-	const onNewChainAccount = useActionNewChainAccount();
-
+export const NewChainAccount: React.FunctionComponent = () => {
 	const onClick = () => {
-		onNewChainAccount({
-			options: { chainNetwork: 'eos-kylin' },
-			onError: console.error,
-			onSuccess: ({ chainAccount } => { ... } ),
-		});
+		oreId.popup.newChainAccount({
+			chainNetwork: 'eos-kylin',
+		})
+		.then({ chainAccount } => { ... })
+		.catch(onError);
 	};
 
 	return <button onClick={onClick}>Create New Blockchain Account</button>;
