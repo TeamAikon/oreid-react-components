@@ -40,13 +40,15 @@ export const Observables: React.FC<Props> = () => {
 	useEffect(() => {
 		if (!authUser) return;
 		authUser.subscribe(updateUserState);
-		authUser.getData().catch(() => {
+		authUser.getData().then(
+			() => {
+				authUser.unsubscribe(updateUserState);
+				return;
+			}
+		).catch(() => {
 			// ! If it fails, nothing needs to be done.
 			// ! This function should stay here to prevent the error alert from appearing in the console
 		});
-		return () => {
-			authUser.unsubscribe(updateUserState);
-		};
 	}, [authUser]);
 
 	return null;
