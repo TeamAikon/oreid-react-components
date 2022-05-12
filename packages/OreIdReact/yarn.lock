@@ -5024,10 +5024,10 @@ optionator@^0.8.1:
     type-check "~0.3.2"
     word-wrap "~1.2.3"
 
-oreid-js@^3.4.1:
-  version "3.4.1"
-  resolved "https://registry.yarnpkg.com/oreid-js/-/oreid-js-3.4.1.tgz#629180a24188d6d9dccd6801c81df1c9e207a5c3"
-  integrity sha512-2ujH82HtTNUGobwBOuNbg+yRnor+RcsJHpz7+ffl2ASu0pCnZbH1DQ2Nhfv+K5NAjZP+SmOuVyVue9nB1VZWFQ==
+oreid-js@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/oreid-js/-/oreid-js-4.0.0.tgz#3b8704d635b2cffd8eac4f497af15449cf09e7a1"
+  integrity sha512-y3qUiDqL7sCIreIR7mB8BQR5xnCOXzQd2eG42VLkRNiSlHRLks+rEYuYt2BRIXUqyq1HsgJY2MMwi/74iIPpIQ==
   dependencies:
     "@aikon/eos-transit" "^4.0.8"
     "@msgpack/msgpack" "^2.7.2"
