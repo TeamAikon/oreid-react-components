@@ -1,7 +1,7 @@
 # ORE ID React Library
 Popup User Experience and React helpers for ORE ID
 
-This library should be used in a React application. If you aren't using React, you should instead use the pure HTML/Javascript version of this library here: [oreid-webwidget](https://github.com/API-market/oreid-webwidget).
+This library should be used in a React application. If you aren't using React, you should instead use the pure HTML/Javascript version of this library here: [oreid-webpopup](https://github.com/API-market/oreid-webpopup).
 
 This library requires the  `oreid-js` npm package.
 
@@ -15,13 +15,13 @@ This library works with oreid-js to provide a pop-up user experience for common 
 ### Installation
 
 ```
-npm install oreid-js oreid-webwidget oreid-react
+npm install oreid-js oreid-webpopup oreid-react
 ```
 
 or
 
 ```
-yarn add oreid-js oreid-webwidget oreid-react
+yarn add oreid-js oreid-webpopup oreid-react
 ```
 
 After installation, initalize `oreid-js`. We recommend that you initialize it once during your application's bootstrap.
@@ -33,14 +33,14 @@ import ReactDOM from "react-dom";
 import App from "./App";
 
 import { OreId } from "oreid-js";
-import { WebWidget } from "oreid-webwidget";
+import { WebPopup } from "oreid-webpopup";
 import { OreidProvider } from "oreid-react";
 
 let isInitialized;
 const appId = "MY_APP_ID";
-const oreId = new OreId({ appId, plugins:{ popup: WebWidget() }});
+const oreId = new OreId({ appId, plugins:{ popup: WebPopup() }});
 
-// initialize webWidget then render app
+// initialize webpopup then render app
 oreId.init().then(() => {
 	isInitialized =true
 })
@@ -132,13 +132,12 @@ export const NewChainAccount: React.FunctionComponent = () => {
 ### Helpers
 
 ```ts
-import { useIsLoggedIn, useOreId, useUser, useWebWidget } from "oreid-react";
+import { useIsLoggedIn, useOreId, useUser } from "oreid-react";
 import React from "react";
 
 export const Action: React.FunctionComponent = () => {
 	const isLoggedIn = useIsLoggedIn(); // true or false
 	const oreId = useOreId(); // current instance of oreid-js
 	const user = useUser(); // current value of oreid.auth.user.data
-	const webWidget = useWebWidget(); // current instance of oreid-webwidget
 };
 ```
