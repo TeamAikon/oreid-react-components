@@ -1,6 +1,6 @@
 import { OreId } from "oreid-js";
 import React, { useEffect } from "react";
-import { ButtonOutline } from "../ButtonOutline";
+// import { ButtonOutline } from "../ButtonOutline";
 import { Icon } from "../Icon";
 import { LongText } from "../LongText";
 import { FloatBox } from "../FloatBox";

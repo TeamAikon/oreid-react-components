@@ -6,22 +6,6 @@ import TruncateMiddle from "./TruncateMiddle";
 
 import "./LongText.scss";
 
-function isNullOrEmpty(obj: any) {
-	if (!obj) {
-		return true;
-	}
-	if (obj === null) {
-		return true;
-	}
-	// Check for an empty array too
-	if (Array.isArray(obj)) {
-		if (obj.length === 0) {
-			return true;
-		}
-	}
-	return Object.keys(obj).length === 0 && obj.constructor === Object;
-}
-
 interface LongTextProps {
 	text: string;
 	className?: string;
