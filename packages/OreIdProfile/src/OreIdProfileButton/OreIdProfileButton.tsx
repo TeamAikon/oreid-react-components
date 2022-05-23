@@ -1,20 +1,19 @@
 import { Auth, OreId, UserData } from "oreid-js";
 import React, { useEffect, useState } from "react";
+import { Style } from "../types";
 import { Button } from "../Button";
 import { Icon } from "../Icon";
 import { OreIdProfile } from "../OreIdProfile";
 
 import "./OreIdProfileButton.scss";
+import classNames from "classnames";
 
 interface Props {
 	oreId: OreId;
-	fontCollor?: string;
+	style?: Style;
 }
 
-export const OreIdProfileButton: React.FC<Props> = ({
-	oreId,
-	fontCollor = "#fff",
-}) => {
+export const OreIdProfileButton: React.FC<Props> = ({ oreId, style }) => {
 	const [isLoggedIn, setIsLoggedIn] = useState(oreId.auth.isLoggedIn);
 	const [userData, setUserData] = useState<UserData | undefined>(
 		oreId.auth.isLoggedIn ? oreId.auth.user.data : undefined
@@ -45,8 +44,10 @@ export const OreIdProfileButton: React.FC<Props> = ({
 			<>
 				<Button onClick={() => setShowModal(true)}>
 					<div
-						className="oreId-profile-OreIdProfileButton"
-						style={{ color: fontCollor }}
+						className={classNames("oreId-profile-OreIdProfileButton", {
+							showModal,
+						})}
+						style={{ color: style?.textColor || "#222222" }}
 					>
 						<Icon icon={userData.picture as any} size={20} /> {userData.name}
 					</div>

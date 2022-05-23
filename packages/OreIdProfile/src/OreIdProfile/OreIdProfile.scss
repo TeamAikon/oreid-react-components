@@ -1,32 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 .oreId-profile-profile {
-  padding: 10px; 
+  padding: 10px;
   display: flex;
   align-items: center;
   flex-direction: column;
-  
-  span{
+
+  /* System / Bold */
+
+  font-family: 'Roboto';
+  font-style: normal;
+  font-size: 14px;
+  line-height: 25px;
+
+
+  span {
     margin-bottom: 10px;
   }
-  
-  .oreId-profile-profile-name{
+
+  .oreId-profile-profile-name {
+    font-weight: 700;
   }
 
-  .oreId-profile-profile-account{
+  .oreId-profile-profile-account {
+    font-weight: 400;
   }
 
-  .oreId-profile-profile-manage{
-  }
+  .oreId-profile-profile-manage {}
 
-  .oreId-profile-profile-logout{
+  .oreId-profile-profile-logout {
     margin-top: 25px;
-    
-    button{
+
+    button {
       border: none;
       background: transparent;
       cursor: pointer;
       position: relative;
 
-      div{
+
+      font-family: 'Montserrat';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 17px;
+      text-align: center;
+      letter-spacing: 0.5px;
+
+      div {
         &:after {
           content: '';
           background: url(./icon.svg) no-repeat;
@@ -41,5 +62,5 @@
       }
     }
   }
-  
+
 }

@@ -7,9 +7,15 @@ import "./FloatBox.scss";
 interface Props {
 	onClose: () => void;
 	width: number;
+	background?: string;
 }
 
-export const FloatBox: React.FC<Props> = ({ children, width, onClose }) => {
+export const FloatBox: React.FC<Props> = ({
+	children,
+	width,
+	onClose,
+	background,
+}) => {
 	const wrapperRef = useRef<any>(null);
 	useEffect(() => {
 		function handleClickOutside(event: any) {
@@ -30,7 +36,7 @@ export const FloatBox: React.FC<Props> = ({ children, width, onClose }) => {
 				className="oreId-profile-FloatBox"
 				style={{ width }}
 			>
-				<Paper elevation={8}>
+				<Paper elevation={8} style={{ background: background }}>
 					<div className="oreId-profile-FloatBox-content">{children}</div>
 				</Paper>
 			</div>

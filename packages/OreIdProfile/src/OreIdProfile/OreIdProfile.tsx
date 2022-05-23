@@ -6,15 +6,26 @@ import { LongText } from "../LongText";
 import { FloatBox } from "../FloatBox";
 
 import "./OreIdProfile.scss";
+import { Style } from "../types";
 
 interface Props {
 	oreId: OreId;
 	onClose: () => void;
 	open: boolean;
+	style?: Style;
 }
 
-export const OreIdProfile: React.FC<Props> = ({ oreId, onClose, open }) => {
+export const OreIdProfile: React.FC<Props> = ({
+	oreId,
+	onClose,
+	open,
+	style,
+}) => {
 	const data = oreId.auth.user.data;
+	const textColor = style?.textColor || "#222222";
+	const linkColor = style?.linkColor || "#08B6E7";
+	const backgroundColor = style?.backgroundColor || "#fff";
+
 	useEffect(() => {
 		if (oreId.auth.isLoggedIn) {
 			oreId.auth.user.getData();
@@ -23,7 +34,7 @@ export const OreIdProfile: React.FC<Props> = ({ oreId, onClose, open }) => {
 	if (!oreId.auth.isLoggedIn || !data) return null;
 	if (!open) return null;
 	return (
-		<FloatBox onClose={onClose} width={360}>
+		<FloatBox onClose={onClose} width={360} background={backgroundColor}>
 			<div className="oreId-profile-profile">
 				<span>
 					<Icon
@@ -33,9 +44,17 @@ export const OreIdProfile: React.FC<Props> = ({ oreId, onClose, open }) => {
 					/>
 				</span>
 
-				<span className="oreId-profile-profile-name">{data.name}</span>
+				<span
+					className="oreId-profile-profile-name"
+					style={{ color: textColor }}
+				>
+					{data.name}
+				</span>
 
-				<span className="oreId-profile-profile-account">
+				<span
+					className="oreId-profile-profile-account"
+					style={{ color: linkColor }}
+				>
 					<LongText text={data.accountName} truncateInMiddle showCopy />
 				</span>
 
@@ -45,7 +64,7 @@ export const OreIdProfile: React.FC<Props> = ({ oreId, onClose, open }) => {
 							console.log("Click");
 						}}
 						label="Manage your account"
-						fontColor="#05B6E7"
+						fontColor={linkColor}
 					/>
 				</span> */}
 
@@ -55,6 +74,7 @@ export const OreIdProfile: React.FC<Props> = ({ oreId, onClose, open }) => {
 							oreId.auth.logout();
 							onClose();
 						}}
+						style={{ color: textColor }}
 					>
 						<div>Log Out</div>
 					</button>
