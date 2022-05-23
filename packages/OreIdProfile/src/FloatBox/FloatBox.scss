@@ -1,0 +1,15 @@
+.oreId-profile-anchor{
+  position: relative;
+  width: 0px;
+  height: 0px;
+  background-color: transparent;
+  display: inline;
+}
+.oreId-profile-FloatBox {
+  position: absolute;
+  top: 5px;
+
+  .oreId-profile-FloatBox-content{
+    padding: 10px;
+  }
+}

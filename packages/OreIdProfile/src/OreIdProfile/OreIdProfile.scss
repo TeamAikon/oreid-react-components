@@ -1,0 +1,45 @@
+.oreId-profile-profile {
+  padding: 10px; 
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  
+  span{
+    margin-bottom: 10px;
+  }
+  
+  .oreId-profile-profile-name{
+  }
+
+  .oreId-profile-profile-account{
+  }
+
+  .oreId-profile-profile-manage{
+  }
+
+  .oreId-profile-profile-logout{
+    margin-top: 25px;
+    
+    button{
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      position: relative;
+
+      div{
+        &:after {
+          content: '';
+          background: url(./icon.svg) no-repeat;
+          background-size: 100%;
+          position: absolute;
+          width: 16px;
+          height: 16px;
+          top: 0px;
+          left: -15px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  
+}
