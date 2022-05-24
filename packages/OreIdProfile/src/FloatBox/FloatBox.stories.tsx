@@ -14,12 +14,8 @@ const FloatBoxExample = (props: any) => {
 			<button onClick={() => setOpen(true)}>Open FloatBox</button>
 			<br />
 			{open && (
-				<FloatBox onClose={() => setOpen(false)}>
-					<div>
-						FloatBox CONTENT EXAMPLE
-						<Loading />
-						FloatBox CONTENT EXAMPLE
-					</div>
+				<FloatBox width={300} onClose={() => setOpen(false)}>
+					<div>FloatBox CONTENT EXAMPLE</div>
 				</FloatBox>
 			)}
 			<div style={{ color: "#fff" }}>Text that must be under the component</div>

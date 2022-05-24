@@ -1,15 +1,16 @@
-.oreId-profile-anchor{
+.FloatBoxAnchor {
   position: relative;
   width: 0px;
   height: 0px;
   background-color: transparent;
   display: inline;
 }
-.oreId-profile-FloatBox {
+
+.FloatBox {
   position: absolute;
   top: 5px;
 
-  .oreId-profile-FloatBox-content{
+  .content {
     padding: 10px;
   }
 }

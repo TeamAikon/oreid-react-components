@@ -6,7 +6,7 @@ import {
 import classNames from "classnames";
 import { Tooltip } from "@material-ui/core";
 
-import "./CopyToClipboard.scss";
+import styles from "./CopyToClipboard.module.scss";
 
 interface Props extends CopyToClipboardComponentProps {
 	className?: string;
@@ -28,8 +28,8 @@ export const CopyToClipboard: FunctionComponent<Props> = (props) => {
 				<div
 					onAnimationEnd={() => setCopied(false)}
 					className={classNames(className, {
-						"oreId-profile-copyToClipboard": true,
-						"oreId-profile-copyToClipboard-copied": copied,
+						[styles.CopyToClipboard]: true,
+						[styles.CopyToClipboardCopied]: copied,
 					})}
 				>
 					{children}

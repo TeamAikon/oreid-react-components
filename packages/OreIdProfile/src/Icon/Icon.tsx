@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./Icon.scss";
+import styles from "./Icon.module.scss";
 
 interface IconProps {
 	icon: string;
@@ -11,7 +11,7 @@ export const Icon: React.FC<IconProps> = ({ icon, size }) => {
 	return (
 		<img
 			src={icon}
-			className="oreId-profile-Icon"
+			className={styles.Icon}
 			style={{ width: size, height: size }}
 		/>
 	);

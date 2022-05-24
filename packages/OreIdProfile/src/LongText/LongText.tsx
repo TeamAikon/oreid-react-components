@@ -4,7 +4,7 @@ import classNames from "classnames";
 import { CopyToClipboard } from "../CopyToClipboard";
 import TruncateMiddle from "./TruncateMiddle";
 
-import "./LongText.scss";
+import styles from "./LongText.module.scss";
 
 interface LongTextProps {
 	text: string;
@@ -16,11 +16,17 @@ interface LongTextProps {
 	onClick?: () => void;
 }
 
-export const LongText: FunctionComponent<LongTextProps> = (props) => {
-	const { className, href, text, truncateInMiddle, showCopy, onCopy, onClick } =
-		props;
+export const LongText: FunctionComponent<LongTextProps> = ({
+	className,
+	href,
+	text,
+	truncateInMiddle,
+	showCopy,
+	onCopy,
+	onClick,
+}) => {
 	return (
-		<div className="oreId-profile-longText">
+		<div className={styles.LongText}>
 			<Link
 				component={href ? "a" : "div"}
 				underline={href ? "hover" : "none"}
@@ -29,8 +35,8 @@ export const LongText: FunctionComponent<LongTextProps> = (props) => {
 				target="_blank"
 				variant="body1"
 				className={classNames(className, {
-					"oreId-profile-longText-link": true,
-					"oreId-profile-longText-pointerCursor": !!href,
+					[styles.link]: true,
+					[styles.pointerCursor]: !!href,
 				})}
 				onClick={onClick}
 			>
@@ -43,10 +49,7 @@ export const LongText: FunctionComponent<LongTextProps> = (props) => {
 				)}
 			</Link>
 			{showCopy && (
-				<div
-					className="oreId-profile-longText-copy"
-					onClick={(e) => e.stopPropagation()}
-				>
+				<div className={styles.copy} onClick={(e) => e.stopPropagation()}>
 					<CopyToClipboard text={text} onCopy={onCopy} />
 				</div>
 			)}

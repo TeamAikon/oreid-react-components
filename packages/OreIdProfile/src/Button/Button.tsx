@@ -1,7 +1,5 @@
 import React from "react";
-import classNames from "classnames";
-
-import "./Button.scss";
+import styles from "./Button.module.scss";
 
 interface ButtonProps {
 	onClick: () => void;
@@ -13,13 +11,8 @@ export const Button: React.FC<ButtonProps> = ({
 	children,
 	disabled,
 }) => {
-	const cls = disabled ? "disabled" : "";
 	return (
-		<button
-			className={classNames("oreId-profile-button", cls)}
-			disabled={disabled}
-			onClick={onClick}
-		>
+		<button className={styles.Button} disabled={disabled} onClick={onClick}>
 			{children}
 		</button>
 	);

@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
-.oreId-profile-profile {
+.OreIdProfile {
   padding: 10px;
   display: flex;
   align-items: center;
@@ -19,17 +19,17 @@
     margin-bottom: 10px;
   }
 
-  .oreId-profile-profile-name {
+  .name {
     font-weight: 700;
   }
 
-  .oreId-profile-profile-account {
+  .account {
     font-weight: 400;
   }
 
-  .oreId-profile-profile-manage {}
+  .manage {}
 
-  .oreId-profile-profile-logout {
+  .logout {
     margin-top: 25px;
 
     button {

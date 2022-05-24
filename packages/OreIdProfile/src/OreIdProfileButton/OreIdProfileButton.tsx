@@ -5,7 +5,7 @@ import { Button } from "../Button";
 import { Icon } from "../Icon";
 import { OreIdProfile } from "../OreIdProfile";
 
-import "./OreIdProfileButton.scss";
+import styles from "./OreIdProfileButton.module.scss";
 import classNames from "classnames";
 
 interface Props {
@@ -15,9 +15,7 @@ interface Props {
 
 export const OreIdProfileButton: React.FC<Props> = ({ oreId, style }) => {
 	const [isLoggedIn, setIsLoggedIn] = useState(oreId.auth.isLoggedIn);
-	const [userData, setUserData] = useState<UserData | undefined>(
-		oreId.auth.isLoggedIn ? oreId.auth.user.data : undefined
-	);
+	const [userData, setUserData] = useState<UserData | undefined>(undefined);
 	const [showModal, setShowModal] = useState(false);
 
 	useEffect(() => {
@@ -44,8 +42,8 @@ export const OreIdProfileButton: React.FC<Props> = ({ oreId, style }) => {
 			<>
 				<Button onClick={() => setShowModal(true)}>
 					<div
-						className={classNames("oreId-profile-OreIdProfileButton", {
-							showModal,
+						className={classNames(styles.OreIdProfileButton, {
+							[styles.showModal]: showModal,
 						})}
 						style={{ color: style?.textColor || "#222222" }}
 					>

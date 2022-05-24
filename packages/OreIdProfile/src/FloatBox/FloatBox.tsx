@@ -1,8 +1,6 @@
 import { Paper } from "@material-ui/core";
-
 import React, { useEffect, useRef } from "react";
-
-import "./FloatBox.scss";
+import styles from "./FloatBox.module.scss";
 
 interface Props {
 	onClose: () => void;
@@ -30,14 +28,10 @@ export const FloatBox: React.FC<Props> = ({
 	}, [wrapperRef, onClose]);
 
 	return (
-		<div className="oreId-profile-anchor">
-			<div
-				ref={wrapperRef}
-				className="oreId-profile-FloatBox"
-				style={{ width }}
-			>
+		<div className={styles.FloatBoxAnchor}>
+			<div ref={wrapperRef} className={styles.FloatBox} style={{ width }}>
 				<Paper elevation={8} style={{ background: background }}>
-					<div className="oreId-profile-FloatBox-content">{children}</div>
+					<div className={styles.content}>{children}</div>
 				</Paper>
 			</div>
 		</div>

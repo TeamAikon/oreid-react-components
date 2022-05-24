@@ -5,7 +5,7 @@ import { Icon } from "../Icon";
 import { LongText } from "../LongText";
 import { FloatBox } from "../FloatBox";
 
-import "./OreIdProfile.scss";
+import styles from "./OreIdProfile.module.scss";
 import { Style } from "../types";
 
 interface Props {
@@ -35,7 +35,7 @@ export const OreIdProfile: React.FC<Props> = ({
 	if (!open) return null;
 	return (
 		<FloatBox onClose={onClose} width={360} background={backgroundColor}>
-			<div className="oreId-profile-profile">
+			<div className={styles.OreIdProfile}>
 				<span>
 					<Icon
 						size={72}
@@ -44,21 +44,15 @@ export const OreIdProfile: React.FC<Props> = ({
 					/>
 				</span>
 
-				<span
-					className="oreId-profile-profile-name"
-					style={{ color: textColor }}
-				>
+				<span className={styles.name} style={{ color: textColor }}>
 					{data.name}
 				</span>
 
-				<span
-					className="oreId-profile-profile-account"
-					style={{ color: linkColor }}
-				>
+				<span className={styles.account} style={{ color: linkColor }}>
 					<LongText text={data.accountName} truncateInMiddle showCopy />
 				</span>
 
-				{/* <span className="oreId-profile-profile-manage">
+				{/* <span className={styles.manage}
 					<ButtonOutline
 						onClick={() => {
 							console.log("Click");
@@ -68,7 +62,7 @@ export const OreIdProfile: React.FC<Props> = ({
 					/>
 				</span> */}
 
-				<span className="oreId-profile-profile-logout">
+				<span className={styles.logout}>
 					<button
 						onClick={() => {
 							oreId.auth.logout();

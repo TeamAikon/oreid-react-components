@@ -12,7 +12,7 @@ const Template = (props: any) => {
 	return (
 		<div
 			style={{
-				background: "linear-gradient(135deg, #151F44 0%, #270D76 100%)",
+				// background: "linear-gradient(135deg, #151F44 0%, #270D76 100%)",
 				padding: "50px",
 			}}
 		>

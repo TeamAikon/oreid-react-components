@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./ButtonOutline.scss";
+import styles from "./ButtonOutline.module.scss";
 
 interface ButtonOutlineProps {
 	fontColor?: string;
@@ -14,7 +14,7 @@ export const ButtonOutline: React.FC<ButtonOutlineProps> = ({
 	fontColor = "#fff",
 }) => (
 	<button
-		className="oreId-profile-buttonOutline"
+		className={styles.ButtonOutline}
 		style={{ color: fontColor, borderColor: fontColor }}
 		onClick={onClick}
 	>

@@ -28,7 +28,12 @@ Default.args = {
 			isLoggedIn: true,
 			logout: () => console.log("Logout"),
 			user: {
-				getData: () => console.log("getData"),
+				getData: async () => ({
+					picture:
+						"https://upload.wikimedia.org/wikipedia/commons/2/29/Solid_green.svg",
+					name: "Bruno Motta",
+					accountName: "accountName",
+				}),
 				data: {
 					picture:
 						"https://upload.wikimedia.org/wikipedia/commons/2/29/Solid_green.svg",

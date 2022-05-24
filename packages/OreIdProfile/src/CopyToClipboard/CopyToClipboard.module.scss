@@ -1,4 +1,4 @@
-.oreId-profile-copyToClipboard {
+.CopyToClipboard {
   position: relative;
   width: 100%;
 
@@ -14,12 +14,14 @@
     transform: translateY(-50%);
     cursor: pointer;
   }
+
   input {
     width: 100%;
     padding-right: 36px;
     cursor: pointer;
   }
-  .oreId-profile-copyToClipboard-copied {
+
+  .CopyToClipboardCopied {
     // animation class
   }
 }
