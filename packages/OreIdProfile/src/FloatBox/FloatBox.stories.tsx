@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Loading } from "../Loading";
 import { FloatBox } from "./FloatBox";
 
 export default {
@@ -11,13 +10,16 @@ const FloatBoxExample = (props: any) => {
 	const [open, setOpen] = useState(true);
 	return (
 		<>
-			<button onClick={() => setOpen(true)}>Open FloatBox</button>
-			<br />
-			{open && (
-				<FloatBox width={300} onClose={() => setOpen(false)}>
-					<div>FloatBox CONTENT EXAMPLE</div>
-				</FloatBox>
-			)}
+			<FloatBox
+				{...props}
+				anchor={<button onClick={() => setOpen(true)}>Open FloatBox</button>}
+				width={300}
+				onClose={() => setOpen(false)}
+				open={open}
+			>
+				<div>FloatBox CONTENT EXAMPLE</div>
+			</FloatBox>
+
 			<div style={{ color: "#fff" }}>Text that must be under the component</div>
 		</>
 	);

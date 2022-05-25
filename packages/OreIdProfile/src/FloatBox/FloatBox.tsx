@@ -1,20 +1,30 @@
-import { Paper } from "@material-ui/core";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import classNames from "classnames";
 import styles from "./FloatBox.module.scss";
 
 interface Props {
+	anchor: JSX.Element;
 	onClose: () => void;
+	open: boolean;
+
 	width: number;
 	background?: string;
+	align?: "left" | "right";
 }
 
 export const FloatBox: React.FC<Props> = ({
+	anchor,
+	onClose,
+	open,
+
 	children,
 	width,
-	onClose,
 	background,
+	align,
 }) => {
 	const wrapperRef = useRef<any>(null);
+	const [height, setHeight] = useState(0);
+
 	useEffect(() => {
 		function handleClickOutside(event: any) {
 			if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
@@ -27,13 +37,28 @@ export const FloatBox: React.FC<Props> = ({
 		};
 	}, [wrapperRef, onClose]);
 
+	useEffect(() => {
+		setHeight(wrapperRef.current?.clientHeight || 0);
+	});
+
 	return (
 		<div className={styles.FloatBoxAnchor}>
-			<div ref={wrapperRef} className={styles.FloatBox} style={{ width }}>
-				<Paper elevation={8} style={{ background: background }}>
+			{anchor}
+			{open && (
+				<div
+					ref={wrapperRef}
+					className={classNames(styles.FloatBox, {
+						[styles.right]: align === "right",
+					})}
+					style={{
+						width,
+						background: background || "#fff",
+						bottom: (height + 10) * -1,
+					}}
+				>
 					<div className={styles.content}>{children}</div>
-				</Paper>
-			</div>
+				</div>
+			)}
 		</div>
 	);
 };

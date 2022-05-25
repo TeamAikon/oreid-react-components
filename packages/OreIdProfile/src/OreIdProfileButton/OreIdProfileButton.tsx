@@ -11,9 +11,14 @@ import classNames from "classnames";
 interface Props {
 	oreId: OreId;
 	style?: Style;
+	align?: "left" | "right";
 }
 
-export const OreIdProfileButton: React.FC<Props> = ({ oreId, style }) => {
+export const OreIdProfileButton: React.FC<Props> = ({
+	oreId,
+	style,
+	align,
+}) => {
 	const [isLoggedIn, setIsLoggedIn] = useState(oreId.auth.isLoggedIn);
 	const [userData, setUserData] = useState<UserData | undefined>(undefined);
 	const [showModal, setShowModal] = useState(false);
@@ -40,25 +45,26 @@ export const OreIdProfileButton: React.FC<Props> = ({ oreId, style }) => {
 	if (isLoggedIn && userData) {
 		return (
 			<>
-				<Button onClick={() => setShowModal(true)}>
-					<div
-						className={classNames(styles.OreIdProfileButton, {
-							[styles.showModal]: showModal,
-						})}
-						style={{ color: style?.textColor || "#222222" }}
-					>
-						<Icon icon={userData.picture as any} size={20} /> {userData.name}
-					</div>
-				</Button>
 				{userData && (
-					<>
-						<br />
-						<OreIdProfile
-							open={showModal}
-							onClose={() => setShowModal(false)}
-							oreId={oreId}
-						/>
-					</>
+					<OreIdProfile
+						anchor={
+							<Button onClick={() => setShowModal(true)}>
+								<div
+									className={classNames(styles.OreIdProfileButton, {
+										[styles.showModal]: showModal,
+									})}
+									style={{ color: style?.textColor || "#222222" }}
+								>
+									<Icon icon={userData.picture as any} size={32} />{" "}
+									{userData.name}
+								</div>
+							</Button>
+						}
+						open={showModal}
+						onClose={() => setShowModal(false)}
+						oreId={oreId}
+						align={align}
+					/>
 				)}
 			</>
 		);

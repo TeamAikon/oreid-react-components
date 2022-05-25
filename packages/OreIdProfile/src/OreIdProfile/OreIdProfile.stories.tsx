@@ -17,9 +17,12 @@ const Template = (props: any) => {
 				padding: "50px",
 			}}
 		>
-			<button onClick={() => setOpen(true)}>Open Modal</button>
-			<br />
-			<OreIdProfile {...props} onClose={() => setOpen(false)} open={open} />
+			<OreIdProfile
+				{...props}
+				anchor={<button onClick={() => setOpen(true)}>Open Modal</button>}
+				onClose={() => setOpen(false)}
+				open={open}
+			/>
 		</div>
 	);
 };

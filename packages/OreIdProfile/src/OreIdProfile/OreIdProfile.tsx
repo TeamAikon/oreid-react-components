@@ -13,6 +13,8 @@ interface Props {
 	onClose: () => void;
 	open: boolean;
 	style?: Style;
+	anchor?: JSX.Element;
+	align?: "left" | "right";
 }
 
 export const OreIdProfile: React.FC<Props> = ({
@@ -20,6 +22,8 @@ export const OreIdProfile: React.FC<Props> = ({
 	onClose,
 	open,
 	style,
+	anchor,
+	align,
 }) => {
 	const data = oreId.auth.user.data;
 	const textColor = style?.textColor || "#222222";
@@ -32,9 +36,15 @@ export const OreIdProfile: React.FC<Props> = ({
 		}
 	}, []);
 	if (!oreId.auth.isLoggedIn || !data) return null;
-	if (!open) return null;
 	return (
-		<FloatBox onClose={onClose} width={360} background={backgroundColor}>
+		<FloatBox
+			anchor={anchor || <span></span>}
+			onClose={onClose}
+			open={open}
+			width={360}
+			align={align}
+			background={backgroundColor}
+		>
 			<div className={styles.OreIdProfile}>
 				<span>
 					<Icon
@@ -46,6 +56,12 @@ export const OreIdProfile: React.FC<Props> = ({
 
 				<span className={styles.name} style={{ color: textColor }}>
 					{data.name}
+					{data.email && (
+						<>
+							<br />
+							{data.email}
+						</>
+					)}
 				</span>
 
 				<span className={styles.account} style={{ color: linkColor }}>
