@@ -41,7 +41,7 @@ export const OreIdProfile: React.FC<Props> = ({
 			anchor={anchor || <span></span>}
 			onClose={onClose}
 			open={open}
-			width={360}
+			width={240}
 			align={align}
 			background={backgroundColor}
 		>
