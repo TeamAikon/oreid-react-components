@@ -44,4 +44,9 @@ Default.args = {
 			},
 		},
 	},
+	style: {
+		backgroundColor: "red",
+		linkColor: "blue",
+		textColor: "green",
+	},
 };

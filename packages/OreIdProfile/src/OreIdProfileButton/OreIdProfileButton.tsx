@@ -60,6 +60,7 @@ export const OreIdProfileButton: React.FC<Props> = ({
 								</div>
 							</Button>
 						}
+						style={style}
 						open={showModal}
 						onClose={() => setShowModal(false)}
 						oreId={oreId}
