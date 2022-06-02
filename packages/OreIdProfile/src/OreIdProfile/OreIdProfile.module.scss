@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+.OreIdProfile {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  /* System / Bold */
+
+  font-family: 'Roboto';
+  font-style: normal;
+  font-size: 14px;
+  line-height: 25px;
+
+
+  span {
+    margin-bottom: 10px;
+  }
+
+  .name {
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .account {
+    font-weight: 400;
+  }
+
+  .manage {}
+
+  .logout {
+    margin-top: 25px;
+
+    button {
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      position: relative;
+
+
+      font-family: 'Montserrat';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 17px;
+      text-align: center;
+      letter-spacing: 0.5px;
+
+      div {
+        &:after {
+          content: '';
+          background: url(./icon.svg) no-repeat;
+          background-size: 100%;
+          position: absolute;
+          width: 16px;
+          height: 16px;
+          top: 0px;
+          left: -15px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+}

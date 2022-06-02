@@ -1,0 +1,27 @@
+.CopyToClipboard {
+  position: relative;
+  width: 100%;
+
+  &:after {
+    content: '';
+    background: url(./glyph-copy-blue.svg) no-repeat;
+    background-size: 100%;
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+
+  input {
+    width: 100%;
+    padding-right: 36px;
+    cursor: pointer;
+  }
+
+  .CopyToClipboardCopied {
+    // animation class
+  }
+}
