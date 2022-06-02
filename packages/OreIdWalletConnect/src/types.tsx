@@ -37,6 +37,8 @@ export enum ChainNetwork {
   // UxTest = 'ux_test', (there is no test network) - this is left here as a placeholder
   WaxMain = 'wax_main',
   WaxTest = 'wax_test',
+  PolygonMain = 'polygon_main',
+  PolygonMumbai = 'polygon_mumbai',
 }
 
 export type ConnectionEvent = (connection?: Connection, payload?: any) => void
