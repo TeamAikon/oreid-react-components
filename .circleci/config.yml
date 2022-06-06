@@ -58,8 +58,7 @@ jobs:
           at: ~/API-market
       # get npmrc token
       - run: echo $NPMRC | base64 -d > ~/.npmrc
-      - run: yarn build
-      - run: yarn lint
+      - run: yarn build-packages
       # check all package.json versions and publish any that haven't been published
       - run: npx lerna publish from-package --yes
 
