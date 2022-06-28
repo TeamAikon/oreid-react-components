@@ -44,8 +44,8 @@ jobs:
           at: ~/API-market
       # call the linter
       - run: echo "we should fix the linter and tests"
-      # - run: yarn run lint
-      # - run: yarn run test
+      # - run: npx lerna run lint
+      # - run: npx lerna run test
 
   deploy:
     # directory commands will run from by default
@@ -58,7 +58,7 @@ jobs:
           at: ~/API-market
       # get npmrc token
       - run: echo $NPMRC | base64 -d > ~/.npmrc
-      - run: yarn build-packages
+      - run: npx lerna run build
       # check all package.json versions and publish any that haven't been published
       - run: npx lerna publish from-package --yes
 
