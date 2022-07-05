@@ -32,6 +32,8 @@ import phone_style from "./phone-style.json";
 // Wallets
 import algosigner_logo from "./algosigner-logo@2x.png";
 import algosigner_style from "./algosigner-style.json";
+import anchor_logo from "./anchor-logo@2x.png";
+import anchor_style from "./anchor-style.json";
 import keycat_logo from "./keycat-logo@2x.png";
 import keycat_style from "./keycat-style.json";
 import ledger_logo from "./ledger-logo@2x.png";
@@ -57,6 +59,7 @@ import whalevault_style from "./whalevault-style.json";
 
 const providers = [
   { id: "oreid", logo: oreid_logo, style: oreid_style },
+  { id: "anchor", logo: anchor_logo, style: anchor_style },
   { id: "algosigner", logo: algosigner_logo, style: algosigner_style },
   { id: "apple", logo: apple_logo, style: apple_style },
   { id: "email", logo: email_logo, style: email_style },
