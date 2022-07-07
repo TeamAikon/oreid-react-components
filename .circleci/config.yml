@@ -26,6 +26,8 @@ jobs:
       # call `yarn install`
       - node/install-packages:
           pkg-manager: yarn
+      - run: npx lerna bootstrap
+      - run: npx lerna run build
       # save the installed modules and configured repo for the following steps
       - persist_to_workspace:
           root: ~/API-market
