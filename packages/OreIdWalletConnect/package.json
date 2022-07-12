@@ -65,7 +65,6 @@
     "eslint-plugin-prettier": "^3.1.2",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^24.9.0",
-    "node-sass": "^4.14.1",
     "prettier": "^2.2.1",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
@@ -74,7 +73,7 @@
     "rollup-plugin-peer-deps-external": "^2.2.0",
     "rollup-plugin-sass": "^1.2.2",
     "rollup-plugin-typescript2": "^0.27.0",
-    "sass-loader": "^8.0.0",
+    "sass": "^1.53.0",
     "ts-jest": "^24.2.0",
     "typescript": "^3.7.2"
   },
