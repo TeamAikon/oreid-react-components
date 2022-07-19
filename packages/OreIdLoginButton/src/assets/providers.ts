@@ -54,6 +54,8 @@ import walletconnect_logo from "./walletconnect-logo.png";
 import walletconnect_style from "./walletconnect-style.json";
 import web3_logo from "./web3-logo@2x.png";
 import web3_style from "./web3-style.json";
+import wombat_logo from "./wombat-logo@2x.png";
+import wombat_style from "./wombat-style.json";
 import whalevault_logo from "./whalevault-logo@2x.png";
 import whalevault_style from "./whalevault-style.json";
 
@@ -84,6 +86,7 @@ const providers = [
   { id: "tokenpocket", logo: tokenpocket_logo, style: tokenpocket_style },
   { id: "walletconnect", logo: walletconnect_logo, style: walletconnect_style },
   { id: "web3", logo: web3_logo, style: web3_style },
+  { id: "wombat", logo: wombat_logo, style: wombat_style },
   { id: "whalevault", logo: whalevault_logo, style: whalevault_style },
 ];
 
