@@ -1,24 +1,22 @@
+import { MuiThemeProvider, Tab, Tabs } from '@material-ui/core'
 import React, { useEffect, useRef, useState } from 'react'
-import { MuiThemeProvider, Tabs, Tab } from '@material-ui/core'
 import theme from '../assets/_styles/theme'
-
-import { Modal } from '../Modal'
+import { ConnectionListItem } from '../ConnectionListItem'
+import { ConnectionsBadge } from '../ConnectionsBadge'
 import { ConnectWalletContainer } from '../ConnectWalletContainer'
+import { getSize, hasChainSupport } from '../helpers'
+import { mapWalletConnectRefToConnection } from '../mapper'
+import { Modal } from '../Modal'
+import { RequestWidget } from '../RequestWidget'
 import {
   ModalConnections,
   OreIDWalletConnectProps,
-  WalletConnectRefEvent,
-  WalletConnectRef,
   PeerMeta,
+  WalletConnectRef,
+  WalletConnectRefEvent,
   WalletConnectTransaction,
 } from '../types'
 import { factoryConnection, subscribeEvents, unsubscribeEvents } from '../utils'
-import { ConnectionListItem } from '../ConnectionListItem'
-import { ConnectionsBadge } from '../ConnectionsBadge'
-import { mapWalletConnectRefToConnection } from '../mapper'
-import { RequestWidget } from '../RequestWidget'
-import { hasChainSupport } from '../helpers'
-
 import './OreIDWalletConnect.scss'
 
 const useForceUpdate = () => {
@@ -26,15 +24,22 @@ const useForceUpdate = () => {
   return () => setValue(value + 1) // update the state to force render
 }
 
-export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
+interface Props extends OreIDWalletConnectProps {
+  width: number
+}
+
+export const OreIDWalletConnect: React.FC<Props> = ({
   config,
   modalConnections,
   setModalConnections,
   connections,
   setConnections,
   hideWhenNoConnections,
+  width,
   ...props
 }) => {
+  const parentSize = getSize(width)
+  console.log({ parentSize }, { width })
   const walletConnectClientList = useRef<WalletConnectRef[]>([])
   const [incomingRequest, setIncomingRequest] = useState<
     { peerMeta: PeerMeta; request: WalletConnectTransaction; connectionUri: string } | undefined
@@ -265,6 +270,7 @@ export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
                   return (
                     <React.Fragment key={connection.connectionUri}>
                       <ConnectionListItem
+                        parentSize={parentSize}
                         resetConnection={() => {
                           setModalConnections(ModalConnections.NewConnection)
                         }}
@@ -306,6 +312,8 @@ export const OreIDWalletConnect: React.FC<OreIDWalletConnectProps> = ({
           )}
         </Modal>
         <ConnectionsBadge
+          CustomButton={props.CustomButton}
+          parentSize={parentSize}
           hideWhenNoConnections={!!hideWhenNoConnections}
           peerMeta={connections
             .map((connection) => {
