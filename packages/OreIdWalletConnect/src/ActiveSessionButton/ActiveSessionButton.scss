@@ -8,10 +8,16 @@
   cursor: pointer;
   padding: 10px 12px;
   white-space: nowrap;
+
   &:hover {
     background: rgba(255, 255, 255, 0.2);
   }
-  & > *:last-child {
+
+  &>*:last-child {
     margin-left: 5px;
+  }
+
+  &.oreIdWalletConnect-activeSessionButton-button-small {
+    padding: 10px 12px 10px 7px;
   }
 }
