@@ -39,7 +39,6 @@ export const OreIDWalletConnect: React.FC<Props> = ({
   ...props
 }) => {
   const parentSize = getSize(width)
-  console.log({ parentSize }, { width })
   const walletConnectClientList = useRef<WalletConnectRef[]>([])
   const [incomingRequest, setIncomingRequest] = useState<
     { peerMeta: PeerMeta; request: WalletConnectTransaction; connectionUri: string } | undefined
@@ -75,7 +74,7 @@ export const OreIDWalletConnect: React.FC<Props> = ({
 
   const updateConnections = () => setConnections(walletConnectClientList.current.map(mapWalletConnectRefToConnection))
 
-  // This block is for customizing the events if necessary
+  // // This block is for customizing the events if necessary
 
   /** handle a new session request (a new wallet connect session to be approved) */
   const onSessionRequest: WalletConnectRefEvent = (connection, payload) => {
