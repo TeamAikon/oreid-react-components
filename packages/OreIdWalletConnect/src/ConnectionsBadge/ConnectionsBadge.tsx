@@ -1,36 +1,43 @@
 import React from 'react'
-import { PeerMeta } from '../types'
-import { ConnectionIcon } from '../ConnectionIcon'
 import { ActiveSessionButton } from '../ActiveSessionButton'
-import { ButtonOutline } from '../ButtonOutline'
+import { ConnectButton } from '../ConnectButton'
+import { OreIDWalletConnectSize, PeerMeta } from '../types'
+import { ConnectionIconList } from './ConnectionIconList'
 
 import './ConnectionsBadge.scss'
 
-interface ConnectedUIProps {
+interface Props {
+  parentSize: OreIDWalletConnectSize
   hideWhenNoConnections: boolean
   peerMeta: PeerMeta[]
   onClick: () => void
+  CustomButton?: React.FC<{ onClick: () => void }>
 }
 
-export const ConnectionsBadge: React.FC<ConnectedUIProps> = ({ hideWhenNoConnections, peerMeta, onClick }) => {
-  if (hideWhenNoConnections && peerMeta.length === 0) {
-    return null
-  }
+export const ConnectionsBadge: React.FC<Props> = ({
+  hideWhenNoConnections,
+  peerMeta,
+  onClick,
+  CustomButton,
+  parentSize,
+}) => {
   return (
     <div className="oreIdWalletConnect-connectionsBadge">
       <div className="oreIdWalletConnect-connectionsBadge-icons">
-        {peerMeta.map((metaData, index) => {
-          if (!metaData?.icons?.[0]) return null
-          return <ConnectionIcon key={index} icon={metaData.icons[0]} size={20} />
-        })}
-        {peerMeta.length === 0 && <ConnectionIcon icon="https://example.walletconnect.org/favicon.ico" size={20} />}
+        <ConnectionIconList
+          icons={peerMeta
+            .map((metaData) => {
+              if (!metaData?.icons?.[0]) return ''
+              return metaData?.icons[0]
+            })
+            .filter((icon) => icon !== '')}
+          parentSize={parentSize}
+        />
       </div>
       {peerMeta.length > 0 ? (
-        <ActiveSessionButton onClick={onClick} />
+        <ActiveSessionButton onClick={onClick} parentSize={parentSize} />
       ) : (
-        <>
-          <ButtonOutline label="Connect" onClick={onClick} />
-        </>
+        <ConnectButton CustomButton={CustomButton} onClick={onClick} />
       )}
     </div>
   )

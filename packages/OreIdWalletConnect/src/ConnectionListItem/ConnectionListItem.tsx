@@ -1,20 +1,25 @@
-import React, { useRef, useState } from 'react'
 import { Menu, MenuItem } from '@material-ui/core'
 import { MoreVert } from '@material-ui/icons'
+import React from 'react'
+import { ActiveSessionButton } from '../ActiveSessionButton'
+import { ConnectionIcon } from '../ConnectionIcon'
+import { OreIDWalletConnectSize, PeerMeta } from '../types'
 
 import './ConnectionListItem.scss'
-import { PeerMeta } from '../types'
-import { ConnectionIcon } from '../ConnectionIcon'
-import { ActiveSessionButton } from '../ActiveSessionButton'
-import { OutlineButton } from '../OutlineButton'
 
 interface ConnectionListItemProps {
   disconnect: () => void
   resetConnection: () => void
   peerMeta: PeerMeta
+  parentSize: OreIDWalletConnectSize
 }
 
-export const ConnectionListItem: React.FC<ConnectionListItemProps> = ({ disconnect, resetConnection, peerMeta }) => {
+export const ConnectionListItem: React.FC<ConnectionListItemProps> = ({
+  disconnect,
+  resetConnection,
+  peerMeta,
+  parentSize,
+}) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget)
@@ -38,7 +43,7 @@ export const ConnectionListItem: React.FC<ConnectionListItemProps> = ({ disconne
       )}
       <div>{peerMeta.name}</div>
       <div className="oreIdWalletConnect-connectionListItem-actions">
-        <ActiveSessionButton onClick={() => {}} fontColor="#000" />
+        <ActiveSessionButton onClick={() => {}} fontColor="#000" parentSize={parentSize} />
       </div>
       <div className="oreIdWalletConnect-connectionListItem-menu">
         <button onClick={handleClick}>
