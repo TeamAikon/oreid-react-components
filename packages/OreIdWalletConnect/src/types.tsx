@@ -43,7 +43,7 @@ export enum ChainNetwork {
 export enum OreIDWalletConnectSize {
   Wide = 213,
   Medium = 121,
-  Small = 73,
+  Small = 51,
 }
 
 export type ConnectionEvent = (connection?: Connection, payload?: any) => void
