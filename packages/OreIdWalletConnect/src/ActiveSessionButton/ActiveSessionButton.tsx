@@ -25,7 +25,8 @@ export const ActiveSessionButton: React.FC<ActiveSessionButtonProps> = ({
       style={{ color: fontColor }}
       onClick={onClick}
     >
-      <OnSignal /> {complete && <span>Active Session</span>}
+      <OnSignal />{' '}
+      {complete && <span className="oreIdWalletConnect-activeSessionButton-button-text">Active Session</span>}
     </button>
   )
 }
