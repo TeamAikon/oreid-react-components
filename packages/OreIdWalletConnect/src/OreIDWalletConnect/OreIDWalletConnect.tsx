@@ -220,7 +220,13 @@ export const OreIDWalletConnect: React.FC<Props> = ({
   if (!hasChainNetworkSupport) return null
   return (
     <MuiThemeProvider theme={theme}>
-      <div className="oreIdWalletConnect">
+      <div
+        className="oreIdWalletConnect"
+        onClick={(e) => {
+          e.preventDefault()
+          e.stopPropagation()
+        }}
+      >
         <Modal
           open={modalConnections !== ModalConnections.Closed}
           onClose={() => setModalConnections(ModalConnections.Closed)}

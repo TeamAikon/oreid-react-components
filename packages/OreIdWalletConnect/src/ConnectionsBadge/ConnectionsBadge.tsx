@@ -37,7 +37,7 @@ export const ConnectionsBadge: React.FC<Props> = ({
       {peerMeta.length > 0 ? (
         <ActiveSessionButton onClick={onClick} parentSize={parentSize} />
       ) : (
-        <ConnectButton CustomButton={CustomButton} onClick={onClick} />
+        <ConnectButton hideWhenNoConnections={hideWhenNoConnections} CustomButton={CustomButton} onClick={onClick} />
       )}
     </div>
   )

@@ -14,6 +14,7 @@ export const ConnectionIconList: React.FC<Props> = ({ icons, parentSize }) => {
   const numberOfConnections = icons.length
   const showIcons = parentSize > OreIDWalletConnectSize.Small ? 4 : 1
   const list = icons.slice(0, showIcons)
+  const lastIcon = list.length - 1
 
   return (
     <>
@@ -22,7 +23,7 @@ export const ConnectionIconList: React.FC<Props> = ({ icons, parentSize }) => {
           key={icon}
           icon={icon}
           size={20}
-          connections={index === showIcons - 1 ? numberOfConnections : undefined}
+          connections={index === lastIcon && list.length < numberOfConnections ? numberOfConnections : undefined}
         />
       ))}
     </>
