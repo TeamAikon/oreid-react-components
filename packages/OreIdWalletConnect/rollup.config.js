@@ -1,25 +1,54 @@
-import peerDepsExternal from 'rollup-plugin-peer-deps-external'
-import commonjs from '@rollup/plugin-commonjs'
-import typescript from 'rollup-plugin-typescript2'
-import sass from 'rollup-plugin-sass'
-// import copy from "rollup-plugin-copy";
+import babel from 'rollup-plugin-babel';
+import { nodeResolve } from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
+import postcss from 'rollup-plugin-postcss';
+import postcssUrl from "postcss-url";
+import peerDepsExternal from 'rollup-plugin-peer-deps-external';
+import typescript from 'rollup-plugin-typescript2';
+import svgr from '@svgr/rollup';
+import image from '@rollup/plugin-image';
+import json from '@rollup/plugin-json';
+import { terser } from "rollup-plugin-terser";
+
+const pkg = require('./package.json');
+
+const options = {
+  url: 'inline'
+}
 
 export default {
-  input: ['src/index.ts'],
+  input: './src/index.ts',
   output: [
     {
-      dir: 'build',
-      format: 'cjs',
+      name: pkg.name,
       sourcemap: true,
+      // dir: './dist',
+      file: pkg.main,
+      format: 'umd',
+      globals: { react: 'React' },
+
     },
   ],
-  preserveModules: true, // Important if we want to code split
   plugins: [
+    nodeResolve(),
     peerDepsExternal(),
-    commonjs(),
-    typescript({ useTsconfigDeclarationDir: true }),
-    sass({
-      insert: true,
+    postcss({
+      extract: false,
+      modules: true,
+      plugins: [
+        postcssUrl(options)
+      ],
+      use: ['sass'],
     }),
+    svgr(),
+    image(),
+    babel({
+      exclude: "node_modules/**", extensions: ['.js', '.svg'],
+    }),
+    commonjs(),
+    typescript(),
+    json(),
+    terser()
   ],
-}
+  external: ['react', 'react-dom'],
+};

@@ -1,0 +1,13 @@
+{
+	"extends": "./tsconfig.json",
+	"exclude": [
+		"test",
+		"dist",
+		"**/test-utils.tsx",
+		"**/*.stories.tsx",
+		"**/*.spec.ts",
+		"**/*.spec.tsx",
+		"**/*.test.ts",
+		"**/*.test.tsx"
+	]
+}

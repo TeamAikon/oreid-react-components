@@ -1,4 +1,29 @@
-node_modules/
-build/
-storybook-static/
+
+# See https://help.github.com/ignore-files/ for more about ignoring files.
+
+src/assets/aikon-assets-as-components/images/icons/**.tsx
+src/assets/images/**.tsx
+src/assets/images/**.ts
+src/assets/images/global-icons/**.tsx
+src/assets/images/global-icons/**.ts
+
+# dependencies
+node_modules
 .npmrc
+
+# builds
+build
+dist
+.rpt2_cache
+
+# misc
+.DS_Store
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
