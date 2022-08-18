@@ -1,12 +1,9 @@
-import React, { useState } from 'react'
-import { OutlinedInput } from '@material-ui/core'
-import { QrCodeImage } from './QrCodeImage'
-import { ArowIcon } from './ArowIcon'
+import React from 'react'
 import { Button } from '../Button'
-import { PeerMeta } from '../types'
 import { ConnectionIcon } from '../ConnectionIcon'
+import { PeerMeta } from '../types'
 
-import './ApproveConnectionWidget.scss'
+import styles from './ApproveConnectionWidget.module.scss'
 
 interface ApproveConnectionWidgetProps {
   approveSessionRequest: () => void
@@ -20,11 +17,11 @@ export const ApproveConnectionWidget: React.FC<ApproveConnectionWidgetProps> = (
   address,
 }) => {
   return (
-    <div className="oreIdWalletConnect-approveConnectionWidget">
-      <div className="oreIdWalletConnect-approveConnectionWidget-title">Connected to {peerMeta.name}</div>
+    <div className={styles.approveConnectionWidget}>
+      <div className={styles.title}>Connected to {peerMeta.name}</div>
 
       {peerMeta.icons && (
-        <div className="oreIdWalletConnect-approveConnectionWidget-name">
+        <div className={styles.name}>
           <div>
             <ConnectionIcon icon={peerMeta.icons[peerMeta.icons.length - 1]} size={74} />
           </div>
@@ -34,15 +31,13 @@ export const ApproveConnectionWidget: React.FC<ApproveConnectionWidgetProps> = (
         </div>
       )}
 
-      <div className="oreIdWalletConnect-approveConnectionWidget-address">
-        <div className="oreIdWalletConnect-approveConnectionWidget-title">Address</div>
+      <div className={styles.address}>
+        <div className={styles.title}>Address</div>
         <span>{address}</span>
       </div>
 
-      <div className="oreIdWalletConnect-approveConnectionWidget-description">
-        <div className="oreIdWalletConnect-approveConnectionWidget-title">
-          You've successfully connected to {peerMeta.name}.
-        </div>
+      <div className={styles.description}>
+        <div className={styles.title}>You've successfully connected to {peerMeta.name}.</div>
         <span>Please go back to the app to perform transactions. You will see any Wallet requests here.</span>
       </div>
 

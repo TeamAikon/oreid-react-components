@@ -22,8 +22,7 @@ const Template = (props: any) => {
 
 export const Default = Template.bind({})
 Default.args = {
-  text:
-    'wc:9605531b-4a51-458a-999b-ee373cc9d2b6@1?bridge=https%3A%2F%2Ft.bridge.walletconnect.org&key=c2abc7e2a919b87056aa4f451f7ec57d87aa4160c80ed6ca97697395cb042797',
+  text: 'wc:9605531b-4a51-458a-999b-ee373cc9d2b6@1?bridge=https%3A%2F%2Ft.bridge.walletconnect.org&key=c2abc7e2a919b87056aa4f451f7ec57d87aa4160c80ed6ca97697395cb042797',
   className: 'my-custom-className',
   href: 'http://localhost:6007/?path=/story/copytoclipboard--default',
   truncateInMiddle: true,

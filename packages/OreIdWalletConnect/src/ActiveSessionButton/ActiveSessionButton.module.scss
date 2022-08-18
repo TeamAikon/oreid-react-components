@@ -1,4 +1,4 @@
-.oreIdWalletConnect-activeSessionButton-button {
+.button {
   display: flex;
   align-items: center;
   border: none;
@@ -13,15 +13,15 @@
     background: rgba(255, 255, 255, 0.2);
   }
 
-  &.oreIdWalletConnect-activeSessionButton-button-small {
+  &.small {
     padding: 2px;
 
     &:hover {
-      background: transparent
+      background: transparent;
     }
   }
 }
 
-.oreIdWalletConnect-activeSessionButton-button-text {
+.text {
   margin-left: 5px;
 }

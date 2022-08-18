@@ -3,7 +3,7 @@ import React from 'react'
 import { OnSignal } from '../OnSignal'
 import { OreIDWalletConnectSize } from '../types'
 
-import './ActiveSessionButton.scss'
+import styles from './ActiveSessionButton.module.scss'
 
 interface ActiveSessionButtonProps {
   fontColor?: string
@@ -19,14 +19,13 @@ export const ActiveSessionButton: React.FC<ActiveSessionButtonProps> = ({
   const complete = parentSize >= OreIDWalletConnectSize.Wide
   return (
     <button
-      className={classNames('oreIdWalletConnect-activeSessionButton-button', {
-        'oreIdWalletConnect-activeSessionButton-button-small': !complete,
+      className={classNames(styles.button, {
+        [styles.small]: !complete,
       })}
       style={{ color: fontColor }}
       onClick={onClick}
     >
-      <OnSignal />{' '}
-      {complete && <span className="oreIdWalletConnect-activeSessionButton-button-text">Active Session</span>}
+      <OnSignal /> {complete && <span className={styles.text}>Active Session</span>}
     </button>
   )
 }

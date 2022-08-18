@@ -1,6 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { FunctionComponent, useCallback } from 'react'
 
+import styles from './TruncateMiddle.module.scss'
+
 const ellipse = (parentNode: HTMLElement, txtNode: HTMLElement) => {
   const containerWidth = parentNode.offsetWidth
   const txtWidth = txtNode.offsetWidth
@@ -24,26 +26,24 @@ const prepEllipse = (node: HTMLElement) => {
   const txtToEllipse = node.firstElementChild as HTMLElement
 
   if (txtToEllipse) {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
     // @ts-ignore
     ellipse(node.offsetWidth > parent.offsetWidth ? parent : node, txtToEllipse)
   }
 }
 
-const TruncateMiddle: FunctionComponent<{}> = (props) => {
-  const measuredParent = useCallback((node) => {
+const TruncateMiddle: FunctionComponent<{}> = props => {
+  const measuredParent = useCallback(node => {
     if (node !== null) {
       window.addEventListener('resize', () => {
         prepEllipse(node)
       })
       prepEllipse(node)
     }
-    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
     // @ts-ignore
   }, null)
 
   return (
-    <div ref={measuredParent} className="truncateMiddle">
+    <div ref={measuredParent} className={styles.truncateMiddle}>
       {props.children}
     </div>
   )

@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Button } from '../Button'
 import { ConnectionIcon } from '../ConnectionIcon'
 import { LongText } from '../LongText'
-import { WalletConnectTransaction, PeerMeta } from '../types'
+import { PeerMeta, WalletConnectTransaction } from '../types'
 
-import './RequestWidget.scss'
+import styles from './RequestWidget.module.scss'
 
 interface ConnectWalletWidgetProps {
   peerMeta: PeerMeta
@@ -15,22 +15,22 @@ interface ConnectWalletWidgetProps {
 export const RequestWidget: React.FC<ConnectWalletWidgetProps> = ({ peerMeta, request, onAcceptRequest }) => {
   if (!peerMeta) return null
   return (
-    <div className="oreIdWalletConnect-requestWidget">
-      <div className="oreIdWalletConnect-requestWidget-content">
+    <div className={styles.requestWidget}>
+      <div className={styles.content}>
         <h2>{peerMeta.name} is requesting you add signature(s) to a transaction.</h2>
         <p>Accept this request to add it to your pending transactions. You can then sign it using ORE Vault. </p>
       </div>
 
-      <div className="oreIdWalletConnect-requestWidget-content">
+      <div className={styles.content}>
         <h3>Account Address</h3>
-        <span className="oreIdWalletConnect-requestWidget-accountAddress">
+        <span className={styles.accountAddress}>
           <LongText truncateInMiddle text={request.params[0].from} />
         </span>
       </div>
 
-      <div className="oreIdWalletConnect-requestWidget-divider" />
+      <div className={styles.divider} />
 
-      <div className="oreIdWalletConnect-requestWidget-name">
+      <div className={styles.name}>
         {peerMeta.icons && <ConnectionIcon icon={peerMeta.icons[peerMeta.icons.length - 1]} size={50} />}
         <span>{peerMeta.name}</span>
       </div>

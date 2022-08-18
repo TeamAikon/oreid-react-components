@@ -5,7 +5,7 @@ import { ActiveSessionButton } from '../ActiveSessionButton'
 import { ConnectionIcon } from '../ConnectionIcon'
 import { OreIDWalletConnectSize, PeerMeta } from '../types'
 
-import './ConnectionListItem.scss'
+import styles from './ConnectionListItem.module.scss'
 
 interface ConnectionListItemProps {
   disconnect: () => void
@@ -35,17 +35,17 @@ export const ConnectionListItem: React.FC<ConnectionListItemProps> = ({
 
   if (!peerMeta) return null
   return (
-    <div className="oreIdWalletConnect-connectionListItem">
+    <div className={styles.connectionListItem}>
       {peerMeta.icons && (
         <div>
           <ConnectionIcon icon={peerMeta.icons[0]} size={40} />
         </div>
       )}
       <div>{peerMeta.name}</div>
-      <div className="oreIdWalletConnect-connectionListItem-actions">
+      <div className={styles.actions}>
         <ActiveSessionButton onClick={() => {}} fontColor="#000" parentSize={parentSize} />
       </div>
-      <div className="oreIdWalletConnect-connectionListItem-menu">
+      <div className={styles.menu}>
         <button onClick={handleClick}>
           <MoreVert />
         </button>

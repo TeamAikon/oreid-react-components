@@ -1,0 +1,29 @@
+.oreIdWalletConnect {
+  display: flex;
+
+  .modal {
+    border-bottom: 1px solid #d0d3d4;
+
+    .tab {
+      text-transform: capitalize !important;
+      font-weight: 600 !important;
+    }
+  }
+}
+
+.tabs-divider {
+  height: 2px !important;
+}
+
+.reconnection {
+  color: #d1d4d5;
+  text-align: center;
+
+  .btn {
+    padding: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #08b6e7;
+  }
+}

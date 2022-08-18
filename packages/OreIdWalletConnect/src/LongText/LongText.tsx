@@ -1,26 +1,10 @@
-import React, { FunctionComponent } from 'react'
 import { Link } from '@material-ui/core'
 import classNames from 'classnames'
+import React, { FunctionComponent } from 'react'
 import { CopyToClipboard } from '../CopyToClipboard'
 import TruncateMiddle from './TruncateMiddle'
 
-import './LongText.scss'
-
-function isNullOrEmpty(obj) {
-  if (!obj) {
-    return true
-  }
-  if (obj === null) {
-    return true
-  }
-  // Check for an empty array too
-  if (Array.isArray(obj)) {
-    if (obj.length === 0) {
-      return true
-    }
-  }
-  return Object.keys(obj).length === 0 && obj.constructor === Object
-}
+import styles from './LongText.module.scss'
 
 interface LongTextProps {
   text: string
@@ -32,10 +16,10 @@ interface LongTextProps {
   onClick?: () => void
 }
 
-export const LongText: FunctionComponent<LongTextProps> = (props) => {
+export const LongText: FunctionComponent<LongTextProps> = props => {
   const { className, href, text, truncateInMiddle, showCopy, onCopy, onClick } = props
   return (
-    <div className="oreIdWalletConnect-longText">
+    <div className={styles.longText}>
       <Link
         component={href ? 'a' : 'div'}
         underline={href ? 'hover' : 'none'}
@@ -44,8 +28,8 @@ export const LongText: FunctionComponent<LongTextProps> = (props) => {
         target="_blank"
         variant="body1"
         className={classNames(className, {
-          'oreIdWalletConnect-longText-link': true,
-          'oreIdWalletConnect-longText-pointerCursor': !!href,
+          [styles.link]: true,
+          [styles.pointerCursor]: !!href,
         })}
         onClick={onClick}
       >
@@ -58,7 +42,7 @@ export const LongText: FunctionComponent<LongTextProps> = (props) => {
         )}
       </Link>
       {showCopy && (
-        <div className="oreIdWalletConnect-longText-copy" onClick={(e) => e.stopPropagation()}>
+        <div className={styles.copy} onClick={e => e.stopPropagation()}>
           <CopyToClipboard text={text} onCopy={onCopy} />
         </div>
       )}

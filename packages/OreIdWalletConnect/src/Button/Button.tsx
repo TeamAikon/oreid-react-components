@@ -1,6 +1,7 @@
+import classNames from 'classnames'
 import React from 'react'
 
-import './Button.scss'
+import styles from './Button.module.scss'
 
 interface ButtonProps {
   onClick: () => void
@@ -8,9 +9,12 @@ interface ButtonProps {
 }
 
 export const Button: React.FC<ButtonProps> = ({ onClick, children, disabled }) => {
-  const cls = disabled ? 'disabled' : ''
   return (
-    <button className={`oreIdWalletConnect-button ${cls}`} disabled={disabled} onClick={onClick}>
+    <button
+      className={classNames(styles.button, { [styles.disabled]: disabled })}
+      disabled={disabled}
+      onClick={onClick}
+    >
       {children}
     </button>
   )

@@ -1,7 +1,6 @@
 import React from 'react'
-
-import './OnSignal.scss'
+import styles from './OnSignal.module.scss'
 
 export const OnSignal: React.FC = () => {
-  return <span className="oreIdWalletConnect-onSignal" />
+  return <span className={styles.onSignal} />
 }

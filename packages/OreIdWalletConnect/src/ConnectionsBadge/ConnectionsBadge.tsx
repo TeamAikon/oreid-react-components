@@ -4,7 +4,7 @@ import { ConnectButton } from '../ConnectButton'
 import { OreIDWalletConnectSize, PeerMeta } from '../types'
 import { ConnectionIconList } from './ConnectionIconList'
 
-import './ConnectionsBadge.scss'
+import styles from './ConnectionsBadge.module.scss'
 
 interface Props {
   parentSize: OreIDWalletConnectSize
@@ -22,15 +22,15 @@ export const ConnectionsBadge: React.FC<Props> = ({
   parentSize,
 }) => {
   return (
-    <div className="oreIdWalletConnect-connectionsBadge">
-      <div className="oreIdWalletConnect-connectionsBadge-icons">
+    <div className={styles.connectionsBadge}>
+      <div className={styles.icons}>
         <ConnectionIconList
           icons={peerMeta
-            .map((metaData) => {
+            .map(metaData => {
               if (!metaData?.icons?.[0]) return ''
               return metaData?.icons[0]
             })
-            .filter((icon) => icon !== '')}
+            .filter(icon => icon !== '')}
           parentSize={parentSize}
         />
       </div>

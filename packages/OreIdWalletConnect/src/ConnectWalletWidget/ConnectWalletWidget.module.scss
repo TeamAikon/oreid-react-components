@@ -1,9 +1,9 @@
-.oreIdWalletConnect-connectWalletWidget {
+.connectWalletWidget {
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
 
-  .oreIdWalletConnect-connectWalletWidget-content {
+  .content {
     font-size: 16px;
     line-height: 24px;
     /* or 150% */
@@ -12,12 +12,13 @@
     letter-spacing: 0.5px;
 
     color: #333333;
+
     a {
       color: #08b6e7;
     }
   }
 
-  .oreIdWalletConnect-connectWalletWidget-example {
+  .example {
     margin-top: 25px;
     background: #333333;
     border: 1px solid #f0f0f0;
@@ -26,7 +27,7 @@
     display: flex;
     flex-direction: row;
 
-    .oreIdWalletConnect-connectWalletWidget-example-code {
+    .code {
       margin-right: 26px;
       background: #ffffff;
       border: 1px solid #000000;
@@ -45,10 +46,12 @@
         color: #555555;
       }
     }
-    .oreIdWalletConnect-connectWalletWidget-example-content {
+
+    .content {
       ul {
         list-style: none;
         padding: 0px;
+
         li {
           font-size: 16px;
           line-height: 24px;
@@ -59,21 +62,21 @@
     }
   }
 
-  .oreIdWalletConnect-connectWalletWidget-input {
+  .input {
     margin: 50px 0px;
 
-    .oreIdWalletConnect-connectWalletWidget-input-container {
+    .container {
       display: flex;
       flex-direction: row;
       align-items: center;
       justify-content: center;
 
-      & > div {
+      &>div {
         padding: 0px 10px;
       }
     }
 
-    .oreIdWalletConnect-connectWalletWidget-error {
+    .error {
       margin-left: 60px;
       margin-top: 5px;
       font-size: 12px;

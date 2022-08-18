@@ -1,19 +1,19 @@
+import { Tooltip } from '@material-ui/core'
+import classNames from 'classnames'
 import React, { FunctionComponent, useState } from 'react'
 import {
   CopyToClipboard as CopyToClipboardComponent,
   Props as CopyToClipboardComponentProps,
 } from 'react-copy-to-clipboard'
-import classNames from 'classnames'
-import { Tooltip } from '@material-ui/core'
 
-import './CopyToClipboard.scss'
+import styles from './CopyToClipboard.module.scss'
 
 interface Props extends CopyToClipboardComponentProps {
   className?: string
   onCopy?: () => void
 }
 
-export const CopyToClipboard: FunctionComponent<Props> = (props) => {
+export const CopyToClipboard: FunctionComponent<Props> = props => {
   const { children, className, onCopy, ...other } = props
   const [copied, setCopied] = useState(false)
   return (
@@ -28,8 +28,8 @@ export const CopyToClipboard: FunctionComponent<Props> = (props) => {
         <div
           onAnimationEnd={() => setCopied(false)}
           className={classNames(className, {
-            'oreIdWalletConnect-copyToClipboard': true,
-            'oreIdWalletConnect-copyToClipboard-copied': copied,
+            [styles.copyToClipboard]: true,
+            [styles.copied]: copied,
           })}
         >
           {children}

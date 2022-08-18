@@ -1,8 +1,8 @@
-.oreIdWalletConnect-approveConnectionWidget {
+.approveConnectionWidget {
   font-family: Roboto;
   font-style: normal;
 
-  .oreIdWalletConnect-approveConnectionWidget-title {
+  .title {
     font-weight: bold;
     font-size: 18px;
     line-height: 31px;
@@ -10,16 +10,17 @@
     color: #333333;
   }
 
-  .oreIdWalletConnect-approveConnectionWidget-name {
+  .name {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 
-    & > div {
+    &>div {
       margin: 10px 0px;
     }
-    & > a {
+
+    &>a {
       cursor: pointer;
       font-weight: normal;
       font-size: 16px;
@@ -29,14 +30,14 @@
     }
   }
 
-  .oreIdWalletConnect-approveConnectionWidget-address {
+  .address {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     margin: 10px 0px;
 
-    & > span {
+    &>span {
       font-weight: normal;
       font-size: 16px;
       line-height: 24px;
@@ -49,7 +50,7 @@
     }
   }
 
-  .oreIdWalletConnect-approveConnectionWidget-description {
+  .description {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -57,10 +58,11 @@
     margin: 10px 0px;
     text-align: center;
 
-    & > div {
+    &>div {
       font-size: 24px;
     }
-    & > span {
+
+    &>span {
       font-weight: normal;
       font-size: 16px;
       line-height: 24px;

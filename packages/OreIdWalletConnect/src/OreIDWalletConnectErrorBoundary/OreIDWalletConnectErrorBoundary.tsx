@@ -16,7 +16,8 @@ export class OreIDWalletConnectErrorBoundary extends React.Component<Props, Stat
     this.state = { hasError: false }
   }
 
-  static getDerivedStateFromError(error: any) {
+  // static getDerivedStateFromError(error: any) {
+  static getDerivedStateFromError() {
     return { hasError: true }
   }
 
@@ -33,7 +34,7 @@ export class OreIDWalletConnectErrorBoundary extends React.Component<Props, Stat
     }
     return (
       <ContainerDimensions>
-        {({ width, height }) => {
+        {({ width }) => {
           return <OreIDWalletConnect width={width} {...props} />
         }}
       </ContainerDimensions>
