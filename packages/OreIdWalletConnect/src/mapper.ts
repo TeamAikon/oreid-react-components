@@ -16,6 +16,11 @@ export const chainNetworkMap: ChainNetworkMap[] = [
     id: 4,
     name: 'Ethereum Rinkeby',
   },
+  {
+    chainNetwork: ChainNetwork.EthGoerli,
+    id: 5,
+    name: 'Ethereum Goerli',
+  },
 ]
 
 export const mapWalletConnectRefToConnection = (connection: WalletConnectRef): Connection => {

@@ -27,6 +27,7 @@ export enum ChainNetwork {
   EthMain = 'eth_main', // 1
   EthRopsten = 'eth_ropsten', // 3
   EthRinkeby = 'eth_rinkeby', // 4
+  EthGoerli = 'eth_goerli', // 5
   MigrateEosMain = 'migrate_eos_main',
   OreMain = 'ore_main',
   OreTest = 'ore_test',
