@@ -17,6 +17,11 @@ export const chainNetworkMap: ChainNetworkMap[] = [
     id: 4,
     name: 'Ethereum Rinkeby',
   },
+  {
+    chainNetwork: ChainNetwork.EthGoerli,
+    id: 5,
+    name: 'Ethereum Goerli',
+  },
 ]
 
 export const mapWalletConnectRefToConnection = (connection: WalletConnectRef): Connection => {
@@ -62,19 +67,19 @@ export const mapConnectionToWalletConnectRefSession = (connection: Connection, c
 }
 
 export const mapChainIdToChainNetwork = (chainId: number): ChainNetwork => {
-  const chainNetwork = chainNetworkMap.find((cnm) => cnm.id === chainId)?.chainNetwork
+  const chainNetwork = chainNetworkMap.find(cnm => cnm.id === chainId)?.chainNetwork
   if (!chainNetwork) throw Error(`Chain Id ${chainId} not supported`)
   return chainNetwork
 }
 
 export const mapChainNetworkToChainId = (chainNetwork: string): number => {
-  const chainId = chainNetworkMap.find((cnm) => cnm.chainNetwork === chainNetwork)?.id
+  const chainId = chainNetworkMap.find(cnm => cnm.chainNetwork === chainNetwork)?.id
   if (!chainId) throw Error(`Chain network ${chainNetwork} not supported`)
   return chainId
 }
 
 export const mapChainNetworkToName = (chainNetwork: string): string => {
-  const chainName = chainNetworkMap.find((cnm) => cnm.chainNetwork === chainNetwork)?.name
+  const chainName = chainNetworkMap.find(cnm => cnm.chainNetwork === chainNetwork)?.name
   if (!chainName) throw Error(`Chain network ${chainNetwork} not supported`)
   return chainName
 }

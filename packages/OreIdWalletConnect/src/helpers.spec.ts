@@ -5,6 +5,7 @@ it('Check if has support', () => {
   expect(hasChainSupport(ChainNetwork.EthMain)).toBe(true)
   expect(hasChainSupport(ChainNetwork.EthRinkeby)).toBe(true)
   expect(hasChainSupport(ChainNetwork.EthRopsten)).toBe(true)
+  expect(hasChainSupport(ChainNetwork.EthGoerli)).toBe(true)
 })
 
 it('Check if has no support', () => {
