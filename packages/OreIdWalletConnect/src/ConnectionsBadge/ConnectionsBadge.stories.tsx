@@ -7,7 +7,7 @@ export default {
   component: ConnectionsBadge,
 }
 
-const peerMeta: PeerMeta[] = ([
+const peerMeta: PeerMeta[] = [
   {
     icons: ['https://app.uniswap.org/./favicon.png'],
   },
@@ -20,7 +20,20 @@ const peerMeta: PeerMeta[] = ([
   {
     icons: ['https://example.walletconnect.org/favicon.ico'],
   },
-] as unknown) as PeerMeta[]
+  {
+    icons: ['https://app.uniswap.org/./favicon.png'],
+  },
+  {
+    icons: ['https://example.walletconnect.org/favicon.ico'],
+  },
+  {
+    icons: ['https://app.uniswap.org/./favicon.png'],
+  },
+  {
+    icons: ['https://example.walletconnect.org/favicon.ico'],
+  },
+  // eslint-disable-next-line prettier/prettier
+] as unknown as PeerMeta[]
 
 const Template = (props: any) => {
   return (

@@ -1,0 +1,27 @@
+.button {
+  display: flex;
+  align-items: center;
+  border: none;
+  border-radius: 100px;
+  color: #fff;
+  background: transparent;
+  cursor: pointer;
+  padding: 10px 12px;
+  white-space: nowrap;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  &.small {
+    padding: 2px;
+
+    &:hover {
+      background: transparent;
+    }
+  }
+}
+
+.text {
+  margin-left: 5px;
+}

@@ -1,4 +1,4 @@
-.oreIdWalletConnect-connectionListItem {
+.connectionListItem {
   font-family: Roboto;
   font-style: normal;
   display: flex;
@@ -11,14 +11,14 @@
     border-bottom: none;
   }
 
-  .oreIdWalletConnect-connectionListItem-actions {
+  .actions {
     width: 135 px;
     display: flex;
     justify-content: center;
   }
 
-  .oreIdWalletConnect-connectionListItem-menu {
-    & > button {
+  .menu {
+    &>button {
       background: transparent;
       border: none;
       padding: 2px 5px;

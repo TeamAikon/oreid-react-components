@@ -1,0 +1,17 @@
+.connectionsBadge {
+  display: flex;
+  align-items: center;
+
+  .icons {
+    display: flex;
+
+    &>* {
+      margin-right: -14px;
+
+      &:last-child {
+        margin-right: 6px;
+      }
+    }
+  }
+
+}

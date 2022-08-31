@@ -1,0 +1,22 @@
+.container {
+  position: relative;
+
+  .connectionsNumber {
+    position: absolute;
+    background-color: #fff;
+    color: #000;
+    border-radius: 100%;
+    padding: 2px 0px;
+    font-size: 9px;
+    right: -5px;
+    bottom: 1px;
+    width: 15px;
+    text-align: center;
+  }
+
+  .connectionIcon {
+    background: #e8e8e8;
+    border: 2px solid #fff;
+    border-radius: 100%;
+  }
+}

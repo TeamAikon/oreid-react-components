@@ -1,6 +1,6 @@
 import React from 'react'
 
-import './OutlineButton.scss'
+import styles from './OutlineButton.module.scss'
 
 interface ButtonProps {
   onClick: () => void
@@ -9,7 +9,7 @@ interface ButtonProps {
 
 export const OutlineButton: React.FC<ButtonProps> = ({ onClick, children, disabled }) => {
   return (
-    <button className="oreIdWalletConnect-outlineButton" disabled={disabled} onClick={onClick}>
+    <button className={styles.button} disabled={disabled} onClick={onClick}>
       {children}
     </button>
   )

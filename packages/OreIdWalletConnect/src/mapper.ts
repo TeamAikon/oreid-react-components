@@ -1,5 +1,4 @@
-import WalletConnectClient from '@walletconnect/client'
-import { ChainNetwork, ChainNetworkMap, Connection, WalletConnectRef, OreIDWalletConnectConfig } from './types'
+import { ChainNetwork, ChainNetworkMap, Connection, OreIDWalletConnectConfig, WalletConnectRef } from './types'
 
 export const chainNetworkMap: ChainNetworkMap[] = [
   {

@@ -1,5 +1,5 @@
-import { mapWalletConnectRefToConnection, mapConnectionToWalletConnectRefSession } from './mapper'
-import { WalletConnectRef, ChainNetwork } from './types'
+import { mapConnectionToWalletConnectRefSession, mapWalletConnectRefToConnection } from './mapper'
+import { ChainNetwork } from './types'
 
 it('convert WalletConnectRef To Connection', () => {
   const session = {

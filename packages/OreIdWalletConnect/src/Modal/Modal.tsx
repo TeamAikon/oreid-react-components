@@ -1,10 +1,9 @@
-import React from 'react'
 import { Button, Dialog as MuiDialog, DialogProps } from '@material-ui/core'
-import { Close as CloseIcon } from '@material-ui/icons'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
+import { Close as CloseIcon } from '@material-ui/icons'
+import React from 'react'
 import theme from '../assets/_styles/theme'
-
-import './Modal.scss'
+import styles from './Modal.module.scss'
 import { ModalHeaderIcon } from './ModalHeaderIcon'
 
 interface ModalProps extends DialogProps {
@@ -20,21 +19,21 @@ export const Modal: React.FC<ModalProps> = ({ children, header, ...props }) => {
       {...props}
       classes={{
         root: 'root',
-        paper: 'oreIdWalletConnect-modal-paper',
+        paper: styles.modal,
       }}
     >
       {props.open && (
         <>
           {header && (
-            <div className="oreIdWalletConnect-modal-paper-header">
+            <div className={styles.header}>
               <Button
-                className="oreIdWalletConnect-modal-paper-header-btn"
+                className={styles.btn}
                 startIcon={<CloseIcon />}
                 onClick={() => props.onClose && props.onClose({}, 'backdropClick')}
               >
                 Cancel
               </Button>
-              <div className="oreIdWalletConnect-modal-paper-header-img">
+              <div className={styles.img}>
                 <ModalHeaderIcon />
               </div>
             </div>

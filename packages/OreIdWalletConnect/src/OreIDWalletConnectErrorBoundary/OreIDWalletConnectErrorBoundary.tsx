@@ -1,6 +1,7 @@
 import React from 'react'
-import { OreIDWalletConnectProps } from '../types'
+import ContainerDimensions from 'react-container-dimensions'
 import { OreIDWalletConnect } from '../OreIDWalletConnect'
+import { OreIDWalletConnectProps } from '../types'
 
 interface Props extends OreIDWalletConnectProps {
   onControllerError?: (error: any, errorInfo: any) => void
@@ -15,7 +16,8 @@ export class OreIDWalletConnectErrorBoundary extends React.Component<Props, Stat
     this.state = { hasError: false }
   }
 
-  static getDerivedStateFromError(error: any) {
+  // static getDerivedStateFromError(error: any) {
+  static getDerivedStateFromError() {
     return { hasError: true }
   }
 
@@ -30,6 +32,12 @@ export class OreIDWalletConnectErrorBoundary extends React.Component<Props, Stat
     if (this.state.hasError) {
       return null
     }
-    return <OreIDWalletConnect {...props} />
+    return (
+      <ContainerDimensions>
+        {({ width }) => {
+          return <OreIDWalletConnect width={width} {...props} />
+        }}
+      </ContainerDimensions>
+    )
   }
 }

@@ -48,7 +48,7 @@ export const ConnectWalletContainer: React.FC<ConnectWalletContainerProps> = ({
         setState(WalletContainerState.WaitingUri)
         setLocalError('Connection timeout, please try again')
       }, 6000)
-    } catch (e) {
+    } catch (e: any) {
       setConnection(undefined)
       setState(WalletContainerState.WaitingUri)
       if (e.message === 'URI format is invalid') {
@@ -60,7 +60,7 @@ export const ConnectWalletContainer: React.FC<ConnectWalletContainerProps> = ({
   useEffect(() => {
     if (!connection) return
     if (!connection.subscribed) {
-      connection.connector.createSession().catch((err) => {
+      connection.connector.createSession().catch(err => {
         setConnection(undefined)
         setState(WalletContainerState.WaitingUri)
 

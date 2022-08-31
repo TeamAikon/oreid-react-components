@@ -1,5 +1,4 @@
 import WalletConnectClient from '@walletconnect/client'
-import { JsonRpc } from '@walletconnect/types'
 
 export enum ModalConnections {
   Closed,
@@ -42,6 +41,12 @@ export enum ChainNetwork {
   PolygonMumbai = 'polygon_mumbai',
 }
 
+export enum OreIDWalletConnectSize {
+  Wide = 213,
+  Medium = 121,
+  Small = 51,
+}
+
 export type ConnectionEvent = (connection?: Connection, payload?: any) => void
 export type WalletConnectRefEvent = (connection: WalletConnectRef, payload?: any) => void
 
@@ -69,6 +74,7 @@ export interface OreIDWalletConnectProps {
   onConnectionDelete?: ConnectionEvent
   onAcceptRequest: (transaction: WalletConnectTransaction, connection: Connection) => void
   onError?: (eventName: string, error: Error, connection?: Connection) => void
+  CustomButton?: React.FC<{ onClick: () => void }>
 }
 
 export interface PeerMeta {

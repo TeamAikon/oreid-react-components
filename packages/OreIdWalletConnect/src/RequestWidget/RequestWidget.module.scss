@@ -1,10 +1,10 @@
-.oreIdWalletConnect-requestWidget {
+.requestWidget {
   font-family: Roboto;
   font-style: normal;
   color: #333333;
   letter-spacing: 0.5px;
 
-  .oreIdWalletConnect-requestWidget-content {
+  .content {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -36,20 +36,20 @@
       text-align: center;
     }
 
-    .oreIdWalletConnect-requestWidget-accountAddress {
+    .accountAddress {
       color: #08b6e7;
       text-overflow: ellipsis;
       overflow: hidden;
     }
   }
 
-  .oreIdWalletConnect-requestWidget-divider {
+  .divider {
     border: 1px solid #d0d3d4;
     width: 100%;
     margin: 32px 0px;
   }
 
-  .oreIdWalletConnect-requestWidget-name {
+  .name {
     display: flex;
     flex-direction: row;
     align-items: center;

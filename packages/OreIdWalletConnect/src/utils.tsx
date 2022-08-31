@@ -7,6 +7,7 @@ export const factoryConnection = (
   config: OreIDWalletConnectConfig,
   connection?: Connection,
 ): WalletConnectRef => {
+  // eslint-disable-next-line prefer-destructuring
   const storageId = uri.split('key=')[1]
   const session = connection ? mapConnectionToWalletConnectRefSession(connection, config) : undefined
   const connector = new WalletConnect({ uri, storageId, session })

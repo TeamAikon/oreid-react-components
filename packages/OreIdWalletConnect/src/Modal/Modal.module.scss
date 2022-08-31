@@ -1,21 +1,22 @@
-.oreIdWalletConnect-modal-paper {
+.modal {
   width: 25%;
   min-width: 400px;
   padding: 40px;
 
-  &-header {
-    &-btn {
+  .header {
+    .btn {
       color: #08b6e7 !important;
       text-transform: capitalize !important;
       margin: -20px 0 0 -20px !important;
       border-radius: 100px !important;
     }
+
     .MuiButton-label {
       font-size: 12px !important;
       font-weight: 500 !important;
     }
 
-    &-img {
+    .img {
       margin-bottom: 40px;
       display: flex;
       align-items: center;
