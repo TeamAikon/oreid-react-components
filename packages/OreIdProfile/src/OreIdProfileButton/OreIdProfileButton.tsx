@@ -1,6 +1,5 @@
 import { Auth, OreId, UserData } from "oreid-js";
 import React, { useEffect, useState } from "react";
-import { Style } from "../types";
 import { Button } from "../Button";
 import { Icon } from "../Icon";
 import { OreIdProfile } from "../OreIdProfile";
@@ -20,7 +19,7 @@ export const OreIdProfileButton: React.FC<Props> = ({
 	align,
 }) => {
 	const [isLoggedIn, setIsLoggedIn] = useState(oreId.auth.isLoggedIn);
-	const [userData, setUserData] = useState<UserData | undefined>(undefined);
+	const [userData, setUserData] = useState<UserData | undefined>();
 	const [showModal, setShowModal] = useState(false);
 
 	useEffect(() => {
@@ -32,6 +31,7 @@ export const OreIdProfileButton: React.FC<Props> = ({
 				setUserData(undefined);
 			}
 		};
+		if (oreId.auth.isLoggedIn && !userData) updateState(oreId.auth);
 		oreId.auth.subscribe(updateState);
 		return () => {
 			oreId.auth.unsubscribe(updateState);
@@ -55,7 +55,7 @@ export const OreIdProfileButton: React.FC<Props> = ({
 									})}
 									style={{ color: style?.textColor || "#222222" }}
 								>
-									<Icon icon={userData.picture as any} size={32} />{" "}
+									<Icon icon={userData.picture.href} size={32} />{" "}
 									{userData.name}
 								</div>
 							</Button>
