@@ -30,16 +30,12 @@ Default.args = {
 			logout: () => console.log("Logout"),
 			user: {
 				getData: async () => ({
-					picture: {
-						href: "https://upload.wikimedia.org/wikipedia/commons/2/29/Solid_green.svg"
-					},
+					picture: "https://upload.wikimedia.org/wikipedia/commons/2/29/Solid_green.svg",
 					name: "Bruno Motta",
 					accountName: "accountName",
 				}),
 				data: {
-					picture: {
-						href: "https://upload.wikimedia.org/wikipedia/commons/2/29/Solid_green.svg"
-					},
+					picture: "https://upload.wikimedia.org/wikipedia/commons/2/29/Solid_green.svg",
 					name: "Bruno Motta",
 				},
 			},

@@ -55,7 +55,7 @@ export const OreIdProfileButton: React.FC<Props> = ({
 									})}
 									style={{ color: style?.textColor || "#222222" }}
 								>
-									<Icon icon={userData.picture.href} size={32} />{" "}
+									<Icon icon={userData.picture} size={32} />{" "}
 									{userData.name}
 								</div>
 							</Button>
