@@ -26,3 +26,9 @@ declare module "*.jpg";
 declare module "*.png";
 
 declare module "@sheerun/mutationobserver-shim";
+
+interface Style {
+	textColor?: string;
+	linkColor?: string;
+	backgroundColor?: string;
+}
