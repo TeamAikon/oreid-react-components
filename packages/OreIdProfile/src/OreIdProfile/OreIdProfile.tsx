@@ -46,10 +46,7 @@ export const OreIdProfile: React.FC<Props> = ({
 		>
 			<div className={styles.OreIdProfile}>
 				<span>
-					<Icon
-						size={72}
-						icon={data.picture.href}
-					/>
+					<Icon size={72} icon={data.picture} />
 				</span>
 
 				<span className={styles.name} style={{ color: textColor }}>
