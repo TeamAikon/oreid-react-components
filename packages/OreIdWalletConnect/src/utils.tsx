@@ -75,13 +75,13 @@ export const unsubscribeEvents = (connection: WalletConnectRef) => {
 }
 
 /** Typescript Typeguard to verify that the value is in the enumType specified  */
-export function isInEnum<T>(enumType: T, value: any): value is T[keyof T] {
+export function isInEnum<T extends Object>(enumType: T, value: any): value is T[keyof T] {
   return Object.values(enumType).includes(value as T[keyof T])
 }
 
 /** Typescript Typeguard helper to ensure that a string value can be assigned to an Enum type
  *  If a value can't be matched to a valid option in the enum, returns null (or throws if throwIfInvalid = true) */
-export function toEnumValue<T>(e: T, value: any, throwIfInvalid = false): T[keyof T] | null {
+export function toEnumValue<T extends Object>(e: T, value: any, throwIfInvalid = false): T[keyof T] | null {
   if (value === null || value === undefined) return null
   if (isInEnum<T>(e, value)) {
     return value
