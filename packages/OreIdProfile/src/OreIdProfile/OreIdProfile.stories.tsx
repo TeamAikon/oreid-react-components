@@ -31,18 +31,20 @@ export const Default = Template.bind({});
 Default.args = {
 	oreId: {
 		auth: {
+			accountName: "accountName",
 			isLoggedIn: true,
 			logout: () => console.log("Logout"),
 			user: {
-				getData: () => console.log("getData"),
+				getData: async () => console.log("getData"),
 				data: {
-					picture:
-						"https://upload.wikimedia.org/wikipedia/commons/2/29/Solid_green.svg",
+					picture: "https://upload.wikimedia.org/wikipedia/commons/2/29/Solid_green.svg",
 					name: "Bruno Motta",
-					accountName: "accountName",
 				},
 			},
 		},
+		popup: {
+			buy: (buyParams) => console.log('buy!', buyParams)
+		}
 	},
 	style: {
 		backgroundColor: "red",

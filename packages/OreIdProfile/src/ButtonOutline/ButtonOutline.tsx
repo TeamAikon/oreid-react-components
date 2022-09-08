@@ -1,23 +1,27 @@
+import classNames from "classnames";
 import React from "react";
 
 import styles from "./ButtonOutline.module.scss";
 
-interface ButtonOutlineProps {
+interface ButtonOutlineProps extends React.HTMLProps<HTMLButtonElement> {
 	fontColor?: string;
-	label: string;
-	onClick: () => void;
+	type?: any
 }
 
 export const ButtonOutline: React.FC<ButtonOutlineProps> = ({
-	onClick,
-	label,
 	fontColor = "#fff",
+	className,
+	children,
+	...rest
 }) => (
 	<button
-		className={styles.ButtonOutline}
+		className={classNames(styles.ButtonOutline, className)}
 		style={{ color: fontColor, borderColor: fontColor }}
-		onClick={onClick}
+		{...rest}
 	>
-		<span>{label}</span>
+		{rest.label && (
+			<span>{rest.label}</span>
+		)}
+		{children}
 	</button>
 );

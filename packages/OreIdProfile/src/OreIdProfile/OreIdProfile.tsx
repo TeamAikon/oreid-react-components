@@ -1,12 +1,11 @@
-import { OreId } from "oreid-js";
 import React, { useEffect } from "react";
-// import { ButtonOutline } from "../ButtonOutline";
+import { ChainNetwork, OreId } from "oreid-js";
+import { ButtonOutline } from "../ButtonOutline";
 import { Icon } from "../Icon";
 import { LongText } from "../LongText";
 import { FloatBox } from "../FloatBox";
-
+import { startCase } from "lodash";
 import styles from "./OreIdProfile.module.scss";
-import { Style } from "../types";
 
 interface Props {
 	oreId: OreId;
@@ -47,11 +46,7 @@ export const OreIdProfile: React.FC<Props> = ({
 		>
 			<div className={styles.OreIdProfile}>
 				<span>
-					<Icon
-						size={72}
-						//@ts-ignore
-						icon={data.picture}
-					/>
+					<Icon size={72} icon={data.picture} />
 				</span>
 
 				<span className={styles.name} style={{ color: textColor }}>
@@ -65,18 +60,24 @@ export const OreIdProfile: React.FC<Props> = ({
 				</span>
 
 				<span className={styles.account} style={{ color: linkColor }}>
-					<LongText text={data.accountName} truncateInMiddle showCopy />
+					<LongText text={oreId.auth.accountName} truncateInMiddle showCopy />
 				</span>
 
-				{/* <span className={styles.manage}
+				<div className={styles.buy}>
 					<ButtonOutline
-						onClick={() => {
-							console.log("Click");
-						}}
-						label="Manage your account"
-						fontColor={linkColor}
+						label="Buy Tokens"
+						fontColor={textColor}
 					/>
-				</span> */}
+					<div className={styles.dropdown}>
+						{Object.keys(ChainNetwork).map(chainNetwork => (
+							<span
+								onClick={() => oreId.popup.buy({ chainAccount: oreId.auth.accountName, chainNetwork: ChainNetwork[chainNetwork] })}
+							>
+								{startCase(chainNetwork)}
+							</span>
+						))}
+					</div>
+				</div>
 
 				<span className={styles.logout}>
 					<button
