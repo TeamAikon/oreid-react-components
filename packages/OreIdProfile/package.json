@@ -60,7 +60,7 @@
     "css-loader": "5.2.7",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^24.9.0",
-    "oreid-js": "^4.0.5",
+    "oreid-js": "4.3.0",
     "postcss": "^8.4.5",
     "postcss-url": "^10.1.3",
     "prettier": "^2.2.1",
