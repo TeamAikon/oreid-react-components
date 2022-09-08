@@ -9447,10 +9447,10 @@ optionator@^0.8.1:
     type-check "~0.3.2"
     word-wrap "~1.2.3"
 
-oreid-js@^4.0.5:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/oreid-js/-/oreid-js-4.1.1.tgz#c7662e683f75d2fedf6556d5bffe117538dc5382"
-  integrity sha512-fLDA21/fpiOPAbUysj4WTGZ6G7in1QqyuoQ+kwKxYqzyFtBdmalzgb18zLPTObgaznMjGyWWq2lb6QhP7ZD1/g==
+oreid-js@4.3.0:
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/oreid-js/-/oreid-js-4.3.0.tgz#8bb3cf44388e2b43e84699b15a09614a627a783e"
+  integrity sha512-yiXFapLvve3/HcOHdj03q2tevwmYs6iCAoWTSM79Vtr7l2ZbuLJDTcrXAtZMhCe2EqMX0FmiJ8bGjQJp5AU5sg==
   dependencies:
     "@aikon/eos-transit" "^4.0.8"
     "@msgpack/msgpack" "^2.7.2"
