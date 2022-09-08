@@ -11,12 +11,13 @@ interface ButtonOutlineProps extends React.HTMLProps<HTMLButtonElement> {
 export const ButtonOutline: React.FC<ButtonOutlineProps> = ({
 	fontColor = "#fff",
 	className,
+	style,
 	children,
 	...rest
 }) => (
 	<button
 		className={classNames(styles.ButtonOutline, className)}
-		style={{ color: fontColor, borderColor: fontColor }}
+		style={{ color: fontColor, borderColor: fontColor, ...style, }}
 		{...rest}
 	>
 		{rest.label && (

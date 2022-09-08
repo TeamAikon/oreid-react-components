@@ -83,12 +83,8 @@ export function isInEnum<T extends Object>(enumType: T, value: any): value is T[
  *  If a value can't be matched to a valid option in the enum, returns null (or throws if throwIfInvalid = true) */
 export function toEnumValue<T extends Object>(e: T, value: any, throwIfInvalid = false): T[keyof T] | null {
   if (value === null || value === undefined) return null
-  if (isInEnum<T>(e, value)) {
-    return value
-  }
+  if (isInEnum(e, value)) return value
   const errMsg = `Value ${JSON.stringify(value)} is not a valid member of enum ${JSON.stringify(e)}.`
-  if (throwIfInvalid) {
-    throw new Error(errMsg)
-  }
+  if (throwIfInvalid) throw new Error(errMsg)
   return null
 }
