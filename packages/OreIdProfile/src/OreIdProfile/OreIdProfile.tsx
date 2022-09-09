@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { ChainNetwork, OreId } from "oreid-js";
+import { OreId } from "oreid-js";
 import { ButtonOutline } from "../ButtonOutline";
 import { Icon } from "../Icon";
 import { LongText } from "../LongText";
