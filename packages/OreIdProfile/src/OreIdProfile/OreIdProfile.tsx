@@ -69,11 +69,11 @@ export const OreIdProfile: React.FC<Props> = ({
 						fontColor={textColor}
 					/>
 					<div className={styles.dropdown}>
-						{Object.keys(ChainNetwork).map(chainNetwork => (
+						{oreId.auth.user.data.chainAccounts.map(userChainAccount => (
 							<span
-								onClick={() => oreId.popup.buy({ chainAccount: oreId.auth.accountName, chainNetwork: ChainNetwork[chainNetwork] })}
+								onClick={() => oreId.popup.buy({ chainAccount: userChainAccount.chainAccount, chainNetwork: userChainAccount.chainNetwork })}
 							>
-								{startCase(chainNetwork)}
+								{`${userChainAccount.chainAccount} (${userChainAccount.chainNetwork})`}
 							</span>
 						))}
 					</div>
