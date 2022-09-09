@@ -69,7 +69,7 @@ export const OreIdProfile: React.FC<Props> = ({
 						fontColor={textColor}
 					/>
 					<div className={styles.dropdown}>
-						{oreId.auth.user.data.chainAccounts.map(userChainAccount => (
+						{data.chainAccounts.map(userChainAccount => (
 							<span
 								onClick={() => oreId.popup.buy({ chainAccount: userChainAccount.chainAccount, chainNetwork: userChainAccount.chainNetwork })}
 							>
