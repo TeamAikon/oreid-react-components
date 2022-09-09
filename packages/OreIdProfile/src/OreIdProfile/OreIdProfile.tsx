@@ -4,7 +4,6 @@ import { ButtonOutline } from "../ButtonOutline";
 import { Icon } from "../Icon";
 import { LongText } from "../LongText";
 import { FloatBox } from "../FloatBox";
-import { startCase } from "lodash";
 import styles from "./OreIdProfile.module.scss";
 
 interface Props {
