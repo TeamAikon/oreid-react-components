@@ -5,6 +5,7 @@ import { Icon } from "../Icon";
 import { LongText } from "../LongText";
 import { FloatBox } from "../FloatBox";
 import styles from "./OreIdProfile.module.scss";
+import { startCase } from "lodash";
 
 interface Props {
 	oreId: OreId;
@@ -68,12 +69,13 @@ export const OreIdProfile: React.FC<Props> = ({
 						fontColor={textColor}
 					/>
 					<div className={styles.dropdown}>
-						{data.chainAccounts.map(userChainAccount => (
-							<span
+						{data.chainAccounts?.map(userChainAccount => (
+							<div
 								onClick={() => oreId.popup.buy({ chainAccount: userChainAccount.chainAccount, chainNetwork: userChainAccount.chainNetwork })}
 							>
-								{`${userChainAccount.chainAccount} (${userChainAccount.chainNetwork})`}
-							</span>
+								<LongText text={userChainAccount.chainAccount} truncateInMiddle />
+								{`(${startCase(userChainAccount.chainNetwork)})`}
+							</div>
 						))}
 					</div>
 				</div>
