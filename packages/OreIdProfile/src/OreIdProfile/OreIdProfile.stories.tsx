@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { oreidForStorybook } from "../utils/mock-storybook";
 import { OreIdProfile } from "./OreIdProfile";
 
 export default {
@@ -29,29 +30,7 @@ const Template = (props: any) => {
 
 export const Default = Template.bind({});
 Default.args = {
-	oreId: {
-		auth: {
-			accountName: "accountName",
-			isLoggedIn: true,
-			logout: () => console.log("Logout"),
-			user: {
-				getData: async () => console.log("getData"),
-				data: {
-					picture: "https://upload.wikimedia.org/wikipedia/commons/2/29/Solid_green.svg",
-					name: "Bruno Motta",
-					chainAccounts: [
-						{
-							chainAccount: 'accountName',
-							chainNetwork: 'chain_network'
-						}
-					]
-				},
-			},
-		},
-		popup: {
-			buy: (buyParams) => console.log('buy!', buyParams)
-		}
-	},
+	oreId: oreidForStorybook,
 	style: {
 		backgroundColor: "red",
 		linkColor: "blue",
