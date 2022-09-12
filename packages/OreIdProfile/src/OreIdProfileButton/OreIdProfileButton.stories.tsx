@@ -37,6 +37,12 @@ Default.args = {
 				data: {
 					picture: "https://upload.wikimedia.org/wikipedia/commons/2/29/Solid_green.svg",
 					name: "Bruno Motta",
+					chainAccounts: [
+						{
+							chainAccount: 'accountName',
+							chainNetwork: 'chain_network'
+						}
+					]					
 				},
 			},
 		},
