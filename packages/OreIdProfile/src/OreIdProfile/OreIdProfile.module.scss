@@ -36,7 +36,10 @@
       min-width: 160px;
       box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
       z-index: 1;
-      span {
+      > div {
+        display: flex;
+        gap: 5px;
+        white-space: nowrap;
         margin: 0;
         color: black;
         padding: 4px 16px;
