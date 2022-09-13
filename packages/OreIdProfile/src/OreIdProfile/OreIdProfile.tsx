@@ -1,12 +1,11 @@
-import { startCase } from "lodash";
-import { OreId } from "oreid-js";
 import React, { useEffect } from "react";
-import { ButtonOutline } from "../ButtonOutline";
-import { FloatBox } from "../FloatBox";
+import { OreId } from "oreid-js";
 import { Icon } from "../Icon";
 import { LongText } from "../LongText";
-import { ProfileProvider } from "../ProfileContext";
+import { FloatBox } from "../FloatBox";
 import styles from "./OreIdProfile.module.scss";
+import { BuyButton } from "../BuyButton";
+import { ProfileProvider } from "../ProfileContext";
 
 interface Props {
 	oreId: OreId;
@@ -29,6 +28,7 @@ export const OreIdProfile: React.FC<Props> = ({
 	const textColor = style?.textColor || "#222222";
 	const linkColor = style?.linkColor || "#08B6E7";
 	const backgroundColor = style?.backgroundColor || "#fff";
+
 	useEffect(() => {
 		if (oreId.auth.isLoggedIn) {
 			oreId.auth.user.getData();
@@ -36,11 +36,12 @@ export const OreIdProfile: React.FC<Props> = ({
 	}, []);
 
 	if (!oreId.auth.isLoggedIn || !data) return null;
-	if (oreId.isInitialized !== true) return null;
+	if (!oreId.isInitialized) return null;
+
 	return (
 		<ProfileProvider
+			linkColor={textColor}
 			textColor={textColor}
-			linkColor={linkColor}
 			backgroundColor={backgroundColor}
 		>
 			<FloatBox
@@ -70,27 +71,7 @@ export const OreIdProfile: React.FC<Props> = ({
 						<LongText text={oreId.auth.accountName} truncateInMiddle showCopy />
 					</span>
 
-					<div className={styles.buy}>
-						<ButtonOutline label="Buy Tokens" fontColor={textColor} />
-						<div className={styles.dropdown}>
-							{data.chainAccounts?.map((userChainAccount) => (
-								<div
-									onClick={() =>
-										oreId.popup.buy({
-											chainAccount: userChainAccount.chainAccount,
-											chainNetwork: userChainAccount.chainNetwork,
-										})
-									}
-								>
-									<LongText
-										text={userChainAccount.chainAccount}
-										truncateInMiddle
-									/>
-									{`(${startCase(userChainAccount.chainNetwork)})`}
-								</div>
-							))}
-						</div>
-					</div>
+					<BuyButton oreId={oreId} />
 
 					<span className={styles.logout}>
 						<button

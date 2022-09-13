@@ -1,36 +1,33 @@
 import { startCase } from "lodash";
-import { ChainNetwork, OreId } from "oreid-js";
+import { OreId } from "oreid-js";
 import React, { useContext } from "react";
 import { ButtonOutline } from "../ButtonOutline";
 import { ProfileContext } from "../ProfileContext";
-import { getAvaliableChainNetworks } from "../utils";
+
 import styles from "./BuyButton.module.scss";
 // import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowDropDown from "@material-ui/icons/ArrowDropDown";
+import { LongText } from "../LongText";
 
 interface Props {
 	oreId: OreId;
 }
 
 export const BuyButton: React.FC<Props> = ({ oreId }) => {
-	const avaliableChainNetworks = getAvaliableChainNetworks({ oreId });
-	const hasDropdown = avaliableChainNetworks.length > 1;
+	const chainAccounts = oreId?.auth?.user?.data?.chainAccounts || [];
+	const hasDropdown = chainAccounts.length > 1;
 	const { textColor } = useContext(ProfileContext);
-
-	const buyAction = (chainNetwork: ChainNetwork) => {
-		oreId.popup.buy({
-			chainAccount: oreId.auth.accountName,
-			chainNetwork: chainNetwork,
-		});
-	};
 
 	return (
 		<div className={styles.buyButton}>
 			<ButtonOutline
 				fontColor={textColor}
 				onClick={() => {
-					if (!hasDropdown) {
-						buyAction(avaliableChainNetworks[0]);
+					if (chainAccounts.length === 1) {
+						oreId.popup.buy({
+							chainAccount: chainAccounts[0].chainAccount,
+							chainNetwork: chainAccounts[0].chainNetwork,
+						});
 					}
 				}}
 			>
@@ -45,10 +42,20 @@ export const BuyButton: React.FC<Props> = ({ oreId }) => {
 			</ButtonOutline>
 			{hasDropdown && (
 				<div className={styles.dropdown}>
-					{avaliableChainNetworks.map((chainNetwork) => (
-						<span key={chainNetwork} onClick={() => buyAction(chainNetwork)}>
-							{startCase(chainNetwork)}
-						</span>
+					{oreId.auth.user.data.chainAccounts?.map((userChainAccount) => (
+						<div
+							className={styles.dropdownItem}
+							key={`${userChainAccount.chainNetwork}:${userChainAccount.chainAccount}`}
+							onClick={() =>
+								oreId.popup.buy({
+									chainAccount: userChainAccount.chainAccount,
+									chainNetwork: userChainAccount.chainNetwork,
+								})
+							}
+						>
+							<LongText text={userChainAccount.chainAccount} truncateInMiddle />
+							{`(${startCase(userChainAccount.chainNetwork)})`}
+						</div>
 					))}
 				</div>
 			)}

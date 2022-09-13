@@ -1,9 +1,10 @@
 .buyButton {
+
   .label {
     display: flex;
     align-items: center;
 
-    * {
+    >span {
       padding: 0px;
       margin: 0px;
     }
@@ -17,11 +18,10 @@
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
 
-    max-height: 300px;
-    overflow-y: auto;
-
-
-    span {
+    .dropdownItem {
+      display: flex;
+      gap: 5px;
+      white-space: nowrap;
       margin: 0;
       color: black;
       padding: 4px 16px;
