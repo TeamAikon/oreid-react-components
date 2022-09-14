@@ -13,8 +13,14 @@ interface Props {
 	oreId: OreId;
 }
 
+function onlyUnique(value: any, index: number, self: string | any[]) {
+  return self.indexOf(value) === index;
+}
+
 export const BuyButton: React.FC<Props> = ({ oreId }) => {
-	const chainAccounts = oreId?.auth?.user?.data?.chainAccounts || [];
+	let chainAccounts = oreId?.auth?.user?.data?.chainAccounts || [];
+	chainAccounts = chainAccounts?.filter(ca => !ca.chainNetwork.startsWith('ore')) // filter out ORE networks - we dont sell anything on ORE
+	const chainNetworks = chainAccounts?.map(ca => ca.chainNetwork).filter(onlyUnique) // unique set of chain networks in use
 	const hasDropdown = chainAccounts.length > 1;
 	const { textColor } = useContext(ProfileContext);
 
@@ -23,10 +29,11 @@ export const BuyButton: React.FC<Props> = ({ oreId }) => {
 			<ButtonOutline
 				fontColor={textColor}
 				onClick={() => {
-					if (chainAccounts.length === 1) {
+					if (!hasDropdown) {
 						oreId.popup.buy({
 							chainAccount: chainAccounts[0].chainAccount,
 							chainNetwork: chainAccounts[0].chainNetwork,
+							limitToChains: chainNetworks,
 						});
 					}
 				}}
@@ -50,6 +57,7 @@ export const BuyButton: React.FC<Props> = ({ oreId }) => {
 								oreId.popup.buy({
 									chainAccount: userChainAccount.chainAccount,
 									chainNetwork: userChainAccount.chainNetwork,
+									limitToChains: chainNetworks
 								})
 							}
 						>
