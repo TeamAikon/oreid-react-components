@@ -28,36 +28,6 @@
     font-weight: 400;
   }
 
-  .buy {
-    .dropdown {
-      display: none;
-      background-color: #f9f9f9;
-      position: absolute;
-      min-width: 160px;
-      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-      z-index: 1;
-      > div {
-        display: flex;
-        gap: 5px;
-        white-space: nowrap;
-        margin: 0;
-        color: black;
-        padding: 4px 16px;
-        text-decoration: none;
-        cursor: pointer;
-        &:hover {
-          background-color: #f1f1f1;
-        }
-      }
-    }
-    &:hover {
-      .dropdown {
-        display: flex;
-        flex-direction: column;
-      }
-    }
-  }
-
   .logout {
     margin-top: 25px;
 

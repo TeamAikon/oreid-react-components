@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { OreId } from "oreid-js";
-import { ButtonOutline } from "../ButtonOutline";
 import { Icon } from "../Icon";
 import { LongText } from "../LongText";
 import { FloatBox } from "../FloatBox";
 import styles from "./OreIdProfile.module.scss";
-import { startCase } from "lodash";
+import { BuyButton } from "../BuyButton";
+import { ProfileProvider } from "../ProfileContext";
 
 interface Props {
 	oreId: OreId;
@@ -34,64 +34,58 @@ export const OreIdProfile: React.FC<Props> = ({
 			oreId.auth.user.getData();
 		}
 	}, []);
+
 	if (!oreId.auth.isLoggedIn || !data) return null;
+	if (!oreId.isInitialized) return null;
+
 	return (
-		<FloatBox
-			anchor={anchor || <span></span>}
-			onClose={onClose}
-			open={open}
-			width={240}
-			align={align}
-			background={backgroundColor}
+		<ProfileProvider
+			linkColor={textColor}
+			textColor={textColor}
+			backgroundColor={backgroundColor}
 		>
-			<div className={styles.OreIdProfile}>
-				<span>
-					<Icon size={72} icon={data.picture} />
-				</span>
+			<FloatBox
+				anchor={anchor || <span></span>}
+				onClose={onClose}
+				open={open}
+				width={240}
+				align={align}
+				background={backgroundColor}
+			>
+				<div className={styles.OreIdProfile}>
+					<span>
+						<Icon size={72} icon={data.picture} />
+					</span>
 
-				<span className={styles.name} style={{ color: textColor }}>
-					{data.name}
-					{data.email && (
-						<>
-							<br />
-							{data.email}
-						</>
-					)}
-				</span>
+					<span className={styles.name} style={{ color: textColor }}>
+						{data.name}
+						{data.email && (
+							<>
+								<br />
+								{data.email}
+							</>
+						)}
+					</span>
 
-				<span className={styles.account} style={{ color: linkColor }}>
-					<LongText text={oreId.auth.accountName} truncateInMiddle showCopy />
-				</span>
+					<span className={styles.account} style={{ color: linkColor }}>
+						<LongText text={oreId.auth.accountName} truncateInMiddle showCopy />
+					</span>
 
-				<div className={styles.buy}>
-					<ButtonOutline
-						label="Buy Tokens"
-						fontColor={textColor}
-					/>
-					<div className={styles.dropdown}>
-						{data.chainAccounts?.map(userChainAccount => (
-							<div
-								onClick={() => oreId.popup.buy({ chainAccount: userChainAccount.chainAccount, chainNetwork: userChainAccount.chainNetwork })}
-							>
-								<LongText text={userChainAccount.chainAccount} truncateInMiddle />
-								{`(${startCase(userChainAccount.chainNetwork)})`}
-							</div>
-						))}
-					</div>
+					<BuyButton oreId={oreId} />
+
+					<span className={styles.logout}>
+						<button
+							onClick={() => {
+								oreId.auth.logout();
+								onClose();
+							}}
+							style={{ color: textColor }}
+						>
+							<div>Log Out</div>
+						</button>
+					</span>
 				</div>
-
-				<span className={styles.logout}>
-					<button
-						onClick={() => {
-							oreId.auth.logout();
-							onClose();
-						}}
-						style={{ color: textColor }}
-					>
-						<div>Log Out</div>
-					</button>
-				</span>
-			</div>
-		</FloatBox>
+			</FloatBox>
+		</ProfileProvider>
 	);
 };
