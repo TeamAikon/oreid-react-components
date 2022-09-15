@@ -13,32 +13,48 @@ export interface ChainNetworkMap {
   name: string
 }
 
+/** Supported chain networks */
 export enum ChainNetwork {
+  // Algo
   AlgoMain = 'algo_main',
   AlgoBeta = 'algo_beta',
   AlgoTest = 'algo_test',
+  // AVALANCHE
+  AvalancheC_Main = 'avalanchec_main',
+  AvalancheC_Fuji = 'avalanchec_fuji',
+  // Dsp/EOS
   DspEosKylin1 = 'kylin-dsp-1.liquidapps.io',
   DspEosKylin2 = 'kylin-dsp-2.liquidapps.io',
   DspMoonlighting = 'eos_moon_blockstartdsp_com',
   DspMoonlightingTest = 'eos_moontest_blockstartdsp_com',
-  EosMain = 'eos_main', // 59
-  EosKylin = 'eos_kylin', // 95
-  EosJungle = 'eos_jungle',
+  // ETH
   EthMain = 'eth_main', // 1
   EthRopsten = 'eth_ropsten', // 3
   EthRinkeby = 'eth_rinkeby', // 4
   EthGoerli = 'eth_goerli', // 5
+  // EOS
+  EosMain = 'eos_main', // 59
+  EosKylin = 'eos_kylin', // 95
+  EosJungle = 'eos_jungle',
   MigrateEosMain = 'migrate_eos_main',
+  // ORE
   OreMain = 'ore_main',
   OreTest = 'ore_test',
-  TelosMain = 'telos_main', // 40
-  TelosTest = 'telos_test', // 41
-  UxMain = 'ux_main',
-  // UxTest = 'ux_test', (there is no test network) - this is left here as a placeholder
-  WaxMain = 'wax_main',
-  WaxTest = 'wax_test',
+  // Polygon
   PolygonMain = 'polygon_main',
   PolygonMumbai = 'polygon_mumbai',
+  // TELOS
+  TelosMain = 'telos_main', // 40
+  TelosTest = 'telos_test', // 41
+  // TELOS EVM
+  TelosEvmMain = 'telosevm_main',
+  TelosEvmTest = 'telosevm_test',
+  // UX
+  UxMain = 'ux_main',
+  // UxTest = 'ux_test', (there is no test network) - this is left here as a placeholder
+  // WAX
+  WaxMain = 'wax_main',
+  WaxTest = 'wax_test',
 }
 
 export enum OreIDWalletConnectSize {
