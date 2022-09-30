@@ -1,6 +1,6 @@
 {
   "name": "@aikon/oreid-wallet-connect-react-component",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "author": "Aikon",
   "license": "MIT",
   "main": "dist/index.js",
@@ -17,7 +17,10 @@
     "lint:fix": "eslint --fix \"src/**\"",
     "format": "prettier --write src/",
     "storybook": "start-storybook -p 6007",
-    "storybook:export": "build-storybook"
+    "storybook:export": "build-storybook",
+    "localpublish": "zalc publish && zalc push",
+    "localpublish-show-usage": "zalc installations show @aikon/oreid-wallet-connect-react-component",
+    "localunpublish": "yalc installations clean @aikon/oreid-wallet-connect-react-component"
   },
   "keywords": [
     "React",
