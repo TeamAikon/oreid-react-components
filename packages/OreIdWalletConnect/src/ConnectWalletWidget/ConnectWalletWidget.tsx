@@ -16,7 +16,7 @@ export const ConnectWalletWidget: React.FC<ConnectWalletWidgetProps> = ({ onClic
   return (
     <div className={styles.connectWalletWidget}>
       <div className={styles.content}>
-        <p>WalletConnect is a new way to connect your ORE Vault Wallet to decentralized applications.</p>
+        <p>WalletConnect is a new way to connect your ORE ID Wallet to decentralized applications.</p>
         <a href="" target="_new">
           Learn More
         </a>
