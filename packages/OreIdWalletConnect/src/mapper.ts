@@ -21,6 +21,26 @@ export const chainNetworkMap: ChainNetworkMap[] = [
     id: 5,
     name: 'Ethereum Goerli',
   },
+  {
+    chainNetwork: ChainNetwork.TelosEvmMain,
+    id: 40,
+    name: 'Telos EVM',
+  },
+  {
+    chainNetwork: ChainNetwork.TelosEvmTest,
+    id: 41,
+    name: 'Telos EVM testnet',
+  },
+  {
+    chainNetwork: ChainNetwork.AvalancheC_Main,
+    id: 43114,
+    name: 'Avalanche C-Chain Mainnet',
+  },
+  {
+    chainNetwork: ChainNetwork.AvalancheC_Fuji,
+    id: 43113,
+    name: 'Avalanche FUJI C-Chain Testnetwork',
+  },
 ]
 
 export const mapWalletConnectRefToConnection = (connection: WalletConnectRef): Connection => {
