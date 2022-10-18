@@ -32,13 +32,6 @@ export class OreIDWalletConnectErrorBoundary extends React.Component<Props, Stat
     if (this.state.hasError) {
       return null
     }
-    return (
-      // @ts-ignore
-      <ContainerDimensions>
-        {({ width }) => (
-          <OreIDWalletConnect width={width} {...props} />
-        )}
-      </ContainerDimensions>
-    )
+    return <ContainerDimensions>{({ width }) => <OreIDWalletConnect width={width} {...props} />}</ContainerDimensions>
   }
 }
