@@ -82,7 +82,9 @@ import { useUser } from "oreid-react";
 import React from "react";
 
 export const Sign: React.FunctionComponent = () => {
+	const oreId = useOreId();
 	const user = useUser();
+
 
 	const onClick = () => {
 		const userChainAccounts = oreId.auth.user.data.chainAccounts;
@@ -117,6 +119,7 @@ export const Sign: React.FunctionComponent = () => {
 import React from "react";
 
 export const NewChainAccount: React.FunctionComponent = () => {
+	const oreId = useOreId();
 	const onClick = () => {
 		oreId.popup.newChainAccount({
 			chainNetwork: 'eos-kylin',
