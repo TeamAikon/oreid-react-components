@@ -1,14 +1,14 @@
 # ORE ID React Library
+
 Popup User Experience and React helpers for ORE ID
 
 This library should be used in a React application. If you aren't using React, you should instead use the pure HTML/Javascript version of this library here: [oreid-webwidget](https://github.com/API-market/oreid-webwidget).
 
-This library requires the  `oreid-js` npm package.
+This library requires the `oreid-js` npm package.
 
 ## Overview
 
 This library works with oreid-js to provide a pop-up user experience for common ORE ID flows - like logging-in and signing a transaction
-
 
 ## How to use
 
@@ -38,13 +38,9 @@ import { OreidProvider } from "oreid-react";
 
 let isInitialized;
 const appId = "MY_APP_ID";
-const oreId = new OreId({ appId, plugins:{ popup: WebWidget() }});
+const oreId = new OreId({ appId, plugins: { popup: WebWidget() } });
 
-// initialize webWidget then render app
-oreId.init().then(() => {
-	isInitialized =true
-})
-
+// The privider will initialize oreid-js
 ReactDOM.render(
 	<React.StrictMode>
 		<OreidProvider oreId={oreId}>
@@ -53,7 +49,6 @@ ReactDOM.render(
 	</React.StrictMode>,
 	document.getElementById("root")
 );
-
 ```
 
 ### Auth
@@ -62,13 +57,15 @@ ReactDOM.render(
 import React from "react";
 
 export const Login: React.FunctionComponent = () => {
+	const oreId = useOreId();
 
 	const onClick = () => {
-		oreId.popup.auth({
-			provider: 'google'
-		})
-		.then(onSuccess)
-		.catch(onError);
+		oreId.popup
+			.auth({
+				provider: "google",
+			})
+			.then(onSuccess)
+			.catch(onError);
 	};
 
 	return <button onClick={onClick}>Login to Google</button>;
@@ -82,6 +79,7 @@ import { useUser } from "oreid-react";
 import React from "react";
 
 export const Sign: React.FunctionComponent = () => {
+	const oreId = useOreId();
 	const user = useUser();
 
 	const onClick = () => {
@@ -117,6 +115,7 @@ export const Sign: React.FunctionComponent = () => {
 import React from "react";
 
 export const NewChainAccount: React.FunctionComponent = () => {
+	const oreId = useOreId();
 	const onClick = () => {
 		oreId.popup.newChainAccount({
 			chainNetwork: 'eos-kylin',
