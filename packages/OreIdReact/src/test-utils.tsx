@@ -22,6 +22,7 @@ export const createTestOreId = () => {
 			newChainAccount: jest.fn(),
 			sign: jest.fn(),
 		},
+		init: jest.fn(),
 	} as unknown as OreId;
 };
 
