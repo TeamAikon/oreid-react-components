@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { OreId, UserData } from "oreid-js";
 import { OreIdContext } from "src/OreIdContext";
 import { useState } from "react";
@@ -6,7 +6,6 @@ import { Observables } from "../Observables";
 
 interface Props {
 	oreId: OreId;
-
 	children: React.ReactNode;
 }
 export const OreidProvider: React.FC<Props> = ({ children, oreId }) => {
@@ -14,11 +13,14 @@ export const OreidProvider: React.FC<Props> = ({ children, oreId }) => {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const [accessToken, setAccessToken] = useState<string | undefined>(undefined);
 
-	if (!oreId.popup) {
-		throw new Error(
-			"oreId popup must be initialized. Make sure you added the plugin and called oreId.init()"
-		);
-	}
+	useEffect(() => {
+		if (typeof window === "undefined") {
+			return;
+		}
+		if (!oreId.isInitialized) {
+			oreId.init();
+		}
+	}, []);
 
 	return (
 		<OreIdContext.Provider
