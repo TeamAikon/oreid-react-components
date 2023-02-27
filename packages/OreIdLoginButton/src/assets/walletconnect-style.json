@@ -1,10 +1,8 @@
 {
-    "buttonStyle":{
-        "color": "#464b72",
-        "backgroundColor": "#fff"
-
-    },
-    "logoStyle":{
-    },
-    "text":"Login WalletConnect"
+  "buttonStyle": {
+    "color": "#464b72",
+    "backgroundColor": "#fff"
+  },
+  "logoStyle": {},
+  "text": "Login WalletConnect"
 }

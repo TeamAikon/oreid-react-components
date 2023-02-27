@@ -1,9 +1,7 @@
 {
-    "buttonStyle":{
-        "backgroundColor": "#00B70C"
-
-    },
-    "logoStyle":{
-    },
-    "text":"Login WeChat"
+  "buttonStyle": {
+    "backgroundColor": "#00B70C"
+  },
+  "logoStyle": {},
+  "text": "Login WeChat"
 }

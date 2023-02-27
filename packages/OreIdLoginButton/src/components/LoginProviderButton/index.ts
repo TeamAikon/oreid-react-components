@@ -1,2 +1,2 @@
-export * from "./LoginProviderButton";
-export { default } from "./LoginProviderButton";
+export * from './LoginProviderButton'
+export { default } from './LoginProviderButton'
