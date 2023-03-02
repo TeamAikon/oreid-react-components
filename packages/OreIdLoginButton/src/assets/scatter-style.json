@@ -1,9 +1,8 @@
 {
-    "buttonStyle":{
-        "backgroundColor": "#FFFFFF",
-        "color": "#333333"
-    },
-    "logoStyle":{
-    },
-    "text":"Login Scatter"
+  "buttonStyle": {
+    "backgroundColor": "#FFFFFF",
+    "color": "#333333"
+  },
+  "logoStyle": {},
+  "text": "Login Scatter"
 }

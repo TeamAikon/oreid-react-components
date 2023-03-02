@@ -1,7 +1,7 @@
 {
   "name": "oreid-login-button",
   "description": "Login button for ORE ID which includes provider logos",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "license": "MIT",
   "author": "Aikon",
   "main": "dist/index.js",
@@ -13,6 +13,7 @@
     "dist"
   ],
   "scripts": {
+    "format": "prettier --write src/",
     "build": "rm -rf dist/ && rollup -c",
     "clean": "rm -rf node_modules/ dist/",
     "prepublish": "yarn build",
@@ -26,7 +27,7 @@
     "react-dom": "^16.8.0 || ^17.0.0|| ^18.0.0"
   },
   "devDependencies": {
-    "rollup-plugin-terser": "^7.0.2",
+    "@aikon/aikon-configs": "^1.0.5",
     "@babel/core": "^7.10.3",
     "@rollup/plugin-commonjs": "^21.0.1",
     "@rollup/plugin-image": "^2.1.1",
@@ -62,6 +63,7 @@
     "rollup-plugin-copy": "^3.3.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2",
+    "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript2": "^0.27.3",
     "sass": "^1.52.1",
     "sass-loader": "10.1.1",

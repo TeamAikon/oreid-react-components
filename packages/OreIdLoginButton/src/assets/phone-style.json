@@ -1,10 +1,8 @@
 {
-    "buttonStyle":{
-        "color": "#222",
-        "backgroundColor": "#fff"
-
-    },
-    "logoStyle":{
-    },
-    "text":"Login Phone"
+  "buttonStyle": {
+    "color": "#222",
+    "backgroundColor": "#fff"
+  },
+  "logoStyle": {},
+  "text": "Login Phone"
 }

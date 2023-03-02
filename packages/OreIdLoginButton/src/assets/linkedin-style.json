@@ -1,9 +1,7 @@
 {
-    "buttonStyle":{
-        "backgroundColor": "#127cb4"
-
-    },
-    "logoStyle":{
-    },
-    "text":"Login LinkedIn"
+  "buttonStyle": {
+    "backgroundColor": "#127cb4"
+  },
+  "logoStyle": {},
+  "text": "Login LinkedIn"
 }

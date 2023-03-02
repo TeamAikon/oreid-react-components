@@ -1,9 +1,7 @@
 {
-    "buttonStyle":{
-        "backgroundColor": "#3E5895"
-
-    },
-    "logoStyle":{
-    },
-    "text":"Login Facebook"
+  "buttonStyle": {
+    "backgroundColor": "#3E5895"
+  },
+  "logoStyle": {},
+  "text": "Login Facebook"
 }

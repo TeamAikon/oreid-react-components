@@ -1,9 +1,8 @@
 {
-    "buttonStyle":{
-        "color": "#222",
-        "backgroundColor": "#ffffff"
-    },
-    "logoStyle":{
-    },
-    "text":"Login ORE ID"
+  "buttonStyle": {
+    "color": "#222",
+    "backgroundColor": "#ffffff"
+  },
+  "logoStyle": {},
+  "text": "Login ORE ID"
 }

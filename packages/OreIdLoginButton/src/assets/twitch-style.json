@@ -1,9 +1,7 @@
 {
-    "buttonStyle":{
-        "backgroundColor": "#6441A4"
-
-    },
-    "logoStyle":{
-    },
-    "text":"Login Twitch"
+  "buttonStyle": {
+    "backgroundColor": "#6441A4"
+  },
+  "logoStyle": {},
+  "text": "Login Twitch"
 }

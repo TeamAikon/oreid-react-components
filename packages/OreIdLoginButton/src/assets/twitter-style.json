@@ -1,9 +1,7 @@
 {
-    "buttonStyle":{
-        "backgroundColor": "#55acee"
-
-    },
-    "logoStyle":{
-    },
-    "text":"Login Twitter"
+  "buttonStyle": {
+    "backgroundColor": "#55acee"
+  },
+  "logoStyle": {},
+  "text": "Login Twitter"
 }

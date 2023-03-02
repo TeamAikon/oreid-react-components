@@ -1,9 +1,7 @@
 {
-    "buttonStyle":{
-        "backgroundColor": "#00C300"
-
-    },
-    "logoStyle":{
-    },
-    "text":"Login Line"
+  "buttonStyle": {
+    "backgroundColor": "#00C300"
+  },
+  "logoStyle": {},
+  "text": "Login Line"
 }

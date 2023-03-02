@@ -1,9 +1,8 @@
 {
-    "buttonStyle":{
-        "backgroundColor": "#f5faff",
-        "color": "#333333"
-    },
-    "logoStyle":{
-    },
-    "text":"Login TokenPocket"
+  "buttonStyle": {
+    "backgroundColor": "#f5faff",
+    "color": "#333333"
+  },
+  "logoStyle": {},
+  "text": "Login TokenPocket"
 }
