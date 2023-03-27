@@ -27,14 +27,17 @@ export enum ChainNetwork {
   DspEosKylin2 = 'kylin-dsp-2.liquidapps.io',
   DspMoonlighting = 'eos_moon_blockstartdsp_com',
   DspMoonlightingTest = 'eos_moontest_blockstartdsp_com',
+  // DOS
+  DosMain = 'dos_main',
+  DosTest = 'dos_test',
   // ETH
-  EthMain = 'eth_main', // 1
-  EthRopsten = 'eth_ropsten', // 3
-  EthRinkeby = 'eth_rinkeby', // 4
-  EthGoerli = 'eth_goerli', // 5
+  EthMain = 'eth_main',
+  EthRopsten = 'eth_ropsten',
+  EthRinkeby = 'eth_rinkeby',
+  EthGoerli = 'eth_goerli',
   // EOS
-  EosMain = 'eos_main', // 59
-  EosKylin = 'eos_kylin', // 95
+  EosMain = 'eos_main',
+  EosKylin = 'eos_kylin',
   EosJungle = 'eos_jungle',
   MigrateEosMain = 'migrate_eos_main',
   // ORE
@@ -44,8 +47,8 @@ export enum ChainNetwork {
   PolygonMain = 'polygon_main',
   PolygonMumbai = 'polygon_mumbai',
   // TELOS
-  TelosMain = 'telos_main', // 40
-  TelosTest = 'telos_test', // 41
+  TelosMain = 'telos_main',
+  TelosTest = 'telos_test',
   // TELOS EVM
   TelosEvmMain = 'telosevm_main',
   TelosEvmTest = 'telosevm_test',
