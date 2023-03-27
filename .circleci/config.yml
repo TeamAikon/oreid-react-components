@@ -58,7 +58,7 @@ jobs:
       - attach_workspace:
           at: ~/API-market
       # get npmrc token
-      - run: echo $NPMRC | base64 -d > ~/.npmrc
+      - run: echo $NPMRC_PUBLISH | base64 -d > ~/.npmrc
       - run: npx lerna run build
       # check all package.json versions and publish any that haven't been published
       - run: npx lerna publish from-package --yes
