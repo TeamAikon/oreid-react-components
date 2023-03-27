@@ -27,6 +27,9 @@ export enum ChainNetwork {
   DspEosKylin2 = 'kylin-dsp-2.liquidapps.io',
   DspMoonlighting = 'eos_moon_blockstartdsp_com',
   DspMoonlightingTest = 'eos_moontest_blockstartdsp_com',
+  // DOS
+  DosMain = 'dos_main', // 7979
+  DosTest = 'dos_test', // 1311
   // ETH
   EthMain = 'eth_main', // 1
   EthRopsten = 'eth_ropsten', // 3

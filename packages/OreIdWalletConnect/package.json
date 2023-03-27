@@ -1,6 +1,6 @@
 {
   "name": "@aikon/oreid-wallet-connect-react-component",
-  "version": "1.4.3",
+  "version": "1.4.4",
   "author": "Aikon",
   "license": "MIT",
   "main": "dist/index.js",
@@ -87,5 +87,9 @@
     "classnames": "^2.3.1",
     "react-container-dimensions": "^1.4.1",
     "react-copy-to-clipboard": "^5.1.0"
+  },
+  "resolutions": {
+    "@types/react": "17.0.2",
+    "@types/react-dom": "17.0.2"
   }
 }
