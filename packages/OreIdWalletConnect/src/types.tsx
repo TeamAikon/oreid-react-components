@@ -66,8 +66,8 @@ export enum OreIDWalletConnectSize {
   Small = 51,
 }
 
-export type ConnectionEvent = (connection?: Connection, payload?: any) => void
-export type WalletConnectRefEvent = (connection: WalletConnectRef, payload?: any) => void
+export type ConnectionEvent = (connection?: Connection, payload?: WalletConnectActionRequest) => void
+export type WalletConnectRefEvent = (connection: WalletConnectRef, payload?: WalletConnectActionRequest) => void
 
 export interface OreIDWalletConnectConfig {
   chainNetwork: ChainNetwork
@@ -91,7 +91,7 @@ export interface OreIDWalletConnectProps {
   onSessionUpdate?: ConnectionEvent
   onConnectionCreate?: ConnectionEvent
   onConnectionDelete?: ConnectionEvent
-  onAcceptRequest: (transaction: WalletConnectTransaction, connection: Connection) => void
+  onAcceptRequest: (transaction: WalletConnectActionRequest, connection: Connection) => void
   onError?: (eventName: string, error: Error, connection?: Connection) => void
   CustomButton?: React.FC<{ onClick: () => void }>
 }
@@ -124,17 +124,164 @@ export interface Connection {
   logoUrl?: string
 }
 
-export interface WalletConnectTransaction {
+/** Action (methods) defined by WalletConnect */
+export enum WalletConnectAction {
+  WalletSwitchEthereumChain = 'wallet_switchEthereumChain',
+  EthSendTransaction = 'eth_sendTransaction',
+  EthSignTransaction = 'eth_signTransaction',
+  PersonalSign = 'personal_sign',
+  EthSign = 'eth_sign',
+  EthSignTypedData = 'eth_signTypedData',
+}
+
+export type WalletConnectActionRequest =
+  | ActionEthSignTransactionRequest
+  | ActionEthSendTransactionRequest
+  | ActionPersonalSignRequest
+  | ActionEthSignRequest
+  | ActionSignTypedDataRequest
+
+// WalletConnect docs - https://docs.walletconnect.com/1.0/json-rpc-api-methods/ethereum#eth_signtransaction
+
+// Request
+// {
+//   "id": 1,
+//   "jsonrpc": "2.0",
+//   "method": "eth_signTransaction",
+//   "params":[{see below}],
+// }
+export interface ActionEthSignTransactionRequest {
   id: number
   jsonrpc: string
   method: string
-  params: [
-    {
-      gas: string
-      value: string
-      from: string
-      to: string
-      data: string
-    },
-  ]
+  params: [EthTransaction]
+}
+export interface EthTransaction {
+  from: string
+  to: string
+  data: string
+  gas: string
+  gasPrice: string
+  value: string
+  nonce: string
+}
+// Result
+// {
+//   "id": 1,
+//   "jsonrpc": "2.0",
+//   "result": "0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331"
+// }
+export interface ActionEthSignTransactionResult {
+  id: number
+  jsonrpc: string
+  result: string
+}
+
+// Request
+// {
+//   "id": 1,
+//   "jsonrpc": "2.0",
+//   "method": "eth_sendTransaction",
+//   "params":[{see above}],
+// }
+export interface ActionEthSendTransactionRequest {
+  id: number
+  jsonrpc: string
+  method: string
+  params: [EthTransaction]
+}
+// Result
+// {
+//   "id": 1,
+//   "jsonrpc": "2.0",
+//   "result": "0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331"
+// }
+export interface ActionEthSendTransactionResult {
+  id: number
+  jsonrpc: string
+  result: string
+}
+
+// Request
+// {
+//   "id": 1,
+//   "jsonrpc": "2.0",
+//   "method": "personal_sign",
+//   "params":["0xdeadbeaf","0x9b2055d370f73ec7d8a03e965129118dc8f5bf83"],
+// }
+export interface ActionPersonalSignRequest {
+  id: number
+  jsonrpc: string
+  method: string
+  params: [messageToSign: string, address: string]
+}
+// Result
+// {
+//   "id": 1,
+//   "jsonrpc": "2.0",
+//   "result": "0xa3f20717a250c2b0b729b7e5becbff67fdaef7e0699da4de7ca5895b02a170a12d887fd3b17bfdce3481f10bea41f45ba9f709d39ce8325427b57afcfc994cee1b"
+// }
+export interface ActionPersonalSignResponse {
+  id: number
+  jsonrpc: string
+  result: string
+}
+
+// // Request
+// {
+//   "id": 1,
+//   "jsonrpc": "2.0",
+//   "method": "eth_sign",
+//   "params": ["0x9b2055d370f73ec7d8a03e965129118dc8f5bf83", "0xdeadbeaf"],
+// }
+export interface ActionEthSignRequest {
+  id: number
+  jsonrpc: string
+  method: string
+  params: [address: string, messageToSign: string]
+}
+// Result
+// {
+//   "id": 1,
+//   "jsonrpc": "2.0",
+//   "result": "0xa3f20717a250c2b0b729b7e5becbff67fdaef7e0699da4de7ca5895b02a170a12d887fd3b17bfdce3481f10bea41f45ba9f709d39ce8325427b57afcfc994cee1b"
+// }
+export interface ActionEthSignResponse {
+  id: number
+  jsonrpc: string
+  result: string
+}
+
+// Wallet Connect docs - https://docs.walletconnect.com/1.0/json-rpc-api-methods/ethereum#eth_signtypeddata
+
+// Request
+// {
+//   "id": 1,
+//   "jsonrpc": "2.0",
+//   "method": "eth_signTypedData",
+//   "params": ["0x9b2055d370f73ec7d8a03e965129118dc8f5bf83", {see below}],
+// }
+export type ActionSignTypedDataRequest = {
+  id: number
+  jsonrpc: string
+  method: string
+  params: [address: string, messageToSign: typeof SignTypedDataInputModel]
+}
+export const SignTypedDataInputModel = {
+  version: 0,
+  types: {},
+  primaryType: '',
+  domain: {},
+  message: {},
+}
+// Result
+// {
+//   "id": 1,
+//   "jsonrpc": "2.0",
+//   "result": "0x4355c47d63924e8a72e509b65029052eb6c299d53a04e167c5775fd466751c9d07299936d304c153f6443dfa05f40ff007d72911b6f72307f996231605b915621c"
+// }
+export interface ActionSignTypedDataResponse {
+  id: number
+  jsonrpc: string
+  result: string
 }

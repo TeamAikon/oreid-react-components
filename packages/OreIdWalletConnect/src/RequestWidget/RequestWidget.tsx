@@ -2,14 +2,15 @@ import React from 'react'
 import { Button } from '../Button'
 import { ConnectionIcon } from '../ConnectionIcon'
 import { LongText } from '../LongText'
-import { PeerMeta, WalletConnectTransaction } from '../types'
+import { PeerMeta, WalletConnectActionRequest } from '../types'
 
 import styles from './RequestWidget.module.scss'
+import { getAddressFromRequest } from '../helpers'
 
 interface ConnectWalletWidgetProps {
   peerMeta: PeerMeta
-  request: WalletConnectTransaction
-  onAcceptRequest: (request: WalletConnectTransaction) => void
+  request: WalletConnectActionRequest
+  onAcceptRequest: (request: WalletConnectActionRequest) => void
 }
 
 export const RequestWidget: React.FC<ConnectWalletWidgetProps> = ({ peerMeta, request, onAcceptRequest }) => {
@@ -24,7 +25,7 @@ export const RequestWidget: React.FC<ConnectWalletWidgetProps> = ({ peerMeta, re
       <div className={styles.content}>
         <h3>Account Address</h3>
         <span className={styles.accountAddress}>
-          <LongText truncateInMiddle text={request.params[0].from} />
+          <LongText truncateInMiddle text={getAddressFromRequest(request)} />
         </span>
       </div>
 

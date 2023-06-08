@@ -12,9 +12,10 @@ import {
   ModalConnections,
   OreIDWalletConnectProps,
   PeerMeta,
+  WalletConnectAction,
+  WalletConnectActionRequest,
   WalletConnectRef,
   WalletConnectRefEvent,
-  WalletConnectTransaction,
 } from '../types'
 import { factoryConnection, subscribeEvents, unsubscribeEvents } from '../utils'
 import styles from './OreIDWalletConnect.module.scss'
@@ -41,7 +42,7 @@ export const OreIDWalletConnect: React.FC<Props> = ({
   const parentSize = getSize(width)
   const walletConnectClientList = useRef<WalletConnectRef[]>([])
   const [incomingRequest, setIncomingRequest] = useState<
-    { peerMeta: PeerMeta; request: WalletConnectTransaction; connectionUri: string } | undefined
+    { peerMeta: PeerMeta; request: WalletConnectActionRequest; connectionUri: string } | undefined
   >()
 
   if (!config.clientIcons || !config.clientDescription || !config.clientName) {
@@ -129,9 +130,21 @@ export const OreIDWalletConnect: React.FC<Props> = ({
 
   /** Handle a new request (for a transaction) */
   const onRequest: WalletConnectRefEvent = (connection, payload) => {
+    // listen to action handler for switch network - if request is to switch network...
+    // - throw error - we wont switch networks here - this instance is tied to a single network
     const index = getWalletConnectClientIndexByUri(connection.connector.uri)
     const { peerMeta } = walletConnectClientList.current[index].connector.session
     if (peerMeta) {
+      if (payload?.method === WalletConnectAction.WalletSwitchEthereumChain) {
+        console.log('Request to switch networks - Not supported')
+        onError('switch_network_not_supported', new Error('Request to switch networks - Not supported'), connection)
+        return
+      }
+      if (payload === undefined) {
+        onError('request_malformed', new Error('Request missing payload'), connection)
+        return
+      }
+      // ask user to accept request
       setIncomingRequest({
         peerMeta,
         request: payload,
